@@ -1,0 +1,110 @@
+{
+  "Object":{"toString()":"String"},
+  "Integer":{"parseInt(String)":"int"},
+  "Math":{"sqrt(double)":"double",
+    "sqrt(int)":"double",
+    "pow(double,double)":"double","pow(double,int)":"double","pow(int,int)":"double"},
+  "Double":{"parseDouble(String)":"double"},
+  "EditText":{"getText()":"Editable"},
+  "TextView": {"getText()": "String"},
+  "String": {
+    "valueOf(int)": "String",
+    "valueOf(double)": "String",
+    "valueOf(Double)": "String",
+    "valueOf(Float)": "String",
+    "valueOf(float)": "String",
+    "length()": "int"
+  },
+  "Editable": {"toString()": "String"},
+
+  "FirebaseFirestore": {"collection(String)":  "CollectionReference"},
+  "CollectionReference": {"add(Map<String,Object>)": "DocumentReference","document()": "DocumentReference","document(String)": "DocumentReference","get()": "Task<QuerySnapshot>","limit(int)": "Query",
+    "whereEqualTo(String,String)":"Query",
+    "whereEqualTo(String,int)":"Query",
+    "whereEqualTo(String,boolean)": "Query",
+    "whereEqualTo(String,double)":"Query",
+    "whereEqualTo(String,float)":"Query",
+    "whereEqualTo(String,ArrayList<String>)":"Query",
+    "whereEqualTo(String,ArrayList<int>)":"Query",
+    "whereEqualTo(String,ArrayList<float>)":"Query",
+    "whereEqualTo(String,ArrayList<Object>)":"Query",
+    "whereLessThan(String,String)":"Query",
+    "whereLessThan(String,int)":"Query",
+    "whereLessThan(String,boolean)":"Query",
+    "whereLessThan(String,double)":"Query",
+    "whereLessThan(String,float)":"Query",
+    "whereLessThan(String,ArrayList<String>)":"Query",
+    "whereLessThan(String,ArrayList<int>)":"Query",
+    "whereLessThan(String,ArrayList<float>)":"Query",
+    "whereLessThan(String,ArrayList<Object>)":"Query",
+    "whereGreaterThanOrEqualTo(String,String)":"Query",
+    "whereGreaterThanOrEqualTo(String,int)":"Query",
+    "whereGreaterThanOrEqualTo(String,boolean)":"Query",
+    "whereGreaterThanOrEqualTo(String,double)":"Query",
+    "whereGreaterThanOrEqualTo(String,float)":"Query",
+    "whereGreaterThanOrEqualTo(String,ArrayList<String>)":"Query",
+    "whereGreaterThanOrEqualTo(String,ArrayList<int>)":"Query",
+    "whereGreaterThanOrEqualTo(String,ArrayList<float>)":"Query",
+    "whereGreaterThanOrEqualTo(String,ArrayList<Object>)":"Query",
+    "whereNotEqualTo(String,String)": "Query",
+    "whereNotEqualTo(String,int)": "Query",
+    "whereNotEqualTo(String,boolean)": "Query",
+    "whereNotEqualTo(String,double)": "Query",
+    "whereNotEqualTo(String,float)": "Query",
+    "whereNotEqualTo(String,ArrayList<String>)": "Query",
+    "whereNotEqualTo(String,ArrayList<int>)": "Query",
+    "whereNotEqualTo(String,ArrayList<float>)": "Query",
+    "whereNotEqualTo(String,ArrayList<Object>)": "Query", 
+    "whereArrayContains(String,String)": "Query",
+    "whereArrayContainsAny(String,Arrays)": "Query",
+    "orderBy(String)": "Query"
+  },
+  "Task<DocumentSnapshot>": {
+    "getResult()": "DocumentSnapshot",
+    "set(Map<String,Object>)": "DocumentReference",
+    "set(Map<String,String)": "DocumentReference",
+    "set(Map<String,int>)": "DocumentReference",
+    "set(Map<String,float>)": "DocumentReference",
+    "addOnSuccessListener": "Task<DocumentSnapshot>", "addOnFailureListener": "Task<DocumentSnapshot>",
+    "isSuccessful()": "boolean","getResult()": "DocumentSnapshot","set(Map<String,Object>)": "DocumentReference"
+  },
+  "Task<QuerySnapshot>": {
+    "getResult()": "QuerySnapshot",
+    "set(Map<String,Object>)": "DocumentReference",
+    "set(Map<String,String)": "DocumentReference",
+    "set(Map<String,int>)": "DocumentReference",
+    "set(Map<String,float>)": "DocumentReference",
+    "addOnCompleteListener": "Task<QuerySnapshot>",
+    "addOnSuccessListener": "Task<QuerySnapshot>", "addOnFailureListener": "Task<QuerySnapshot>",
+    "isSuccessful()": "boolean","getResult()": "QueryDocumentSnapshot","set(Map<String,Object>)": "DocumentReference"
+  },
+  "Task<AuthResult>": {
+      "addOnCompleteListener": "Task<AuthResult>","addOnSuccessListener": "Task<AuthResult>",
+      "addOnFailureListener": "Task<AuthResult>","isSuccessful()": "boolean"
+  },
+  "Task<Void>": {
+    "addOnCompleteListener": "Task<Void>","addOnSuccessListener": "Task<Void>",
+    "addOnFailureListener": "Task<Void>","isSuccessful()": "boolean"
+  },
+  "Query": {
+      "get()": "Task<QuerySnapshot>"
+  },
+"DocumentSnapshot": {
+    "exists()": "boolean",
+    "getData()": "Map<String, Object>"
+},
+
+  "DocumentReference": { "getId()" : "String","get()": "Task<DocumentSnapshot>","set(Map<String,Object>)": "Task<Void>",
+    "set(Map<String,String>)": "Task<Void>","set(Map<String,int>)": "Task<Void>","set(Map<String,float>)": "Task<Void>",
+    "addSnapshotListener": "ListenerRegistration"},
+  "FirebaseAuth": {"getCurrentUser()": "FirebaseUser","getInstance()": "FirebaseAuth",
+    "createUserWithEmailAndPassword(String,String)": "Task<AuthResult>","signInWithEmailAndPassword(String,String)": "Task<AuthResult>",
+  "sendPasswordResetEmail(String)": "Task<AuthResult>","signInAnonymously()": "Task<AuthResult>"
+  },
+
+  "FirebaseUser": {"getDisplayName()": "String","getEmail()": "String","getPhotoUrl()": "Uri",
+    "isEmailVerified()": "boolean","getUid()": "String","sendEmailVerification()": "Task<AuthResult>",
+    "updatePassword(String)": "Task<AuthResult>","delete()": "Task<AuthResult>","reauthenticate(AuthCredential)": "Task<AuthResult>"
+  }
+
+}

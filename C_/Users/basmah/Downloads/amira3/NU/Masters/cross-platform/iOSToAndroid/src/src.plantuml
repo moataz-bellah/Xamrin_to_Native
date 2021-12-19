@@ -1,0 +1,5630 @@
+@startuml
+
+title __SRC's Class Diagram__\n
+
+  namespace  {
+    class Swift3BaseVisitor {
+        + visitAccess_level_modifier()
+        + visitAny_punctuation_for_balanced_token()
+        + visitArchitecture()
+        + visitArgument_label()
+        + visitArgument_name()
+        + visitArgument_names()
+        + visitArray_literal()
+        + visitArray_literal_item()
+        + visitArray_literal_items()
+        + visitArray_type()
+        + visitArrow_operator()
+        + visitAssignment_operator()
+        + visitAssociativity()
+        + visitAttribute()
+        + visitAttribute_argument_clause()
+        + visitAttribute_name()
+        + visitAttributes()
+        + visitAvailability_argument()
+        + visitAvailability_arguments()
+        + visitAvailability_condition()
+        + visitBalanced_token()
+        + visitBalanced_tokens()
+        + visitBinary_expression()
+        + visitBinary_expressions()
+        + visitBinary_operator()
+        + visitBoolean_literal()
+        + visitBranch_statement()
+        + visitBreak_statement()
+        + visitCapture_list()
+        + visitCapture_list_item()
+        + visitCapture_list_items()
+        + visitCapture_specifier()
+        + visitCase_condition()
+        + visitCase_item_list()
+        + visitCase_label()
+        + visitCatch_clause()
+        + visitCatch_clauses()
+        + visitClass_body()
+        + visitClass_declaration()
+        + visitClass_member()
+        + visitClass_name()
+        + visitClass_requirement()
+        + visitClosure_expression()
+        + visitClosure_parameter()
+        + visitClosure_parameter_clause()
+        + visitClosure_parameter_clause_identifier_list()
+        + visitClosure_parameter_list()
+        + visitClosure_parameter_name()
+        + visitClosure_signature()
+        + visitCode_block()
+        + visitCompilation_condition()
+        + visitCompilation_condition_AND()
+        + visitCompilation_condition_GE()
+        + visitCompilation_condition_OR()
+        + visitCompiler_control_statement()
+        + visitCondition()
+        + visitCondition_list()
+        + visitConditional_compilation_block()
+        + visitConditional_operator()
+        + visitConformance_requirement()
+        + visitConstant_declaration()
+        + visitContinue_statement()
+        + visitControl_transfer_statement()
+        + visitDeclaration()
+        + visitDeclaration_identifier()
+        + visitDeclaration_modifier()
+        + visitDeclaration_modifiers()
+        + visitDeclarations()
+        + visitDefault_argument_clause()
+        + visitDefault_label()
+        + visitDefer_statement()
+        + visitDeinitializer_declaration()
+        + visitDictionary_literal()
+        + visitDictionary_literal_item()
+        + visitDictionary_literal_items()
+        + visitDictionary_type()
+        + visitDidSet_clause()
+        + visitDo_statement()
+        + visitDot_operator_character()
+        + visitDot_operator_head()
+        + visitDynamic_type()
+        + visitDynamic_type_expression()
+        + visitElement_name()
+        + visitElse_clause()
+        + visitElse_directive()
+        + visitElse_directive_clause()
+        + visitElseif_directive()
+        + visitElseif_directive_clause()
+        + visitElseif_directive_clauses()
+        + visitEndif_directive()
+        + visitEnum_case_name()
+        + visitEnum_case_pattern()
+        + visitEnum_declaration()
+        + visitEnum_name()
+        + visitExplicit_member_expression1()
+        + visitExplicit_member_expression2()
+        + visitExplicit_member_expression3()
+        + visitExplicit_member_expression4()
+        + visitExpression()
+        + visitExpression_list()
+        + visitExpression_pattern()
+        + visitExtension_body()
+        + visitExtension_declaration()
+        + visitExtension_member()
+        + visitExternal_parameter_name()
+        + visitFallthrough_statement()
+        + visitFile_name()
+        + visitFor_in_statement()
+        + visitFor_init()
+        + visitFor_statement()
+        + visitFunction_body()
+        + visitFunction_call_argument()
+        + visitFunction_call_argument_clause()
+        + visitFunction_call_argument_list()
+        + visitFunction_call_expression()
+        + visitFunction_call_expression_with_closure()
+        + visitFunction_declaration()
+        + visitFunction_head()
+        + visitFunction_name()
+        + visitFunction_result()
+        + visitFunction_signature()
+        + visitFunction_type()
+        + visitFunction_type_argument()
+        + visitFunction_type_argument_clause()
+        + visitFunction_type_argument_list()
+        + visitGeneric_argument()
+        + visitGeneric_argument_clause()
+        + visitGeneric_argument_list()
+        + visitGeneric_parameter()
+        + visitGeneric_parameter_clause()
+        + visitGeneric_parameter_list()
+        + visitGeneric_where_clause()
+        + visitGetter_clause()
+        + visitGetter_keyword_clause()
+        + visitGetter_setter_block()
+        + visitGetter_setter_keyword_block()
+        + visitGuard_statement()
+        + visitIdentifier_pattern()
+        + visitIf_directive()
+        + visitIf_directive_clause()
+        + visitIf_statement()
+        + visitImplicit_member_expression()
+        + visitImport_declaration()
+        + visitImport_kind()
+        + visitImport_path()
+        + visitImport_path_identifier()
+        + visitIn_out_expression()
+        + visitInfix_operator_declaration()
+        + visitInfix_operator_group()
+        + visitInitializer()
+        + visitInitializer_body()
+        + visitInitializer_declaration()
+        + visitInitializer_expression()
+        + visitInitializer_expression_with_args()
+        + visitInitializer_head()
+        + visitInteger_literal()
+        + visitKey_path_expression()
+        + visitKeyword_as_identifier_in_declarations()
+        + visitKeyword_as_identifier_in_labels()
+        + visitLabel_identifier()
+        + visitLabel_name()
+        + visitLabeled_statement()
+        + visitLine_control_statement()
+        + visitLine_number()
+        + visitLiteral()
+        + visitLiteral_expression()
+        + visitLocal_parameter_name()
+        + visitLoop_statement()
+        + visitMutation_modifier()
+        + visitNegate_prefix_operator()
+        + visitNil_literal()
+        + visitNumeric_literal()
+        + visitOperating_system()
+        + visitOperator()
+        + visitOperator_character()
+        + visitOperator_declaration()
+        + visitOperator_head()
+        + visitOptional_binding_condition()
+        + visitOptional_pattern()
+        + visitParameter()
+        + visitParameter_clause()
+        + visitParameter_list()
+        + visitParenthesized_expression()
+        + visitPattern()
+        + visitPattern_initializer()
+        + visitPattern_initializer_list()
+        + visitPlatform_condition()
+        + visitPlayground_literal()
+        + visitPostfix_operation()
+        + visitPostfix_operator()
+        + visitPostfix_operator_declaration()
+        + visitPostfix_self_expression()
+        + visitPrecedence_group_assignment()
+        + visitPrecedence_group_associativity()
+        + visitPrecedence_group_attribute()
+        + visitPrecedence_group_declaration()
+        + visitPrecedence_group_name()
+        + visitPrecedence_group_names()
+        + visitPrecedence_group_relation()
+        + visitPrefix_expression()
+        + visitPrefix_operator()
+        + visitPrefix_operator_declaration()
+        + visitPrimary()
+        + visitPrimary_expression()
+        + visitProtocol_associated_type_declaration()
+        + visitProtocol_body()
+        + visitProtocol_composition_type()
+        + visitProtocol_declaration()
+        + visitProtocol_identifier()
+        + visitProtocol_initializer_declaration()
+        + visitProtocol_member()
+        + visitProtocol_member_declaration()
+        + visitProtocol_method_declaration()
+        + visitProtocol_name()
+        + visitProtocol_property_declaration()
+        + visitProtocol_subscript_declaration()
+        + visitRange_operator()
+        + visitRaw_value_assignment()
+        + visitRaw_value_literal()
+        + visitRaw_value_style_enum()
+        + visitRaw_value_style_enum_case()
+        + visitRaw_value_style_enum_case_clause()
+        + visitRaw_value_style_enum_case_list()
+        + visitRaw_value_style_enum_member()
+        + visitRaw_value_style_enum_members()
+        + visitRepeat_while_statement()
+        + visitRequirement()
+        + visitRequirement_list()
+        + visitReturn_statement()
+        + visitSame_type_equals()
+        + visitSame_type_requirement()
+        + visitSelector_expression()
+        + visitSelf_expression()
+        + visitSetter_clause()
+        + visitSetter_keyword_clause()
+        + visitSetter_name()
+        + visitStatement()
+        + visitStatement_label()
+        + visitStatements()
+        + visitStatements_impl()
+        + visitString_literal()
+        + visitStruct_body()
+        + visitStruct_declaration()
+        + visitStruct_member()
+        + visitStruct_name()
+        + visitSubscript_declaration()
+        + visitSubscript_expression()
+        + visitSubscript_head()
+        + visitSubscript_result()
+        + visitSuperclass_expression()
+        + visitSuperclass_initializer_expression()
+        + visitSuperclass_method_expression()
+        + visitSuperclass_subscript_expression()
+        + visitSwift_version()
+        + visitSwitch_case()
+        + visitSwitch_cases()
+        + visitSwitch_statement()
+        + visitThe_any_type()
+        + visitThe_array_type()
+        + visitThe_dictionary_type()
+        + visitThe_function_type()
+        + visitThe_implicitly_unwrapped_optional_type()
+        + visitThe_metatype_protocol_type()
+        + visitThe_metatype_type_type()
+        + visitThe_optional_type()
+        + visitThe_protocol_composition_type()
+        + visitThe_self_type()
+        + visitThe_tuple_type()
+        + visitThe_type_identifier()
+        + visitThrow_statement()
+        + visitTop_level()
+        + visitTop_level_declaration()
+        + visitTrailing_closure()
+        + visitTry_operator()
+        + visitTuple_element()
+        + visitTuple_expression()
+        + visitTuple_pattern()
+        + visitTuple_pattern_element()
+        + visitTuple_pattern_element_list()
+        + visitTuple_type()
+        + visitTuple_type_element()
+        + visitTuple_type_element_list()
+        + visitType_annotation()
+        + visitType_casting_operator()
+        + visitType_identifier()
+        + visitType_inheritance_clause()
+        + visitType_inheritance_list()
+        + visitType_name()
+        + visitTypealias_assignment()
+        + visitTypealias_declaration()
+        + visitTypealias_name()
+        + visitUnion_style_enum()
+        + visitUnion_style_enum_case()
+        + visitUnion_style_enum_case_clause()
+        + visitUnion_style_enum_case_list()
+        + visitUnion_style_enum_member()
+        + visitUnion_style_enum_members()
+        + visitValue_binding_pattern()
+        + visitVariable_declaration()
+        + visitVariable_declaration_head()
+        + visitVariable_name()
+        + visitWhere_clause()
+        + visitWhere_expression()
+        + visitWhile_statement()
+        + visitWildcard_expression()
+        + visitWildcard_pattern()
+        + visitWillSet_clause()
+        + visitWillSet_didSet_block()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Lexer {
+        {static} + ADD : int
+        {static} + AND : int
+        {static} + AT : int
+        {static} + BANG : int
+        {static} + Binary_literal : int
+        {static} + Block_comment : int
+        {static} + CARET : int
+        {static} + COLON : int
+        {static} + COMMA : int
+        {static} + DIV : int
+        {static} + DOT : int
+        {static} + Decimal_literal : int
+        {static} + EQUAL : int
+        {static} + Floating_point_literal : int
+        {static} + GT : int
+        {static} + Hexadecimal_literal : int
+        {static} + Identifier : int
+        {static} + Implicit_parameter_name : int
+        {static} + Interpolated_string_literal : int
+        {static} + LBRACK : int
+        {static} + LCURLY : int
+        {static} + LPAREN : int
+        {static} + LT : int
+        {static} + Line_comment : int
+        {static} + MOD : int
+        {static} + MUL : int
+        {static} + OR : int
+        {static} + Octal_literal : int
+        {static} + Operator_following_character : int
+        {static} + Operator_head_other : int
+        {static} + Platform_name_platform_version : int
+        {static} + Pure_decimal_digits : int
+        {static} + QUESTION : int
+        {static} + RBRACK : int
+        {static} + RCURLY : int
+        {static} + RPAREN : int
+        {static} + SEMI : int
+        {static} + SUB : int
+        {static} + Static_string_literal : int
+        {static} + TILDE : int
+        {static} + T__0 : int
+        {static} + T__1 : int
+        {static} + T__10 : int
+        {static} + T__100 : int
+        {static} + T__101 : int
+        {static} + T__102 : int
+        {static} + T__103 : int
+        {static} + T__104 : int
+        {static} + T__105 : int
+        {static} + T__106 : int
+        {static} + T__107 : int
+        {static} + T__108 : int
+        {static} + T__109 : int
+        {static} + T__11 : int
+        {static} + T__110 : int
+        {static} + T__111 : int
+        {static} + T__112 : int
+        {static} + T__113 : int
+        {static} + T__114 : int
+        {static} + T__115 : int
+        {static} + T__116 : int
+        {static} + T__117 : int
+        {static} + T__118 : int
+        {static} + T__119 : int
+        {static} + T__12 : int
+        {static} + T__120 : int
+        {static} + T__121 : int
+        {static} + T__122 : int
+        {static} + T__123 : int
+        {static} + T__124 : int
+        {static} + T__125 : int
+        {static} + T__126 : int
+        {static} + T__127 : int
+        {static} + T__128 : int
+        {static} + T__13 : int
+        {static} + T__14 : int
+        {static} + T__15 : int
+        {static} + T__16 : int
+        {static} + T__17 : int
+        {static} + T__18 : int
+        {static} + T__19 : int
+        {static} + T__2 : int
+        {static} + T__20 : int
+        {static} + T__21 : int
+        {static} + T__22 : int
+        {static} + T__23 : int
+        {static} + T__24 : int
+        {static} + T__25 : int
+        {static} + T__26 : int
+        {static} + T__27 : int
+        {static} + T__28 : int
+        {static} + T__29 : int
+        {static} + T__3 : int
+        {static} + T__30 : int
+        {static} + T__31 : int
+        {static} + T__32 : int
+        {static} + T__33 : int
+        {static} + T__34 : int
+        {static} + T__35 : int
+        {static} + T__36 : int
+        {static} + T__37 : int
+        {static} + T__38 : int
+        {static} + T__39 : int
+        {static} + T__4 : int
+        {static} + T__40 : int
+        {static} + T__41 : int
+        {static} + T__42 : int
+        {static} + T__43 : int
+        {static} + T__44 : int
+        {static} + T__45 : int
+        {static} + T__46 : int
+        {static} + T__47 : int
+        {static} + T__48 : int
+        {static} + T__49 : int
+        {static} + T__5 : int
+        {static} + T__50 : int
+        {static} + T__51 : int
+        {static} + T__52 : int
+        {static} + T__53 : int
+        {static} + T__54 : int
+        {static} + T__55 : int
+        {static} + T__56 : int
+        {static} + T__57 : int
+        {static} + T__58 : int
+        {static} + T__59 : int
+        {static} + T__6 : int
+        {static} + T__60 : int
+        {static} + T__61 : int
+        {static} + T__62 : int
+        {static} + T__63 : int
+        {static} + T__64 : int
+        {static} + T__65 : int
+        {static} + T__66 : int
+        {static} + T__67 : int
+        {static} + T__68 : int
+        {static} + T__69 : int
+        {static} + T__7 : int
+        {static} + T__70 : int
+        {static} + T__71 : int
+        {static} + T__72 : int
+        {static} + T__73 : int
+        {static} + T__74 : int
+        {static} + T__75 : int
+        {static} + T__76 : int
+        {static} + T__77 : int
+        {static} + T__78 : int
+        {static} + T__79 : int
+        {static} + T__8 : int
+        {static} + T__80 : int
+        {static} + T__81 : int
+        {static} + T__82 : int
+        {static} + T__83 : int
+        {static} + T__84 : int
+        {static} + T__85 : int
+        {static} + T__86 : int
+        {static} + T__87 : int
+        {static} + T__88 : int
+        {static} + T__89 : int
+        {static} + T__9 : int
+        {static} + T__90 : int
+        {static} + T__91 : int
+        {static} + T__92 : int
+        {static} + T__93 : int
+        {static} + T__94 : int
+        {static} + T__95 : int
+        {static} + T__96 : int
+        {static} + T__97 : int
+        {static} + T__98 : int
+        {static} + T__99 : int
+        {static} + UNDERSCORE : int
+        {static} + VOCABULARY : Vocabulary
+        {static} + WS : int
+        {static} + _ATN : ATN
+        {static} + _serializedATN : String
+        {static} + channelNames : String[]
+        {static} + modeNames : String[]
+        {static} + ruleNames : String[]
+        {static} + tokenNames : String[]
+        {static} # _decisionToDFA : DFA[]
+        {static} # _sharedContextCache : PredictionContextCache
+        {static} - _LITERAL_NAMES : String[]
+        {static} - _SYMBOLIC_NAMES : String[]
+        + Swift3Lexer()
+        + getATN()
+        + getChannelNames()
+        + getGrammarFileName()
+        + getModeNames()
+        + getRuleNames()
+        + getSerializedATN()
+        + getTokenNames()
+        + getVocabulary()
+        {static} - makeLiteralNames()
+        {static} - makeRuleNames()
+        {static} - makeSymbolicNames()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser {
+        {static} + ADD : int
+        {static} + AND : int
+        {static} + AT : int
+        {static} + BANG : int
+        {static} + Binary_literal : int
+        {static} + Block_comment : int
+        {static} + CARET : int
+        {static} + COLON : int
+        {static} + COMMA : int
+        {static} + DIV : int
+        {static} + DOT : int
+        {static} + Decimal_literal : int
+        {static} + EQUAL : int
+        {static} + Floating_point_literal : int
+        {static} + GT : int
+        {static} + Hexadecimal_literal : int
+        {static} + Identifier : int
+        {static} + Implicit_parameter_name : int
+        {static} + Interpolated_string_literal : int
+        {static} + LBRACK : int
+        {static} + LCURLY : int
+        {static} + LPAREN : int
+        {static} + LT : int
+        {static} + Line_comment : int
+        {static} + MOD : int
+        {static} + MUL : int
+        {static} + OR : int
+        {static} + Octal_literal : int
+        {static} + Operator_following_character : int
+        {static} + Operator_head_other : int
+        {static} + Platform_name_platform_version : int
+        {static} + Pure_decimal_digits : int
+        {static} + QUESTION : int
+        {static} + RBRACK : int
+        {static} + RCURLY : int
+        {static} + RPAREN : int
+        {static} + RULE_access_level_modifier : int
+        {static} + RULE_any_punctuation_for_balanced_token : int
+        {static} + RULE_architecture : int
+        {static} + RULE_argument_label : int
+        {static} + RULE_argument_name : int
+        {static} + RULE_argument_names : int
+        {static} + RULE_array_literal : int
+        {static} + RULE_array_literal_item : int
+        {static} + RULE_array_literal_items : int
+        {static} + RULE_array_type : int
+        {static} + RULE_arrow_operator : int
+        {static} + RULE_assignment_operator : int
+        {static} + RULE_associativity : int
+        {static} + RULE_attribute : int
+        {static} + RULE_attribute_argument_clause : int
+        {static} + RULE_attribute_name : int
+        {static} + RULE_attributes : int
+        {static} + RULE_availability_argument : int
+        {static} + RULE_availability_arguments : int
+        {static} + RULE_availability_condition : int
+        {static} + RULE_balanced_token : int
+        {static} + RULE_balanced_tokens : int
+        {static} + RULE_binary_expression : int
+        {static} + RULE_binary_expressions : int
+        {static} + RULE_binary_operator : int
+        {static} + RULE_boolean_literal : int
+        {static} + RULE_branch_statement : int
+        {static} + RULE_break_statement : int
+        {static} + RULE_capture_list : int
+        {static} + RULE_capture_list_item : int
+        {static} + RULE_capture_list_items : int
+        {static} + RULE_capture_specifier : int
+        {static} + RULE_case_condition : int
+        {static} + RULE_case_item_list : int
+        {static} + RULE_case_label : int
+        {static} + RULE_catch_clause : int
+        {static} + RULE_catch_clauses : int
+        {static} + RULE_class_body : int
+        {static} + RULE_class_declaration : int
+        {static} + RULE_class_member : int
+        {static} + RULE_class_name : int
+        {static} + RULE_class_requirement : int
+        {static} + RULE_closure_expression : int
+        {static} + RULE_closure_parameter : int
+        {static} + RULE_closure_parameter_clause : int
+        {static} + RULE_closure_parameter_clause_identifier_list : int
+        {static} + RULE_closure_parameter_list : int
+        {static} + RULE_closure_parameter_name : int
+        {static} + RULE_closure_signature : int
+        {static} + RULE_code_block : int
+        {static} + RULE_compilation_condition : int
+        {static} + RULE_compilation_condition_AND : int
+        {static} + RULE_compilation_condition_GE : int
+        {static} + RULE_compilation_condition_OR : int
+        {static} + RULE_compiler_control_statement : int
+        {static} + RULE_condition : int
+        {static} + RULE_condition_list : int
+        {static} + RULE_conditional_compilation_block : int
+        {static} + RULE_conditional_operator : int
+        {static} + RULE_conformance_requirement : int
+        {static} + RULE_constant_declaration : int
+        {static} + RULE_continue_statement : int
+        {static} + RULE_control_transfer_statement : int
+        {static} + RULE_declaration : int
+        {static} + RULE_declaration_identifier : int
+        {static} + RULE_declaration_modifier : int
+        {static} + RULE_declaration_modifiers : int
+        {static} + RULE_declarations : int
+        {static} + RULE_default_argument_clause : int
+        {static} + RULE_default_label : int
+        {static} + RULE_defer_statement : int
+        {static} + RULE_deinitializer_declaration : int
+        {static} + RULE_dictionary_literal : int
+        {static} + RULE_dictionary_literal_item : int
+        {static} + RULE_dictionary_literal_items : int
+        {static} + RULE_dictionary_type : int
+        {static} + RULE_didSet_clause : int
+        {static} + RULE_do_statement : int
+        {static} + RULE_dot_operator_character : int
+        {static} + RULE_dot_operator_head : int
+        {static} + RULE_dynamic_type_expression : int
+        {static} + RULE_element_name : int
+        {static} + RULE_else_clause : int
+        {static} + RULE_else_directive : int
+        {static} + RULE_else_directive_clause : int
+        {static} + RULE_elseif_directive : int
+        {static} + RULE_elseif_directive_clause : int
+        {static} + RULE_elseif_directive_clauses : int
+        {static} + RULE_endif_directive : int
+        {static} + RULE_enum_case_name : int
+        {static} + RULE_enum_case_pattern : int
+        {static} + RULE_enum_declaration : int
+        {static} + RULE_enum_name : int
+        {static} + RULE_expression : int
+        {static} + RULE_expression_list : int
+        {static} + RULE_expression_pattern : int
+        {static} + RULE_extension_body : int
+        {static} + RULE_extension_declaration : int
+        {static} + RULE_extension_member : int
+        {static} + RULE_external_parameter_name : int
+        {static} + RULE_fallthrough_statement : int
+        {static} + RULE_file_name : int
+        {static} + RULE_for_in_statement : int
+        {static} + RULE_for_init : int
+        {static} + RULE_for_statement : int
+        {static} + RULE_function_body : int
+        {static} + RULE_function_call_argument : int
+        {static} + RULE_function_call_argument_clause : int
+        {static} + RULE_function_call_argument_list : int
+        {static} + RULE_function_declaration : int
+        {static} + RULE_function_head : int
+        {static} + RULE_function_name : int
+        {static} + RULE_function_result : int
+        {static} + RULE_function_signature : int
+        {static} + RULE_function_type : int
+        {static} + RULE_function_type_argument : int
+        {static} + RULE_function_type_argument_clause : int
+        {static} + RULE_function_type_argument_list : int
+        {static} + RULE_generic_argument : int
+        {static} + RULE_generic_argument_clause : int
+        {static} + RULE_generic_argument_list : int
+        {static} + RULE_generic_parameter : int
+        {static} + RULE_generic_parameter_clause : int
+        {static} + RULE_generic_parameter_list : int
+        {static} + RULE_generic_where_clause : int
+        {static} + RULE_getter_clause : int
+        {static} + RULE_getter_keyword_clause : int
+        {static} + RULE_getter_setter_block : int
+        {static} + RULE_getter_setter_keyword_block : int
+        {static} + RULE_guard_statement : int
+        {static} + RULE_identifier_pattern : int
+        {static} + RULE_if_directive : int
+        {static} + RULE_if_directive_clause : int
+        {static} + RULE_if_statement : int
+        {static} + RULE_implicit_member_expression : int
+        {static} + RULE_import_declaration : int
+        {static} + RULE_import_kind : int
+        {static} + RULE_import_path : int
+        {static} + RULE_import_path_identifier : int
+        {static} + RULE_in_out_expression : int
+        {static} + RULE_infix_operator_declaration : int
+        {static} + RULE_infix_operator_group : int
+        {static} + RULE_initializer : int
+        {static} + RULE_initializer_body : int
+        {static} + RULE_initializer_declaration : int
+        {static} + RULE_initializer_head : int
+        {static} + RULE_integer_literal : int
+        {static} + RULE_key_path_expression : int
+        {static} + RULE_keyword_as_identifier_in_declarations : int
+        {static} + RULE_keyword_as_identifier_in_labels : int
+        {static} + RULE_label_identifier : int
+        {static} + RULE_label_name : int
+        {static} + RULE_labeled_statement : int
+        {static} + RULE_line_control_statement : int
+        {static} + RULE_line_number : int
+        {static} + RULE_literal : int
+        {static} + RULE_literal_expression : int
+        {static} + RULE_local_parameter_name : int
+        {static} + RULE_loop_statement : int
+        {static} + RULE_mutation_modifier : int
+        {static} + RULE_negate_prefix_operator : int
+        {static} + RULE_nil_literal : int
+        {static} + RULE_numeric_literal : int
+        {static} + RULE_operating_system : int
+        {static} + RULE_operator : int
+        {static} + RULE_operator_character : int
+        {static} + RULE_operator_declaration : int
+        {static} + RULE_operator_head : int
+        {static} + RULE_optional_binding_condition : int
+        {static} + RULE_optional_pattern : int
+        {static} + RULE_parameter : int
+        {static} + RULE_parameter_clause : int
+        {static} + RULE_parameter_list : int
+        {static} + RULE_parenthesized_expression : int
+        {static} + RULE_pattern : int
+        {static} + RULE_pattern_initializer : int
+        {static} + RULE_pattern_initializer_list : int
+        {static} + RULE_platform_condition : int
+        {static} + RULE_playground_literal : int
+        {static} + RULE_postfix_expression : int
+        {static} + RULE_postfix_operator : int
+        {static} + RULE_postfix_operator_declaration : int
+        {static} + RULE_precedence_group_assignment : int
+        {static} + RULE_precedence_group_associativity : int
+        {static} + RULE_precedence_group_attribute : int
+        {static} + RULE_precedence_group_declaration : int
+        {static} + RULE_precedence_group_name : int
+        {static} + RULE_precedence_group_names : int
+        {static} + RULE_precedence_group_relation : int
+        {static} + RULE_prefix_expression : int
+        {static} + RULE_prefix_operator : int
+        {static} + RULE_prefix_operator_declaration : int
+        {static} + RULE_primary_expression : int
+        {static} + RULE_protocol_associated_type_declaration : int
+        {static} + RULE_protocol_body : int
+        {static} + RULE_protocol_composition_type : int
+        {static} + RULE_protocol_declaration : int
+        {static} + RULE_protocol_identifier : int
+        {static} + RULE_protocol_initializer_declaration : int
+        {static} + RULE_protocol_member : int
+        {static} + RULE_protocol_member_declaration : int
+        {static} + RULE_protocol_method_declaration : int
+        {static} + RULE_protocol_name : int
+        {static} + RULE_protocol_property_declaration : int
+        {static} + RULE_protocol_subscript_declaration : int
+        {static} + RULE_range_operator : int
+        {static} + RULE_raw_value_assignment : int
+        {static} + RULE_raw_value_literal : int
+        {static} + RULE_raw_value_style_enum : int
+        {static} + RULE_raw_value_style_enum_case : int
+        {static} + RULE_raw_value_style_enum_case_clause : int
+        {static} + RULE_raw_value_style_enum_case_list : int
+        {static} + RULE_raw_value_style_enum_member : int
+        {static} + RULE_raw_value_style_enum_members : int
+        {static} + RULE_repeat_while_statement : int
+        {static} + RULE_requirement : int
+        {static} + RULE_requirement_list : int
+        {static} + RULE_return_statement : int
+        {static} + RULE_same_type_equals : int
+        {static} + RULE_same_type_requirement : int
+        {static} + RULE_selector_expression : int
+        {static} + RULE_self_expression : int
+        {static} + RULE_setter_clause : int
+        {static} + RULE_setter_keyword_clause : int
+        {static} + RULE_setter_name : int
+        {static} + RULE_statement : int
+        {static} + RULE_statement_label : int
+        {static} + RULE_statements : int
+        {static} + RULE_statements_impl : int
+        {static} + RULE_string_literal : int
+        {static} + RULE_struct_body : int
+        {static} + RULE_struct_declaration : int
+        {static} + RULE_struct_member : int
+        {static} + RULE_struct_name : int
+        {static} + RULE_subscript_declaration : int
+        {static} + RULE_subscript_head : int
+        {static} + RULE_subscript_result : int
+        {static} + RULE_superclass_expression : int
+        {static} + RULE_superclass_initializer_expression : int
+        {static} + RULE_superclass_method_expression : int
+        {static} + RULE_superclass_subscript_expression : int
+        {static} + RULE_swift_version : int
+        {static} + RULE_switch_case : int
+        {static} + RULE_switch_cases : int
+        {static} + RULE_switch_statement : int
+        {static} + RULE_throw_statement : int
+        {static} + RULE_top_level : int
+        {static} + RULE_top_level_declaration : int
+        {static} + RULE_trailing_closure : int
+        {static} + RULE_try_operator : int
+        {static} + RULE_tuple_element : int
+        {static} + RULE_tuple_expression : int
+        {static} + RULE_tuple_pattern : int
+        {static} + RULE_tuple_pattern_element : int
+        {static} + RULE_tuple_pattern_element_list : int
+        {static} + RULE_tuple_type : int
+        {static} + RULE_tuple_type_element : int
+        {static} + RULE_tuple_type_element_list : int
+        {static} + RULE_type : int
+        {static} + RULE_type_annotation : int
+        {static} + RULE_type_casting_operator : int
+        {static} + RULE_type_identifier : int
+        {static} + RULE_type_inheritance_clause : int
+        {static} + RULE_type_inheritance_list : int
+        {static} + RULE_type_name : int
+        {static} + RULE_typealias_assignment : int
+        {static} + RULE_typealias_declaration : int
+        {static} + RULE_typealias_name : int
+        {static} + RULE_union_style_enum : int
+        {static} + RULE_union_style_enum_case : int
+        {static} + RULE_union_style_enum_case_clause : int
+        {static} + RULE_union_style_enum_case_list : int
+        {static} + RULE_union_style_enum_member : int
+        {static} + RULE_union_style_enum_members : int
+        {static} + RULE_value_binding_pattern : int
+        {static} + RULE_variable_declaration : int
+        {static} + RULE_variable_declaration_head : int
+        {static} + RULE_variable_name : int
+        {static} + RULE_where_clause : int
+        {static} + RULE_where_expression : int
+        {static} + RULE_while_statement : int
+        {static} + RULE_wildcard_expression : int
+        {static} + RULE_wildcard_pattern : int
+        {static} + RULE_willSet_clause : int
+        {static} + RULE_willSet_didSet_block : int
+        {static} + SEMI : int
+        {static} + SUB : int
+        {static} + Static_string_literal : int
+        {static} + TILDE : int
+        {static} + T__0 : int
+        {static} + T__1 : int
+        {static} + T__10 : int
+        {static} + T__100 : int
+        {static} + T__101 : int
+        {static} + T__102 : int
+        {static} + T__103 : int
+        {static} + T__104 : int
+        {static} + T__105 : int
+        {static} + T__106 : int
+        {static} + T__107 : int
+        {static} + T__108 : int
+        {static} + T__109 : int
+        {static} + T__11 : int
+        {static} + T__110 : int
+        {static} + T__111 : int
+        {static} + T__112 : int
+        {static} + T__113 : int
+        {static} + T__114 : int
+        {static} + T__115 : int
+        {static} + T__116 : int
+        {static} + T__117 : int
+        {static} + T__118 : int
+        {static} + T__119 : int
+        {static} + T__12 : int
+        {static} + T__120 : int
+        {static} + T__121 : int
+        {static} + T__122 : int
+        {static} + T__123 : int
+        {static} + T__124 : int
+        {static} + T__125 : int
+        {static} + T__126 : int
+        {static} + T__127 : int
+        {static} + T__128 : int
+        {static} + T__13 : int
+        {static} + T__14 : int
+        {static} + T__15 : int
+        {static} + T__16 : int
+        {static} + T__17 : int
+        {static} + T__18 : int
+        {static} + T__19 : int
+        {static} + T__2 : int
+        {static} + T__20 : int
+        {static} + T__21 : int
+        {static} + T__22 : int
+        {static} + T__23 : int
+        {static} + T__24 : int
+        {static} + T__25 : int
+        {static} + T__26 : int
+        {static} + T__27 : int
+        {static} + T__28 : int
+        {static} + T__29 : int
+        {static} + T__3 : int
+        {static} + T__30 : int
+        {static} + T__31 : int
+        {static} + T__32 : int
+        {static} + T__33 : int
+        {static} + T__34 : int
+        {static} + T__35 : int
+        {static} + T__36 : int
+        {static} + T__37 : int
+        {static} + T__38 : int
+        {static} + T__39 : int
+        {static} + T__4 : int
+        {static} + T__40 : int
+        {static} + T__41 : int
+        {static} + T__42 : int
+        {static} + T__43 : int
+        {static} + T__44 : int
+        {static} + T__45 : int
+        {static} + T__46 : int
+        {static} + T__47 : int
+        {static} + T__48 : int
+        {static} + T__49 : int
+        {static} + T__5 : int
+        {static} + T__50 : int
+        {static} + T__51 : int
+        {static} + T__52 : int
+        {static} + T__53 : int
+        {static} + T__54 : int
+        {static} + T__55 : int
+        {static} + T__56 : int
+        {static} + T__57 : int
+        {static} + T__58 : int
+        {static} + T__59 : int
+        {static} + T__6 : int
+        {static} + T__60 : int
+        {static} + T__61 : int
+        {static} + T__62 : int
+        {static} + T__63 : int
+        {static} + T__64 : int
+        {static} + T__65 : int
+        {static} + T__66 : int
+        {static} + T__67 : int
+        {static} + T__68 : int
+        {static} + T__69 : int
+        {static} + T__7 : int
+        {static} + T__70 : int
+        {static} + T__71 : int
+        {static} + T__72 : int
+        {static} + T__73 : int
+        {static} + T__74 : int
+        {static} + T__75 : int
+        {static} + T__76 : int
+        {static} + T__77 : int
+        {static} + T__78 : int
+        {static} + T__79 : int
+        {static} + T__8 : int
+        {static} + T__80 : int
+        {static} + T__81 : int
+        {static} + T__82 : int
+        {static} + T__83 : int
+        {static} + T__84 : int
+        {static} + T__85 : int
+        {static} + T__86 : int
+        {static} + T__87 : int
+        {static} + T__88 : int
+        {static} + T__89 : int
+        {static} + T__9 : int
+        {static} + T__90 : int
+        {static} + T__91 : int
+        {static} + T__92 : int
+        {static} + T__93 : int
+        {static} + T__94 : int
+        {static} + T__95 : int
+        {static} + T__96 : int
+        {static} + T__97 : int
+        {static} + T__98 : int
+        {static} + T__99 : int
+        {static} + UNDERSCORE : int
+        {static} + VOCABULARY : Vocabulary
+        {static} + WS : int
+        {static} + _ATN : ATN
+        {static} + _serializedATN : String
+        {static} + ruleNames : String[]
+        {static} + tokenNames : String[]
+        {static} # _decisionToDFA : DFA[]
+        {static} # _sharedContextCache : PredictionContextCache
+        {static} - _LITERAL_NAMES : String[]
+        {static} - _SYMBOLIC_NAMES : String[]
+        {static} - _serializedATNSegment0 : String
+        {static} - _serializedATNSegment1 : String
+        {static} - _serializedATNSegments : int
+        + Swift3Parser()
+        + access_level_modifier()
+        + any_punctuation_for_balanced_token()
+        + architecture()
+        + argument_label()
+        + argument_name()
+        + argument_names()
+        + array_literal()
+        + array_literal_item()
+        + array_literal_items()
+        + array_type()
+        + arrow_operator()
+        + assignment_operator()
+        + associativity()
+        + attribute()
+        + attribute_argument_clause()
+        + attribute_name()
+        + attributes()
+        + availability_argument()
+        + availability_arguments()
+        + availability_condition()
+        + balanced_token()
+        + balanced_tokens()
+        + binary_expression()
+        + binary_expressions()
+        + binary_operator()
+        + boolean_literal()
+        + branch_statement()
+        + break_statement()
+        + capture_list()
+        + capture_list_item()
+        + capture_list_items()
+        + capture_specifier()
+        + case_condition()
+        + case_item_list()
+        + case_label()
+        + catch_clause()
+        + catch_clauses()
+        + class_body()
+        + class_declaration()
+        + class_member()
+        + class_name()
+        + class_requirement()
+        + closure_expression()
+        + closure_parameter()
+        + closure_parameter_clause()
+        + closure_parameter_clause_identifier_list()
+        + closure_parameter_list()
+        + closure_parameter_name()
+        + closure_signature()
+        + code_block()
+        + compilation_condition()
+        + compilation_condition_AND()
+        + compilation_condition_GE()
+        + compilation_condition_OR()
+        + compiler_control_statement()
+        + condition()
+        + condition_list()
+        + conditional_compilation_block()
+        + conditional_operator()
+        + conformance_requirement()
+        + constant_declaration()
+        + continue_statement()
+        + control_transfer_statement()
+        + declaration()
+        + declaration_identifier()
+        + declaration_modifier()
+        + declaration_modifiers()
+        + declarations()
+        + default_argument_clause()
+        + default_label()
+        + defer_statement()
+        + deinitializer_declaration()
+        + dictionary_literal()
+        + dictionary_literal_item()
+        + dictionary_literal_items()
+        + dictionary_type()
+        + didSet_clause()
+        + do_statement()
+        + dot_operator_character()
+        + dot_operator_head()
+        + dynamic_type_expression()
+        + element_name()
+        + else_clause()
+        + else_directive()
+        + else_directive_clause()
+        + elseif_directive()
+        + elseif_directive_clause()
+        + elseif_directive_clauses()
+        + endif_directive()
+        + enum_case_name()
+        + enum_case_pattern()
+        + enum_declaration()
+        + enum_name()
+        + expression()
+        + expression_list()
+        + expression_pattern()
+        + extension_body()
+        + extension_declaration()
+        + extension_member()
+        + external_parameter_name()
+        + fallthrough_statement()
+        + file_name()
+        + for_in_statement()
+        + for_init()
+        + for_statement()
+        + function_body()
+        + function_call_argument()
+        + function_call_argument_clause()
+        + function_call_argument_list()
+        + function_declaration()
+        + function_head()
+        + function_name()
+        + function_result()
+        + function_signature()
+        + function_type()
+        + function_type_argument()
+        + function_type_argument_clause()
+        + function_type_argument_list()
+        + generic_argument()
+        + generic_argument_clause()
+        + generic_argument_list()
+        + generic_parameter()
+        + generic_parameter_clause()
+        + generic_parameter_list()
+        + generic_where_clause()
+        + getATN()
+        + getGrammarFileName()
+        + getRuleNames()
+        + getSerializedATN()
+        + getTokenNames()
+        + getVocabulary()
+        + getter_clause()
+        + getter_keyword_clause()
+        + getter_setter_block()
+        + getter_setter_keyword_block()
+        + guard_statement()
+        + identifier_pattern()
+        + if_directive()
+        + if_directive_clause()
+        + if_statement()
+        + implicit_member_expression()
+        + import_declaration()
+        + import_kind()
+        + import_path()
+        + import_path_identifier()
+        + in_out_expression()
+        + infix_operator_declaration()
+        + infix_operator_group()
+        + initializer()
+        + initializer_body()
+        + initializer_declaration()
+        + initializer_head()
+        + integer_literal()
+        + key_path_expression()
+        + keyword_as_identifier_in_declarations()
+        + keyword_as_identifier_in_labels()
+        + label_identifier()
+        + label_name()
+        + labeled_statement()
+        + line_control_statement()
+        + line_number()
+        + literal()
+        + literal_expression()
+        + local_parameter_name()
+        + loop_statement()
+        + mutation_modifier()
+        + negate_prefix_operator()
+        + nil_literal()
+        + numeric_literal()
+        + operating_system()
+        + operator()
+        + operator_character()
+        + operator_declaration()
+        + operator_head()
+        + optional_binding_condition()
+        + optional_pattern()
+        + parameter()
+        + parameter_clause()
+        + parameter_list()
+        + parenthesized_expression()
+        + pattern()
+        + pattern_initializer()
+        + pattern_initializer_list()
+        + platform_condition()
+        + playground_literal()
+        + postfix_expression()
+        + postfix_operator()
+        + postfix_operator_declaration()
+        + precedence_group_assignment()
+        + precedence_group_associativity()
+        + precedence_group_attribute()
+        + precedence_group_declaration()
+        + precedence_group_name()
+        + precedence_group_names()
+        + precedence_group_relation()
+        + prefix_expression()
+        + prefix_operator()
+        + prefix_operator_declaration()
+        + primary_expression()
+        + protocol_associated_type_declaration()
+        + protocol_body()
+        + protocol_composition_type()
+        + protocol_declaration()
+        + protocol_identifier()
+        + protocol_initializer_declaration()
+        + protocol_member()
+        + protocol_member_declaration()
+        + protocol_method_declaration()
+        + protocol_name()
+        + protocol_property_declaration()
+        + protocol_subscript_declaration()
+        + range_operator()
+        + raw_value_assignment()
+        + raw_value_literal()
+        + raw_value_style_enum()
+        + raw_value_style_enum_case()
+        + raw_value_style_enum_case_clause()
+        + raw_value_style_enum_case_list()
+        + raw_value_style_enum_member()
+        + raw_value_style_enum_members()
+        + repeat_while_statement()
+        + requirement()
+        + requirement_list()
+        + return_statement()
+        + same_type_equals()
+        + same_type_requirement()
+        + selector_expression()
+        + self_expression()
+        + sempred()
+        + setter_clause()
+        + setter_keyword_clause()
+        + setter_name()
+        + statement()
+        + statement_label()
+        + statements()
+        + statements_impl()
+        + string_literal()
+        + struct_body()
+        + struct_declaration()
+        + struct_member()
+        + struct_name()
+        + subscript_declaration()
+        + subscript_head()
+        + subscript_result()
+        + superclass_expression()
+        + superclass_initializer_expression()
+        + superclass_method_expression()
+        + superclass_subscript_expression()
+        + swift_version()
+        + switch_case()
+        + switch_cases()
+        + switch_statement()
+        + throw_statement()
+        + top_level()
+        + top_level_declaration()
+        + trailing_closure()
+        + try_operator()
+        + tuple_element()
+        + tuple_expression()
+        + tuple_pattern()
+        + tuple_pattern_element()
+        + tuple_pattern_element_list()
+        + tuple_type()
+        + tuple_type_element()
+        + tuple_type_element_list()
+        + type()
+        + type_annotation()
+        + type_casting_operator()
+        + type_identifier()
+        + type_inheritance_clause()
+        + type_inheritance_list()
+        + type_name()
+        + typealias_assignment()
+        + typealias_declaration()
+        + typealias_name()
+        + union_style_enum()
+        + union_style_enum_case()
+        + union_style_enum_case_clause()
+        + union_style_enum_case_list()
+        + union_style_enum_member()
+        + union_style_enum_members()
+        + value_binding_pattern()
+        + variable_declaration()
+        + variable_declaration_head()
+        + variable_name()
+        + where_clause()
+        + where_expression()
+        + while_statement()
+        + wildcard_expression()
+        + wildcard_pattern()
+        + willSet_clause()
+        + willSet_didSet_block()
+        - any_punctuation_for_balanced_token_sempred()
+        - arrow_operator_sempred()
+        - assignment_operator_sempred()
+        - binary_operator_sempred()
+        - compilation_condition()
+        - compilation_condition_AND_sempred()
+        - compilation_condition_GE_sempred()
+        - compilation_condition_OR_sempred()
+        - compilation_condition_sempred()
+        {static} - makeLiteralNames()
+        {static} - makeRuleNames()
+        {static} - makeSymbolicNames()
+        - negate_prefix_operator_sempred()
+        - operator_sempred()
+        - pattern()
+        - pattern_sempred()
+        - postfix_expression()
+        - postfix_expression_sempred()
+        - postfix_operator_sempred()
+        - prefix_operator_sempred()
+        - range_operator_sempred()
+        - same_type_equals_sempred()
+        - statements_impl_sempred()
+        - type()
+        - type_sempred()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Access_level_modifierContext {
+        + Access_level_modifierContext()
+        + LPAREN()
+        + RPAREN()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Any_punctuation_for_balanced_tokenContext {
+        + AND()
+        + AT()
+        + Any_punctuation_for_balanced_tokenContext()
+        + BANG()
+        + COLON()
+        + COMMA()
+        + DOT()
+        + EQUAL()
+        + QUESTION()
+        + SEMI()
+        + accept()
+        + arrow_operator()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.ArchitectureContext {
+        + ArchitectureContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Argument_labelContext {
+        + Argument_labelContext()
+        + accept()
+        + getRuleIndex()
+        + label_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Argument_nameContext {
+        + Argument_nameContext()
+        + COLON()
+        + accept()
+        + getRuleIndex()
+        + label_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Argument_namesContext {
+        + Argument_namesContext()
+        + accept()
+        + argument_name()
+        + argument_name()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Array_literalContext {
+        + Array_literalContext()
+        + LBRACK()
+        + RBRACK()
+        + accept()
+        + array_literal_items()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Array_literal_itemContext {
+        + Array_literal_itemContext()
+        + accept()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Array_literal_itemsContext {
+        + Array_literal_itemsContext()
+        + COMMA()
+        + accept()
+        + array_literal_item()
+        + array_literal_items()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Array_typeContext {
+        + Array_typeContext()
+        + LBRACK()
+        + RBRACK()
+        + accept()
+        + getRuleIndex()
+        + type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Arrow_operatorContext {
+        + Arrow_operatorContext()
+        + GT()
+        + SUB()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Assignment_operatorContext {
+        + Assignment_operatorContext()
+        + EQUAL()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.AssociativityContext {
+        + AssociativityContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.AttributeContext {
+        + AT()
+        + AttributeContext()
+        + accept()
+        + attribute_argument_clause()
+        + attribute_name()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Attribute_argument_clauseContext {
+        + Attribute_argument_clauseContext()
+        + LPAREN()
+        + RPAREN()
+        + accept()
+        + balanced_tokens()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Attribute_nameContext {
+        + Attribute_nameContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.AttributesContext {
+        + AttributesContext()
+        + accept()
+        + attribute()
+        + attribute()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Availability_argumentContext {
+        + Availability_argumentContext()
+        + MUL()
+        + Platform_name_platform_version()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Availability_argumentsContext {
+        + Availability_argumentsContext()
+        + COMMA()
+        + COMMA()
+        + accept()
+        + availability_argument()
+        + availability_argument()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Availability_conditionContext {
+        + Availability_conditionContext()
+        + LPAREN()
+        + RPAREN()
+        + accept()
+        + availability_arguments()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Balanced_tokenContext {
+        + Balanced_tokenContext()
+        + LBRACK()
+        + LCURLY()
+        + LPAREN()
+        + Platform_name_platform_version()
+        + RBRACK()
+        + RCURLY()
+        + RPAREN()
+        + accept()
+        + any_punctuation_for_balanced_token()
+        + balanced_tokens()
+        + getRuleIndex()
+        + label_identifier()
+        + literal()
+        + operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Balanced_tokensContext {
+        + Balanced_tokensContext()
+        + accept()
+        + balanced_token()
+        + balanced_token()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Binary_expressionContext {
+        + Binary_expressionContext()
+        + accept()
+        + assignment_operator()
+        + binary_operator()
+        + conditional_operator()
+        + getRuleIndex()
+        + prefix_expression()
+        + try_operator()
+        + type_casting_operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Binary_expressionsContext {
+        + Binary_expressionsContext()
+        + accept()
+        + binary_expression()
+        + binary_expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Binary_operatorContext {
+        + Binary_operatorContext()
+        + accept()
+        + getRuleIndex()
+        + operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Boolean_literalContext {
+        + Boolean_literalContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Branch_statementContext {
+        + Branch_statementContext()
+        + accept()
+        + getRuleIndex()
+        + guard_statement()
+        + if_statement()
+        + switch_statement()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Break_statementContext {
+        + Break_statementContext()
+        + accept()
+        + getRuleIndex()
+        + label_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Capture_listContext {
+        + Capture_listContext()
+        + LBRACK()
+        + RBRACK()
+        + accept()
+        + capture_list_items()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Capture_list_itemContext {
+        + Capture_list_itemContext()
+        + accept()
+        + capture_specifier()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Capture_list_itemsContext {
+        + COMMA()
+        + COMMA()
+        + Capture_list_itemsContext()
+        + accept()
+        + capture_list_item()
+        + capture_list_item()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Capture_specifierContext {
+        + Capture_specifierContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Case_conditionContext {
+        + Case_conditionContext()
+        + accept()
+        + getRuleIndex()
+        + initializer()
+        + pattern()
+        + where_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Case_item_listContext {
+        + COMMA()
+        + Case_item_listContext()
+        + accept()
+        + case_item_list()
+        + getRuleIndex()
+        + pattern()
+        + where_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Case_labelContext {
+        + COLON()
+        + Case_labelContext()
+        + accept()
+        + case_item_list()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Catch_clauseContext {
+        + Catch_clauseContext()
+        + accept()
+        + code_block()
+        + getRuleIndex()
+        + pattern()
+        + where_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Catch_clausesContext {
+        + Catch_clausesContext()
+        + accept()
+        + catch_clause()
+        + catch_clauses()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Class_bodyContext {
+        + Class_bodyContext()
+        + LCURLY()
+        + RCURLY()
+        + accept()
+        + class_member()
+        + class_member()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Class_declarationContext {
+        + Class_declarationContext()
+        + accept()
+        + access_level_modifier()
+        + access_level_modifier()
+        + attributes()
+        + class_body()
+        + class_name()
+        + generic_parameter_clause()
+        + generic_where_clause()
+        + getRuleIndex()
+        + type_inheritance_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Class_memberContext {
+        + Class_memberContext()
+        + accept()
+        + compiler_control_statement()
+        + declaration()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Class_nameContext {
+        + Class_nameContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Class_requirementContext {
+        + Class_requirementContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Closure_expressionContext {
+        + Closure_expressionContext()
+        + LCURLY()
+        + RCURLY()
+        + accept()
+        + closure_signature()
+        + getRuleIndex()
+        + statements()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Closure_parameterContext {
+        + Closure_parameterContext()
+        + accept()
+        + closure_parameter_name()
+        + getRuleIndex()
+        + range_operator()
+        + type_annotation()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Closure_parameter_clauseContext {
+        + Closure_parameter_clauseContext()
+        + LPAREN()
+        + RPAREN()
+        + accept()
+        + closure_parameter_clause_identifier_list()
+        + closure_parameter_list()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Closure_parameter_clause_identifier_listContext {
+        + COMMA()
+        + COMMA()
+        + Closure_parameter_clause_identifier_listContext()
+        + accept()
+        + declaration_identifier()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Closure_parameter_listContext {
+        + COMMA()
+        + COMMA()
+        + Closure_parameter_listContext()
+        + accept()
+        + closure_parameter()
+        + closure_parameter()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Closure_parameter_nameContext {
+        + Closure_parameter_nameContext()
+        + accept()
+        + getRuleIndex()
+        + label_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Closure_signatureContext {
+        + Closure_signatureContext()
+        + accept()
+        + capture_list()
+        + closure_parameter_clause()
+        + function_result()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Code_blockContext {
+        + Code_blockContext()
+        + LCURLY()
+        + RCURLY()
+        + accept()
+        + getRuleIndex()
+        + statements()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Compilation_conditionContext {
+        + BANG()
+        + Compilation_conditionContext()
+        + LPAREN()
+        + RPAREN()
+        + accept()
+        + boolean_literal()
+        + compilation_condition()
+        + compilation_condition()
+        + compilation_condition_AND()
+        + compilation_condition_OR()
+        + getRuleIndex()
+        + label_identifier()
+        + platform_condition()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Compilation_condition_ANDContext {
+        + AND()
+        + AND()
+        + Compilation_condition_ANDContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Compilation_condition_GEContext {
+        + Compilation_condition_GEContext()
+        + EQUAL()
+        + GT()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Compilation_condition_ORContext {
+        + Compilation_condition_ORContext()
+        + OR()
+        + OR()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Compiler_control_statementContext {
+        + Compiler_control_statementContext()
+        + accept()
+        + conditional_compilation_block()
+        + getRuleIndex()
+        + line_control_statement()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.ConditionContext {
+        + ConditionContext()
+        + accept()
+        + availability_condition()
+        + case_condition()
+        + expression()
+        + getRuleIndex()
+        + optional_binding_condition()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Condition_listContext {
+        + COMMA()
+        + COMMA()
+        + Condition_listContext()
+        + accept()
+        + condition()
+        + condition()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Conditional_compilation_blockContext {
+        + Conditional_compilation_blockContext()
+        + accept()
+        + else_directive_clause()
+        + elseif_directive_clauses()
+        + endif_directive()
+        + getRuleIndex()
+        + if_directive_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Conditional_operatorContext {
+        + COLON()
+        + Conditional_operatorContext()
+        + QUESTION()
+        + accept()
+        + expression()
+        + getRuleIndex()
+        + try_operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Conformance_requirementContext {
+        + COLON()
+        + Conformance_requirementContext()
+        + accept()
+        + getRuleIndex()
+        + protocol_composition_type()
+        + type_identifier()
+        + type_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Constant_declarationContext {
+        + Constant_declarationContext()
+        + accept()
+        + attributes()
+        + declaration_modifiers()
+        + getRuleIndex()
+        + pattern_initializer_list()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Continue_statementContext {
+        + Continue_statementContext()
+        + accept()
+        + getRuleIndex()
+        + label_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Control_transfer_statementContext {
+        + Control_transfer_statementContext()
+        + accept()
+        + break_statement()
+        + continue_statement()
+        + fallthrough_statement()
+        + getRuleIndex()
+        + return_statement()
+        + throw_statement()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.DeclarationContext {
+        + DeclarationContext()
+        + accept()
+        + class_declaration()
+        + constant_declaration()
+        + deinitializer_declaration()
+        + enum_declaration()
+        + extension_declaration()
+        + function_declaration()
+        + getRuleIndex()
+        + import_declaration()
+        + initializer_declaration()
+        + operator_declaration()
+        + precedence_group_declaration()
+        + protocol_declaration()
+        + struct_declaration()
+        + subscript_declaration()
+        + typealias_declaration()
+        + variable_declaration()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Declaration_identifierContext {
+        + Declaration_identifierContext()
+        + Identifier()
+        + accept()
+        + getRuleIndex()
+        + keyword_as_identifier_in_declarations()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Declaration_modifierContext {
+        + Declaration_modifierContext()
+        + LPAREN()
+        + RPAREN()
+        + accept()
+        + access_level_modifier()
+        + getRuleIndex()
+        + mutation_modifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Declaration_modifiersContext {
+        + Declaration_modifiersContext()
+        + accept()
+        + declaration_modifier()
+        + declaration_modifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.DeclarationsContext {
+        + DeclarationsContext()
+        + accept()
+        + declaration()
+        + declaration()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Default_argument_clauseContext {
+        + Default_argument_clauseContext()
+        + accept()
+        + assignment_operator()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Default_labelContext {
+        + COLON()
+        + Default_labelContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Defer_statementContext {
+        + Defer_statementContext()
+        + accept()
+        + code_block()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Deinitializer_declarationContext {
+        + Deinitializer_declarationContext()
+        + accept()
+        + attributes()
+        + code_block()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Dictionary_literalContext {
+        + COLON()
+        + Dictionary_literalContext()
+        + LBRACK()
+        + RBRACK()
+        + accept()
+        + dictionary_literal_items()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Dictionary_literal_itemContext {
+        + COLON()
+        + Dictionary_literal_itemContext()
+        + accept()
+        + expression()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Dictionary_literal_itemsContext {
+        + COMMA()
+        + Dictionary_literal_itemsContext()
+        + accept()
+        + dictionary_literal_item()
+        + dictionary_literal_items()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Dictionary_typeContext {
+        + COLON()
+        + Dictionary_typeContext()
+        + LBRACK()
+        + RBRACK()
+        + accept()
+        + getRuleIndex()
+        + type()
+        + type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.DidSet_clauseContext {
+        + DidSet_clauseContext()
+        + accept()
+        + attributes()
+        + code_block()
+        + getRuleIndex()
+        + setter_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Do_statementContext {
+        + Do_statementContext()
+        + accept()
+        + catch_clauses()
+        + code_block()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Dot_operator_characterContext {
+        + DOT()
+        + Dot_operator_characterContext()
+        + accept()
+        + getRuleIndex()
+        + operator_character()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Dot_operator_headContext {
+        + DOT()
+        + Dot_operator_headContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Dynamic_typeContext {
+        + Dynamic_typeContext()
+        + accept()
+        + dynamic_type_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Dynamic_type_expressionContext {
+        + COLON()
+        + Dynamic_type_expressionContext()
+        + LPAREN()
+        + RPAREN()
+        + accept()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Element_nameContext {
+        + Element_nameContext()
+        + accept()
+        + getRuleIndex()
+        + label_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Else_clauseContext {
+        + Else_clauseContext()
+        + accept()
+        + code_block()
+        + getRuleIndex()
+        + if_statement()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Else_directiveContext {
+        + Else_directiveContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Else_directive_clauseContext {
+        + Else_directive_clauseContext()
+        + accept()
+        + else_directive()
+        + getRuleIndex()
+        + statements()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Elseif_directiveContext {
+        + Elseif_directiveContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Elseif_directive_clauseContext {
+        + Elseif_directive_clauseContext()
+        + accept()
+        + compilation_condition()
+        + elseif_directive()
+        + getRuleIndex()
+        + statements()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Elseif_directive_clausesContext {
+        + Elseif_directive_clausesContext()
+        + accept()
+        + elseif_directive_clause()
+        + elseif_directive_clause()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Endif_directiveContext {
+        + Endif_directiveContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Enum_case_nameContext {
+        + Enum_case_nameContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Enum_case_patternContext {
+        + DOT()
+        + Enum_case_patternContext()
+        + accept()
+        + enum_case_name()
+        + getRuleIndex()
+        + tuple_pattern()
+        + type_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Enum_declarationContext {
+        + Enum_declarationContext()
+        + accept()
+        + access_level_modifier()
+        + attributes()
+        + getRuleIndex()
+        + raw_value_style_enum()
+        + union_style_enum()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Enum_nameContext {
+        + Enum_nameContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Explicit_member_expression1Context {
+        + DOT()
+        + Explicit_member_expression1Context()
+        + Pure_decimal_digits()
+        + accept()
+        + postfix_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Explicit_member_expression2Context {
+        + DOT()
+        + Explicit_member_expression2Context()
+        + accept()
+        + declaration_identifier()
+        + generic_argument_clause()
+        + postfix_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Explicit_member_expression3Context {
+        + DOT()
+        + Explicit_member_expression3Context()
+        + LPAREN()
+        + RPAREN()
+        + accept()
+        + argument_names()
+        + declaration_identifier()
+        + postfix_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Explicit_member_expression4Context {
+        + Explicit_member_expression4Context()
+        + LPAREN()
+        + RPAREN()
+        + accept()
+        + argument_names()
+        + postfix_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.ExpressionContext {
+        + ExpressionContext()
+        + accept()
+        + binary_expressions()
+        + getRuleIndex()
+        + prefix_expression()
+        + try_operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Expression_listContext {
+        + COMMA()
+        + COMMA()
+        + Expression_listContext()
+        + accept()
+        + expression()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Expression_patternContext {
+        + Expression_patternContext()
+        + accept()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Extension_bodyContext {
+        + Extension_bodyContext()
+        + LCURLY()
+        + RCURLY()
+        + accept()
+        + extension_member()
+        + extension_member()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Extension_declarationContext {
+        + Extension_declarationContext()
+        + accept()
+        + access_level_modifier()
+        + attributes()
+        + extension_body()
+        + generic_where_clause()
+        + getRuleIndex()
+        + type_identifier()
+        + type_inheritance_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Extension_memberContext {
+        + Extension_memberContext()
+        + accept()
+        + compiler_control_statement()
+        + declaration()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.External_parameter_nameContext {
+        + External_parameter_nameContext()
+        + accept()
+        + getRuleIndex()
+        + label_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Fallthrough_statementContext {
+        + Fallthrough_statementContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.File_nameContext {
+        + File_nameContext()
+        + Static_string_literal()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.For_in_statementContext {
+        + For_in_statementContext()
+        + accept()
+        + code_block()
+        + expression()
+        + getRuleIndex()
+        + pattern()
+        + where_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.For_initContext {
+        + For_initContext()
+        + accept()
+        + expression_list()
+        + getRuleIndex()
+        + variable_declaration()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.For_statementContext {
+        + For_statementContext()
+        + LPAREN()
+        + RPAREN()
+        + SEMI()
+        + SEMI()
+        + accept()
+        + code_block()
+        + expression()
+        + expression()
+        + for_init()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_bodyContext {
+        + Function_bodyContext()
+        + accept()
+        + code_block()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_call_argumentContext {
+        + COLON()
+        + Function_call_argumentContext()
+        + accept()
+        + expression()
+        + getRuleIndex()
+        + label_identifier()
+        + operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_call_argument_clauseContext {
+        + Function_call_argument_clauseContext()
+        + LPAREN()
+        + RPAREN()
+        + accept()
+        + function_call_argument_list()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_call_argument_listContext {
+        + COMMA()
+        + COMMA()
+        + Function_call_argument_listContext()
+        + accept()
+        + function_call_argument()
+        + function_call_argument()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_call_expressionContext {
+        + Function_call_expressionContext()
+        + accept()
+        + function_call_argument_clause()
+        + postfix_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_call_expression_with_closureContext {
+        + Function_call_expression_with_closureContext()
+        + accept()
+        + function_call_argument_clause()
+        + postfix_expression()
+        + trailing_closure()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_declarationContext {
+        + Function_declarationContext()
+        + accept()
+        + function_body()
+        + function_head()
+        + function_name()
+        + function_signature()
+        + generic_parameter_clause()
+        + generic_where_clause()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_headContext {
+        + Function_headContext()
+        + accept()
+        + attributes()
+        + declaration_modifiers()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_nameContext {
+        + Function_nameContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+        + operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_resultContext {
+        + Function_resultContext()
+        + accept()
+        + arrow_operator()
+        + attributes()
+        + getRuleIndex()
+        + type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_signatureContext {
+        + Function_signatureContext()
+        + accept()
+        + function_result()
+        + getRuleIndex()
+        + parameter_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_typeContext {
+        + Function_typeContext()
+        + accept()
+        + arrow_operator()
+        + attributes()
+        + function_type_argument_clause()
+        + getRuleIndex()
+        + type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_type_argumentContext {
+        + Function_type_argumentContext()
+        + accept()
+        + argument_label()
+        + attributes()
+        + getRuleIndex()
+        + type()
+        + type_annotation()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_type_argument_clauseContext {
+        + Function_type_argument_clauseContext()
+        + LPAREN()
+        + RPAREN()
+        + accept()
+        + function_type_argument_list()
+        + getRuleIndex()
+        + range_operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Function_type_argument_listContext {
+        + COMMA()
+        + Function_type_argument_listContext()
+        + accept()
+        + function_type_argument()
+        + function_type_argument_list()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Generic_argumentContext {
+        + Generic_argumentContext()
+        + accept()
+        + getRuleIndex()
+        + type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Generic_argument_clauseContext {
+        + GT()
+        + Generic_argument_clauseContext()
+        + LT()
+        + accept()
+        + generic_argument_list()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Generic_argument_listContext {
+        + COMMA()
+        + COMMA()
+        + Generic_argument_listContext()
+        + accept()
+        + generic_argument()
+        + generic_argument()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Generic_parameterContext {
+        + COLON()
+        + Generic_parameterContext()
+        + accept()
+        + getRuleIndex()
+        + protocol_composition_type()
+        + type_identifier()
+        + type_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Generic_parameter_clauseContext {
+        + GT()
+        + Generic_parameter_clauseContext()
+        + LT()
+        + accept()
+        + generic_parameter_list()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Generic_parameter_listContext {
+        + COMMA()
+        + COMMA()
+        + Generic_parameter_listContext()
+        + accept()
+        + generic_parameter()
+        + generic_parameter()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Generic_where_clauseContext {
+        + Generic_where_clauseContext()
+        + accept()
+        + getRuleIndex()
+        + requirement_list()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Getter_clauseContext {
+        + Getter_clauseContext()
+        + accept()
+        + attributes()
+        + code_block()
+        + getRuleIndex()
+        + mutation_modifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Getter_keyword_clauseContext {
+        + Getter_keyword_clauseContext()
+        + accept()
+        + attributes()
+        + getRuleIndex()
+        + mutation_modifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Getter_setter_blockContext {
+        + Getter_setter_blockContext()
+        + LCURLY()
+        + RCURLY()
+        + accept()
+        + getRuleIndex()
+        + getter_clause()
+        + setter_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Getter_setter_keyword_blockContext {
+        + Getter_setter_keyword_blockContext()
+        + LCURLY()
+        + RCURLY()
+        + accept()
+        + getRuleIndex()
+        + getter_keyword_clause()
+        + setter_keyword_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Guard_statementContext {
+        + Guard_statementContext()
+        + accept()
+        + code_block()
+        + condition_list()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Identifier_patternContext {
+        + Identifier_patternContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.If_directiveContext {
+        + If_directiveContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.If_directive_clauseContext {
+        + If_directive_clauseContext()
+        + accept()
+        + compilation_condition()
+        + getRuleIndex()
+        + if_directive()
+        + statements()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.If_statementContext {
+        + If_statementContext()
+        + accept()
+        + code_block()
+        + condition_list()
+        + else_clause()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Implicit_member_expressionContext {
+        + DOT()
+        + Implicit_member_expressionContext()
+        + accept()
+        + getRuleIndex()
+        + label_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Import_declarationContext {
+        + Import_declarationContext()
+        + accept()
+        + attributes()
+        + getRuleIndex()
+        + import_kind()
+        + import_path()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Import_kindContext {
+        + Import_kindContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Import_pathContext {
+        + DOT()
+        + DOT()
+        + Import_pathContext()
+        + accept()
+        + getRuleIndex()
+        + import_path_identifier()
+        + import_path_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Import_path_identifierContext {
+        + Import_path_identifierContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+        + operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.In_out_expressionContext {
+        + AND()
+        + In_out_expressionContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Infix_operator_declarationContext {
+        + Infix_operator_declarationContext()
+        + accept()
+        + getRuleIndex()
+        + infix_operator_group()
+        + operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Infix_operator_groupContext {
+        + COLON()
+        + Infix_operator_groupContext()
+        + accept()
+        + getRuleIndex()
+        + precedence_group_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.InitializerContext {
+        + InitializerContext()
+        + accept()
+        + assignment_operator()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Initializer_bodyContext {
+        + Initializer_bodyContext()
+        + accept()
+        + code_block()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Initializer_declarationContext {
+        + Initializer_declarationContext()
+        + accept()
+        + generic_parameter_clause()
+        + generic_where_clause()
+        + getRuleIndex()
+        + initializer_body()
+        + initializer_head()
+        + parameter_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Initializer_expressionContext {
+        + DOT()
+        + Initializer_expressionContext()
+        + accept()
+        + postfix_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Initializer_expression_with_argsContext {
+        + DOT()
+        + Initializer_expression_with_argsContext()
+        + LPAREN()
+        + RPAREN()
+        + accept()
+        + argument_names()
+        + postfix_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Initializer_headContext {
+        + BANG()
+        + Initializer_headContext()
+        + QUESTION()
+        + accept()
+        + attributes()
+        + declaration_modifiers()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Integer_literalContext {
+        + Binary_literal()
+        + Decimal_literal()
+        + Hexadecimal_literal()
+        + Integer_literalContext()
+        + Octal_literal()
+        + Pure_decimal_digits()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Key_path_expressionContext {
+        + Key_path_expressionContext()
+        + LPAREN()
+        + RPAREN()
+        + accept()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Keyword_as_identifier_in_declarationsContext {
+        + Keyword_as_identifier_in_declarationsContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Keyword_as_identifier_in_labelsContext {
+        + Keyword_as_identifier_in_labelsContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Label_identifierContext {
+        + Identifier()
+        + Label_identifierContext()
+        + accept()
+        + getRuleIndex()
+        + keyword_as_identifier_in_labels()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Label_nameContext {
+        + Label_nameContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Labeled_statementContext {
+        + Labeled_statementContext()
+        + accept()
+        + do_statement()
+        + getRuleIndex()
+        + if_statement()
+        + loop_statement()
+        + statement_label()
+        + switch_statement()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Line_control_statementContext {
+        + COLON()
+        + COLON()
+        + COMMA()
+        + LPAREN()
+        + Line_control_statementContext()
+        + RPAREN()
+        + accept()
+        + file_name()
+        + getRuleIndex()
+        + line_number()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Line_numberContext {
+        + Line_numberContext()
+        + accept()
+        + getRuleIndex()
+        + integer_literal()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.LiteralContext {
+        + LiteralContext()
+        + accept()
+        + boolean_literal()
+        + getRuleIndex()
+        + nil_literal()
+        + numeric_literal()
+        + string_literal()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Literal_expressionContext {
+        + Literal_expressionContext()
+        + accept()
+        + array_literal()
+        + dictionary_literal()
+        + getRuleIndex()
+        + literal()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Local_parameter_nameContext {
+        + Local_parameter_nameContext()
+        + accept()
+        + getRuleIndex()
+        + label_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Loop_statementContext {
+        + Loop_statementContext()
+        + accept()
+        + for_in_statement()
+        + for_statement()
+        + getRuleIndex()
+        + repeat_while_statement()
+        + while_statement()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Mutation_modifierContext {
+        + Mutation_modifierContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Negate_prefix_operatorContext {
+        + Negate_prefix_operatorContext()
+        + SUB()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Nil_literalContext {
+        + Nil_literalContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Numeric_literalContext {
+        + Floating_point_literal()
+        + Numeric_literalContext()
+        + accept()
+        + getRuleIndex()
+        + integer_literal()
+        + negate_prefix_operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Operating_systemContext {
+        + Operating_systemContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.OperatorContext {
+        + OperatorContext()
+        + accept()
+        + dot_operator_character()
+        + dot_operator_character()
+        + dot_operator_head()
+        + getRuleIndex()
+        + operator_character()
+        + operator_character()
+        + operator_head()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Operator_characterContext {
+        + Operator_characterContext()
+        + Operator_following_character()
+        + accept()
+        + getRuleIndex()
+        + operator_head()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Operator_declarationContext {
+        + Operator_declarationContext()
+        + accept()
+        + getRuleIndex()
+        + infix_operator_declaration()
+        + postfix_operator_declaration()
+        + prefix_operator_declaration()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Operator_headContext {
+        + ADD()
+        + AND()
+        + BANG()
+        + CARET()
+        + DIV()
+        + EQUAL()
+        + GT()
+        + LT()
+        + MOD()
+        + MUL()
+        + OR()
+        + Operator_headContext()
+        + Operator_head_other()
+        + QUESTION()
+        + SUB()
+        + TILDE()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Optional_binding_conditionContext {
+        + Optional_binding_conditionContext()
+        + accept()
+        + getRuleIndex()
+        + initializer()
+        + pattern()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Optional_patternContext {
+        + Optional_patternContext()
+        + QUESTION()
+        + accept()
+        + getRuleIndex()
+        + identifier_pattern()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.ParameterContext {
+        + ParameterContext()
+        + accept()
+        + default_argument_clause()
+        + external_parameter_name()
+        + getRuleIndex()
+        + local_parameter_name()
+        + range_operator()
+        + type_annotation()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Parameter_clauseContext {
+        + LPAREN()
+        + Parameter_clauseContext()
+        + RPAREN()
+        + accept()
+        + getRuleIndex()
+        + parameter_list()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Parameter_listContext {
+        + COMMA()
+        + COMMA()
+        + Parameter_listContext()
+        + accept()
+        + getRuleIndex()
+        + parameter()
+        + parameter()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Parenthesized_expressionContext {
+        + LPAREN()
+        + Parenthesized_expressionContext()
+        + RPAREN()
+        + accept()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.PatternContext {
+        + PatternContext()
+        + accept()
+        + enum_case_pattern()
+        + expression_pattern()
+        + getRuleIndex()
+        + identifier_pattern()
+        + optional_pattern()
+        + pattern()
+        + tuple_pattern()
+        + type()
+        + type_annotation()
+        + value_binding_pattern()
+        + wildcard_pattern()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Pattern_initializerContext {
+        + Pattern_initializerContext()
+        + accept()
+        + getRuleIndex()
+        + initializer()
+        + pattern()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Pattern_initializer_listContext {
+        + COMMA()
+        + COMMA()
+        + Pattern_initializer_listContext()
+        + accept()
+        + getRuleIndex()
+        + pattern_initializer()
+        + pattern_initializer()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Platform_conditionContext {
+        + LPAREN()
+        + Platform_conditionContext()
+        + RPAREN()
+        + accept()
+        + architecture()
+        + compilation_condition_GE()
+        + getRuleIndex()
+        + operating_system()
+        + swift_version()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Playground_literalContext {
+        + COLON()
+        + COLON()
+        + COMMA()
+        + COMMA()
+        + LPAREN()
+        + Playground_literalContext()
+        + RPAREN()
+        + accept()
+        + expression()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Postfix_expressionContext {
+        + Postfix_expressionContext()
+        + Postfix_expressionContext()
+        + copyFrom()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Postfix_operationContext {
+        + Postfix_operationContext()
+        + accept()
+        + postfix_expression()
+        + postfix_operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Postfix_operatorContext {
+        + Postfix_operatorContext()
+        + accept()
+        + getRuleIndex()
+        + operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Postfix_operator_declarationContext {
+        + Postfix_operator_declarationContext()
+        + accept()
+        + getRuleIndex()
+        + operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Postfix_self_expressionContext {
+        + DOT()
+        + Postfix_self_expressionContext()
+        + accept()
+        + postfix_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Precedence_group_assignmentContext {
+        + COLON()
+        + Precedence_group_assignmentContext()
+        + accept()
+        + boolean_literal()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Precedence_group_associativityContext {
+        + COLON()
+        + Precedence_group_associativityContext()
+        + accept()
+        + associativity()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Precedence_group_attributeContext {
+        + Precedence_group_attributeContext()
+        + accept()
+        + getRuleIndex()
+        + precedence_group_assignment()
+        + precedence_group_associativity()
+        + precedence_group_relation()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Precedence_group_declarationContext {
+        + LCURLY()
+        + Precedence_group_declarationContext()
+        + RCURLY()
+        + accept()
+        + getRuleIndex()
+        + precedence_group_attribute()
+        + precedence_group_attribute()
+        + precedence_group_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Precedence_group_nameContext {
+        + Precedence_group_nameContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Precedence_group_namesContext {
+        + COMMA()
+        + COMMA()
+        + Precedence_group_namesContext()
+        + accept()
+        + getRuleIndex()
+        + precedence_group_name()
+        + precedence_group_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Precedence_group_relationContext {
+        + COLON()
+        + Precedence_group_relationContext()
+        + accept()
+        + getRuleIndex()
+        + precedence_group_names()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Prefix_expressionContext {
+        + Prefix_expressionContext()
+        + accept()
+        + getRuleIndex()
+        + in_out_expression()
+        + postfix_expression()
+        + prefix_operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Prefix_operatorContext {
+        + Prefix_operatorContext()
+        + accept()
+        + getRuleIndex()
+        + operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Prefix_operator_declarationContext {
+        + Prefix_operator_declarationContext()
+        + accept()
+        + getRuleIndex()
+        + operator()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.PrimaryContext {
+        + PrimaryContext()
+        + accept()
+        + primary_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Primary_expressionContext {
+        + Primary_expressionContext()
+        + accept()
+        + closure_expression()
+        + declaration_identifier()
+        + generic_argument_clause()
+        + getRuleIndex()
+        + implicit_member_expression()
+        + key_path_expression()
+        + literal_expression()
+        + parenthesized_expression()
+        + selector_expression()
+        + self_expression()
+        + superclass_expression()
+        + tuple_expression()
+        + wildcard_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Protocol_associated_type_declarationContext {
+        + Protocol_associated_type_declarationContext()
+        + accept()
+        + access_level_modifier()
+        + attributes()
+        + getRuleIndex()
+        + type_inheritance_clause()
+        + typealias_assignment()
+        + typealias_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Protocol_bodyContext {
+        + LCURLY()
+        + Protocol_bodyContext()
+        + RCURLY()
+        + accept()
+        + getRuleIndex()
+        + protocol_member()
+        + protocol_member()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Protocol_composition_typeContext {
+        + AND()
+        + AND()
+        + Protocol_composition_typeContext()
+        + accept()
+        + getRuleIndex()
+        + protocol_identifier()
+        + protocol_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Protocol_declarationContext {
+        + Protocol_declarationContext()
+        + accept()
+        + access_level_modifier()
+        + attributes()
+        + getRuleIndex()
+        + protocol_body()
+        + protocol_name()
+        + type_inheritance_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Protocol_identifierContext {
+        + Protocol_identifierContext()
+        + accept()
+        + getRuleIndex()
+        + type_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Protocol_initializer_declarationContext {
+        + Protocol_initializer_declarationContext()
+        + accept()
+        + generic_parameter_clause()
+        + generic_where_clause()
+        + getRuleIndex()
+        + initializer_head()
+        + parameter_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Protocol_memberContext {
+        + Protocol_memberContext()
+        + accept()
+        + compiler_control_statement()
+        + getRuleIndex()
+        + protocol_member_declaration()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Protocol_member_declarationContext {
+        + Protocol_member_declarationContext()
+        + accept()
+        + getRuleIndex()
+        + protocol_associated_type_declaration()
+        + protocol_initializer_declaration()
+        + protocol_method_declaration()
+        + protocol_property_declaration()
+        + protocol_subscript_declaration()
+        + typealias_declaration()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Protocol_method_declarationContext {
+        + Protocol_method_declarationContext()
+        + accept()
+        + function_head()
+        + function_name()
+        + function_signature()
+        + generic_parameter_clause()
+        + generic_where_clause()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Protocol_nameContext {
+        + Protocol_nameContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Protocol_property_declarationContext {
+        + Protocol_property_declarationContext()
+        + accept()
+        + getRuleIndex()
+        + getter_setter_keyword_block()
+        + type_annotation()
+        + variable_declaration_head()
+        + variable_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Protocol_subscript_declarationContext {
+        + Protocol_subscript_declarationContext()
+        + accept()
+        + getRuleIndex()
+        + getter_setter_keyword_block()
+        + subscript_head()
+        + subscript_result()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Range_operatorContext {
+        + DOT()
+        + DOT()
+        + Range_operatorContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Raw_value_assignmentContext {
+        + Raw_value_assignmentContext()
+        + accept()
+        + assignment_operator()
+        + getRuleIndex()
+        + raw_value_literal()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Raw_value_literalContext {
+        + Raw_value_literalContext()
+        + Static_string_literal()
+        + accept()
+        + boolean_literal()
+        + getRuleIndex()
+        + numeric_literal()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Raw_value_style_enumContext {
+        + LCURLY()
+        + RCURLY()
+        + Raw_value_style_enumContext()
+        + accept()
+        + enum_name()
+        + generic_parameter_clause()
+        + generic_where_clause()
+        + getRuleIndex()
+        + raw_value_style_enum_members()
+        + type_inheritance_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Raw_value_style_enum_caseContext {
+        + Raw_value_style_enum_caseContext()
+        + accept()
+        + enum_case_name()
+        + getRuleIndex()
+        + raw_value_assignment()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Raw_value_style_enum_case_clauseContext {
+        + Raw_value_style_enum_case_clauseContext()
+        + accept()
+        + attributes()
+        + getRuleIndex()
+        + raw_value_style_enum_case_list()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Raw_value_style_enum_case_listContext {
+        + COMMA()
+        + Raw_value_style_enum_case_listContext()
+        + accept()
+        + getRuleIndex()
+        + raw_value_style_enum_case()
+        + raw_value_style_enum_case_list()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Raw_value_style_enum_memberContext {
+        + Raw_value_style_enum_memberContext()
+        + accept()
+        + compiler_control_statement()
+        + declaration()
+        + getRuleIndex()
+        + raw_value_style_enum_case_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Raw_value_style_enum_membersContext {
+        + Raw_value_style_enum_membersContext()
+        + accept()
+        + getRuleIndex()
+        + raw_value_style_enum_member()
+        + raw_value_style_enum_members()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Repeat_while_statementContext {
+        + Repeat_while_statementContext()
+        + accept()
+        + code_block()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.RequirementContext {
+        + RequirementContext()
+        + accept()
+        + conformance_requirement()
+        + getRuleIndex()
+        + same_type_requirement()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Requirement_listContext {
+        + COMMA()
+        + COMMA()
+        + Requirement_listContext()
+        + accept()
+        + getRuleIndex()
+        + requirement()
+        + requirement()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Return_statementContext {
+        + Return_statementContext()
+        + accept()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Same_type_equalsContext {
+        + EQUAL()
+        + EQUAL()
+        + Same_type_equalsContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Same_type_requirementContext {
+        + Same_type_requirementContext()
+        + accept()
+        + getRuleIndex()
+        + same_type_equals()
+        + type()
+        + type_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Selector_expressionContext {
+        + LPAREN()
+        + RPAREN()
+        + Selector_expressionContext()
+        + accept()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Self_expressionContext {
+        + DOT()
+        + LBRACK()
+        + RBRACK()
+        + Self_expressionContext()
+        + accept()
+        + declaration_identifier()
+        + expression_list()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Setter_clauseContext {
+        + Setter_clauseContext()
+        + accept()
+        + attributes()
+        + code_block()
+        + getRuleIndex()
+        + mutation_modifier()
+        + setter_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Setter_keyword_clauseContext {
+        + Setter_keyword_clauseContext()
+        + accept()
+        + attributes()
+        + getRuleIndex()
+        + mutation_modifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Setter_nameContext {
+        + LPAREN()
+        + RPAREN()
+        + Setter_nameContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.StatementContext {
+        + SEMI()
+        + StatementContext()
+        + accept()
+        + branch_statement()
+        + compiler_control_statement()
+        + control_transfer_statement()
+        + declaration()
+        + defer_statement()
+        + do_statement()
+        + expression()
+        + getRuleIndex()
+        + labeled_statement()
+        + loop_statement()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Statement_labelContext {
+        + COLON()
+        + Statement_labelContext()
+        + accept()
+        + getRuleIndex()
+        + label_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.StatementsContext {
+        + StatementsContext()
+        + accept()
+        + getRuleIndex()
+        + statements_impl()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Statements_implContext {
+        + indexAfter : int
+        + indexBefore : int
+        + Statements_implContext()
+        + Statements_implContext()
+        + accept()
+        + getRuleIndex()
+        + statement()
+        + statements_impl()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.String_literalContext {
+        + Interpolated_string_literal()
+        + Static_string_literal()
+        + String_literalContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Struct_bodyContext {
+        + LCURLY()
+        + RCURLY()
+        + Struct_bodyContext()
+        + accept()
+        + getRuleIndex()
+        + struct_member()
+        + struct_member()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Struct_declarationContext {
+        + Struct_declarationContext()
+        + accept()
+        + access_level_modifier()
+        + attributes()
+        + generic_parameter_clause()
+        + generic_where_clause()
+        + getRuleIndex()
+        + struct_body()
+        + struct_name()
+        + type_inheritance_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Struct_memberContext {
+        + Struct_memberContext()
+        + accept()
+        + compiler_control_statement()
+        + declaration()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Struct_nameContext {
+        + Struct_nameContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Subscript_declarationContext {
+        + Subscript_declarationContext()
+        + accept()
+        + code_block()
+        + getRuleIndex()
+        + getter_setter_block()
+        + getter_setter_keyword_block()
+        + subscript_head()
+        + subscript_result()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Subscript_expressionContext {
+        + LBRACK()
+        + RBRACK()
+        + Subscript_expressionContext()
+        + accept()
+        + expression_list()
+        + postfix_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Subscript_headContext {
+        + Subscript_headContext()
+        + accept()
+        + attributes()
+        + declaration_modifiers()
+        + getRuleIndex()
+        + parameter_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Subscript_resultContext {
+        + Subscript_resultContext()
+        + accept()
+        + arrow_operator()
+        + attributes()
+        + getRuleIndex()
+        + type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Superclass_expressionContext {
+        + Superclass_expressionContext()
+        + accept()
+        + getRuleIndex()
+        + superclass_initializer_expression()
+        + superclass_method_expression()
+        + superclass_subscript_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Superclass_initializer_expressionContext {
+        + DOT()
+        + Superclass_initializer_expressionContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Superclass_method_expressionContext {
+        + DOT()
+        + Superclass_method_expressionContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Superclass_subscript_expressionContext {
+        + LBRACK()
+        + RBRACK()
+        + Superclass_subscript_expressionContext()
+        + accept()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Swift_versionContext {
+        + DOT()
+        + Pure_decimal_digits()
+        + Pure_decimal_digits()
+        + Swift_versionContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Switch_caseContext {
+        + Switch_caseContext()
+        + accept()
+        + case_label()
+        + default_label()
+        + getRuleIndex()
+        + statements()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Switch_casesContext {
+        + Switch_casesContext()
+        + accept()
+        + getRuleIndex()
+        + switch_case()
+        + switch_cases()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Switch_statementContext {
+        + LCURLY()
+        + RCURLY()
+        + Switch_statementContext()
+        + accept()
+        + expression()
+        + getRuleIndex()
+        + switch_cases()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.The_any_typeContext {
+        + The_any_typeContext()
+        + accept()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.The_array_typeContext {
+        + The_array_typeContext()
+        + accept()
+        + array_type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.The_dictionary_typeContext {
+        + The_dictionary_typeContext()
+        + accept()
+        + dictionary_type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.The_function_typeContext {
+        + The_function_typeContext()
+        + accept()
+        + function_type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.The_implicitly_unwrapped_optional_typeContext {
+        + BANG()
+        + The_implicitly_unwrapped_optional_typeContext()
+        + accept()
+        + type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.The_metatype_protocol_typeContext {
+        + DOT()
+        + The_metatype_protocol_typeContext()
+        + accept()
+        + type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.The_metatype_type_typeContext {
+        + DOT()
+        + The_metatype_type_typeContext()
+        + accept()
+        + type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.The_optional_typeContext {
+        + QUESTION()
+        + The_optional_typeContext()
+        + accept()
+        + type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.The_protocol_composition_typeContext {
+        + The_protocol_composition_typeContext()
+        + accept()
+        + protocol_composition_type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.The_self_typeContext {
+        + The_self_typeContext()
+        + accept()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.The_tuple_typeContext {
+        + The_tuple_typeContext()
+        + accept()
+        + tuple_type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.The_type_identifierContext {
+        + The_type_identifierContext()
+        + accept()
+        + type_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Throw_statementContext {
+        + Throw_statementContext()
+        + accept()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Top_levelContext {
+        + EOF()
+        + Top_levelContext()
+        + accept()
+        + getRuleIndex()
+        + statements()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Top_level_declarationContext {
+        + Top_level_declarationContext()
+        + accept()
+        + getRuleIndex()
+        + statements()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Trailing_closureContext {
+        + Trailing_closureContext()
+        + accept()
+        + closure_expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Try_operatorContext {
+        + BANG()
+        + QUESTION()
+        + Try_operatorContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Tuple_elementContext {
+        + COLON()
+        + Tuple_elementContext()
+        + accept()
+        + expression()
+        + getRuleIndex()
+        + label_identifier()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Tuple_expressionContext {
+        + COMMA()
+        + COMMA()
+        + LPAREN()
+        + RPAREN()
+        + Tuple_expressionContext()
+        + accept()
+        + getRuleIndex()
+        + tuple_element()
+        + tuple_element()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Tuple_patternContext {
+        + LPAREN()
+        + RPAREN()
+        + Tuple_patternContext()
+        + accept()
+        + getRuleIndex()
+        + tuple_pattern_element_list()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Tuple_pattern_elementContext {
+        + Tuple_pattern_elementContext()
+        + accept()
+        + getRuleIndex()
+        + pattern()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Tuple_pattern_element_listContext {
+        + COMMA()
+        + COMMA()
+        + Tuple_pattern_element_listContext()
+        + accept()
+        + getRuleIndex()
+        + tuple_pattern_element()
+        + tuple_pattern_element()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Tuple_typeContext {
+        + LPAREN()
+        + RPAREN()
+        + Tuple_typeContext()
+        + accept()
+        + getRuleIndex()
+        + tuple_type_element_list()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Tuple_type_elementContext {
+        + Tuple_type_elementContext()
+        + accept()
+        + element_name()
+        + getRuleIndex()
+        + type()
+        + type_annotation()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Tuple_type_element_listContext {
+        + COMMA()
+        + Tuple_type_element_listContext()
+        + accept()
+        + getRuleIndex()
+        + tuple_type_element()
+        + tuple_type_element_list()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.TypeContext {
+        + TypeContext()
+        + TypeContext()
+        + copyFrom()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Type_annotationContext {
+        + COLON()
+        + Type_annotationContext()
+        + accept()
+        + attributes()
+        + getRuleIndex()
+        + type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Type_casting_operatorContext {
+        + BANG()
+        + QUESTION()
+        + Type_casting_operatorContext()
+        + accept()
+        + getRuleIndex()
+        + type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Type_identifierContext {
+        + DOT()
+        + Type_identifierContext()
+        + accept()
+        + generic_argument_clause()
+        + getRuleIndex()
+        + type_identifier()
+        + type_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Type_inheritance_clauseContext {
+        + COLON()
+        + COMMA()
+        + Type_inheritance_clauseContext()
+        + accept()
+        + class_requirement()
+        + getRuleIndex()
+        + type_inheritance_list()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Type_inheritance_listContext {
+        + COMMA()
+        + Type_inheritance_listContext()
+        + accept()
+        + getRuleIndex()
+        + type_identifier()
+        + type_inheritance_list()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Type_nameContext {
+        + Type_nameContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Typealias_assignmentContext {
+        + Typealias_assignmentContext()
+        + accept()
+        + assignment_operator()
+        + getRuleIndex()
+        + type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Typealias_declarationContext {
+        + Typealias_declarationContext()
+        + accept()
+        + access_level_modifier()
+        + attributes()
+        + generic_parameter_clause()
+        + getRuleIndex()
+        + typealias_assignment()
+        + typealias_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Typealias_nameContext {
+        + Typealias_nameContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Union_style_enumContext {
+        + LCURLY()
+        + RCURLY()
+        + Union_style_enumContext()
+        + accept()
+        + enum_name()
+        + generic_parameter_clause()
+        + generic_where_clause()
+        + getRuleIndex()
+        + type_inheritance_clause()
+        + union_style_enum_members()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Union_style_enum_caseContext {
+        + Union_style_enum_caseContext()
+        + accept()
+        + enum_case_name()
+        + getRuleIndex()
+        + tuple_type()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Union_style_enum_case_clauseContext {
+        + Union_style_enum_case_clauseContext()
+        + accept()
+        + attributes()
+        + getRuleIndex()
+        + union_style_enum_case_list()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Union_style_enum_case_listContext {
+        + COMMA()
+        + Union_style_enum_case_listContext()
+        + accept()
+        + getRuleIndex()
+        + union_style_enum_case()
+        + union_style_enum_case_list()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Union_style_enum_memberContext {
+        + Union_style_enum_memberContext()
+        + accept()
+        + compiler_control_statement()
+        + declaration()
+        + getRuleIndex()
+        + union_style_enum_case_clause()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Union_style_enum_membersContext {
+        + Union_style_enum_membersContext()
+        + accept()
+        + getRuleIndex()
+        + union_style_enum_member()
+        + union_style_enum_members()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Value_binding_patternContext {
+        + Value_binding_patternContext()
+        + accept()
+        + getRuleIndex()
+        + pattern()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Variable_declarationContext {
+        + Variable_declarationContext()
+        + accept()
+        + code_block()
+        + getRuleIndex()
+        + getter_setter_block()
+        + getter_setter_keyword_block()
+        + initializer()
+        + pattern_initializer_list()
+        + type_annotation()
+        + type_annotation()
+        + variable_declaration_head()
+        + variable_name()
+        + willSet_didSet_block()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Variable_declaration_headContext {
+        + Variable_declaration_headContext()
+        + accept()
+        + attributes()
+        + declaration_modifiers()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Variable_nameContext {
+        + Variable_nameContext()
+        + accept()
+        + declaration_identifier()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Where_clauseContext {
+        + Where_clauseContext()
+        + accept()
+        + getRuleIndex()
+        + where_expression()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Where_expressionContext {
+        + Where_expressionContext()
+        + accept()
+        + expression()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.While_statementContext {
+        + While_statementContext()
+        + accept()
+        + code_block()
+        + condition_list()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Wildcard_expressionContext {
+        + UNDERSCORE()
+        + Wildcard_expressionContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.Wildcard_patternContext {
+        + UNDERSCORE()
+        + Wildcard_patternContext()
+        + accept()
+        + getRuleIndex()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.WillSet_clauseContext {
+        + WillSet_clauseContext()
+        + accept()
+        + attributes()
+        + code_block()
+        + getRuleIndex()
+        + setter_name()
+    }
+  }
+  
+
+  namespace  {
+    class Swift3Parser.WillSet_didSet_blockContext {
+        + LCURLY()
+        + RCURLY()
+        + WillSet_didSet_blockContext()
+        + accept()
+        + didSet_clause()
+        + getRuleIndex()
+        + willSet_clause()
+    }
+  }
+  
+
+  namespace  {
+    interface Swift3Visitor {
+        {abstract} + visitAccess_level_modifier()
+        {abstract} + visitAny_punctuation_for_balanced_token()
+        {abstract} + visitArchitecture()
+        {abstract} + visitArgument_label()
+        {abstract} + visitArgument_name()
+        {abstract} + visitArgument_names()
+        {abstract} + visitArray_literal()
+        {abstract} + visitArray_literal_item()
+        {abstract} + visitArray_literal_items()
+        {abstract} + visitArray_type()
+        {abstract} + visitArrow_operator()
+        {abstract} + visitAssignment_operator()
+        {abstract} + visitAssociativity()
+        {abstract} + visitAttribute()
+        {abstract} + visitAttribute_argument_clause()
+        {abstract} + visitAttribute_name()
+        {abstract} + visitAttributes()
+        {abstract} + visitAvailability_argument()
+        {abstract} + visitAvailability_arguments()
+        {abstract} + visitAvailability_condition()
+        {abstract} + visitBalanced_token()
+        {abstract} + visitBalanced_tokens()
+        {abstract} + visitBinary_expression()
+        {abstract} + visitBinary_expressions()
+        {abstract} + visitBinary_operator()
+        {abstract} + visitBoolean_literal()
+        {abstract} + visitBranch_statement()
+        {abstract} + visitBreak_statement()
+        {abstract} + visitCapture_list()
+        {abstract} + visitCapture_list_item()
+        {abstract} + visitCapture_list_items()
+        {abstract} + visitCapture_specifier()
+        {abstract} + visitCase_condition()
+        {abstract} + visitCase_item_list()
+        {abstract} + visitCase_label()
+        {abstract} + visitCatch_clause()
+        {abstract} + visitCatch_clauses()
+        {abstract} + visitClass_body()
+        {abstract} + visitClass_declaration()
+        {abstract} + visitClass_member()
+        {abstract} + visitClass_name()
+        {abstract} + visitClass_requirement()
+        {abstract} + visitClosure_expression()
+        {abstract} + visitClosure_parameter()
+        {abstract} + visitClosure_parameter_clause()
+        {abstract} + visitClosure_parameter_clause_identifier_list()
+        {abstract} + visitClosure_parameter_list()
+        {abstract} + visitClosure_parameter_name()
+        {abstract} + visitClosure_signature()
+        {abstract} + visitCode_block()
+        {abstract} + visitCompilation_condition()
+        {abstract} + visitCompilation_condition_AND()
+        {abstract} + visitCompilation_condition_GE()
+        {abstract} + visitCompilation_condition_OR()
+        {abstract} + visitCompiler_control_statement()
+        {abstract} + visitCondition()
+        {abstract} + visitCondition_list()
+        {abstract} + visitConditional_compilation_block()
+        {abstract} + visitConditional_operator()
+        {abstract} + visitConformance_requirement()
+        {abstract} + visitConstant_declaration()
+        {abstract} + visitContinue_statement()
+        {abstract} + visitControl_transfer_statement()
+        {abstract} + visitDeclaration()
+        {abstract} + visitDeclaration_identifier()
+        {abstract} + visitDeclaration_modifier()
+        {abstract} + visitDeclaration_modifiers()
+        {abstract} + visitDeclarations()
+        {abstract} + visitDefault_argument_clause()
+        {abstract} + visitDefault_label()
+        {abstract} + visitDefer_statement()
+        {abstract} + visitDeinitializer_declaration()
+        {abstract} + visitDictionary_literal()
+        {abstract} + visitDictionary_literal_item()
+        {abstract} + visitDictionary_literal_items()
+        {abstract} + visitDictionary_type()
+        {abstract} + visitDidSet_clause()
+        {abstract} + visitDo_statement()
+        {abstract} + visitDot_operator_character()
+        {abstract} + visitDot_operator_head()
+        {abstract} + visitDynamic_type()
+        {abstract} + visitDynamic_type_expression()
+        {abstract} + visitElement_name()
+        {abstract} + visitElse_clause()
+        {abstract} + visitElse_directive()
+        {abstract} + visitElse_directive_clause()
+        {abstract} + visitElseif_directive()
+        {abstract} + visitElseif_directive_clause()
+        {abstract} + visitElseif_directive_clauses()
+        {abstract} + visitEndif_directive()
+        {abstract} + visitEnum_case_name()
+        {abstract} + visitEnum_case_pattern()
+        {abstract} + visitEnum_declaration()
+        {abstract} + visitEnum_name()
+        {abstract} + visitExplicit_member_expression1()
+        {abstract} + visitExplicit_member_expression2()
+        {abstract} + visitExplicit_member_expression3()
+        {abstract} + visitExplicit_member_expression4()
+        {abstract} + visitExpression()
+        {abstract} + visitExpression_list()
+        {abstract} + visitExpression_pattern()
+        {abstract} + visitExtension_body()
+        {abstract} + visitExtension_declaration()
+        {abstract} + visitExtension_member()
+        {abstract} + visitExternal_parameter_name()
+        {abstract} + visitFallthrough_statement()
+        {abstract} + visitFile_name()
+        {abstract} + visitFor_in_statement()
+        {abstract} + visitFor_init()
+        {abstract} + visitFor_statement()
+        {abstract} + visitFunction_body()
+        {abstract} + visitFunction_call_argument()
+        {abstract} + visitFunction_call_argument_clause()
+        {abstract} + visitFunction_call_argument_list()
+        {abstract} + visitFunction_call_expression()
+        {abstract} + visitFunction_call_expression_with_closure()
+        {abstract} + visitFunction_declaration()
+        {abstract} + visitFunction_head()
+        {abstract} + visitFunction_name()
+        {abstract} + visitFunction_result()
+        {abstract} + visitFunction_signature()
+        {abstract} + visitFunction_type()
+        {abstract} + visitFunction_type_argument()
+        {abstract} + visitFunction_type_argument_clause()
+        {abstract} + visitFunction_type_argument_list()
+        {abstract} + visitGeneric_argument()
+        {abstract} + visitGeneric_argument_clause()
+        {abstract} + visitGeneric_argument_list()
+        {abstract} + visitGeneric_parameter()
+        {abstract} + visitGeneric_parameter_clause()
+        {abstract} + visitGeneric_parameter_list()
+        {abstract} + visitGeneric_where_clause()
+        {abstract} + visitGetter_clause()
+        {abstract} + visitGetter_keyword_clause()
+        {abstract} + visitGetter_setter_block()
+        {abstract} + visitGetter_setter_keyword_block()
+        {abstract} + visitGuard_statement()
+        {abstract} + visitIdentifier_pattern()
+        {abstract} + visitIf_directive()
+        {abstract} + visitIf_directive_clause()
+        {abstract} + visitIf_statement()
+        {abstract} + visitImplicit_member_expression()
+        {abstract} + visitImport_declaration()
+        {abstract} + visitImport_kind()
+        {abstract} + visitImport_path()
+        {abstract} + visitImport_path_identifier()
+        {abstract} + visitIn_out_expression()
+        {abstract} + visitInfix_operator_declaration()
+        {abstract} + visitInfix_operator_group()
+        {abstract} + visitInitializer()
+        {abstract} + visitInitializer_body()
+        {abstract} + visitInitializer_declaration()
+        {abstract} + visitInitializer_expression()
+        {abstract} + visitInitializer_expression_with_args()
+        {abstract} + visitInitializer_head()
+        {abstract} + visitInteger_literal()
+        {abstract} + visitKey_path_expression()
+        {abstract} + visitKeyword_as_identifier_in_declarations()
+        {abstract} + visitKeyword_as_identifier_in_labels()
+        {abstract} + visitLabel_identifier()
+        {abstract} + visitLabel_name()
+        {abstract} + visitLabeled_statement()
+        {abstract} + visitLine_control_statement()
+        {abstract} + visitLine_number()
+        {abstract} + visitLiteral()
+        {abstract} + visitLiteral_expression()
+        {abstract} + visitLocal_parameter_name()
+        {abstract} + visitLoop_statement()
+        {abstract} + visitMutation_modifier()
+        {abstract} + visitNegate_prefix_operator()
+        {abstract} + visitNil_literal()
+        {abstract} + visitNumeric_literal()
+        {abstract} + visitOperating_system()
+        {abstract} + visitOperator()
+        {abstract} + visitOperator_character()
+        {abstract} + visitOperator_declaration()
+        {abstract} + visitOperator_head()
+        {abstract} + visitOptional_binding_condition()
+        {abstract} + visitOptional_pattern()
+        {abstract} + visitParameter()
+        {abstract} + visitParameter_clause()
+        {abstract} + visitParameter_list()
+        {abstract} + visitParenthesized_expression()
+        {abstract} + visitPattern()
+        {abstract} + visitPattern_initializer()
+        {abstract} + visitPattern_initializer_list()
+        {abstract} + visitPlatform_condition()
+        {abstract} + visitPlayground_literal()
+        {abstract} + visitPostfix_operation()
+        {abstract} + visitPostfix_operator()
+        {abstract} + visitPostfix_operator_declaration()
+        {abstract} + visitPostfix_self_expression()
+        {abstract} + visitPrecedence_group_assignment()
+        {abstract} + visitPrecedence_group_associativity()
+        {abstract} + visitPrecedence_group_attribute()
+        {abstract} + visitPrecedence_group_declaration()
+        {abstract} + visitPrecedence_group_name()
+        {abstract} + visitPrecedence_group_names()
+        {abstract} + visitPrecedence_group_relation()
+        {abstract} + visitPrefix_expression()
+        {abstract} + visitPrefix_operator()
+        {abstract} + visitPrefix_operator_declaration()
+        {abstract} + visitPrimary()
+        {abstract} + visitPrimary_expression()
+        {abstract} + visitProtocol_associated_type_declaration()
+        {abstract} + visitProtocol_body()
+        {abstract} + visitProtocol_composition_type()
+        {abstract} + visitProtocol_declaration()
+        {abstract} + visitProtocol_identifier()
+        {abstract} + visitProtocol_initializer_declaration()
+        {abstract} + visitProtocol_member()
+        {abstract} + visitProtocol_member_declaration()
+        {abstract} + visitProtocol_method_declaration()
+        {abstract} + visitProtocol_name()
+        {abstract} + visitProtocol_property_declaration()
+        {abstract} + visitProtocol_subscript_declaration()
+        {abstract} + visitRange_operator()
+        {abstract} + visitRaw_value_assignment()
+        {abstract} + visitRaw_value_literal()
+        {abstract} + visitRaw_value_style_enum()
+        {abstract} + visitRaw_value_style_enum_case()
+        {abstract} + visitRaw_value_style_enum_case_clause()
+        {abstract} + visitRaw_value_style_enum_case_list()
+        {abstract} + visitRaw_value_style_enum_member()
+        {abstract} + visitRaw_value_style_enum_members()
+        {abstract} + visitRepeat_while_statement()
+        {abstract} + visitRequirement()
+        {abstract} + visitRequirement_list()
+        {abstract} + visitReturn_statement()
+        {abstract} + visitSame_type_equals()
+        {abstract} + visitSame_type_requirement()
+        {abstract} + visitSelector_expression()
+        {abstract} + visitSelf_expression()
+        {abstract} + visitSetter_clause()
+        {abstract} + visitSetter_keyword_clause()
+        {abstract} + visitSetter_name()
+        {abstract} + visitStatement()
+        {abstract} + visitStatement_label()
+        {abstract} + visitStatements()
+        {abstract} + visitStatements_impl()
+        {abstract} + visitString_literal()
+        {abstract} + visitStruct_body()
+        {abstract} + visitStruct_declaration()
+        {abstract} + visitStruct_member()
+        {abstract} + visitStruct_name()
+        {abstract} + visitSubscript_declaration()
+        {abstract} + visitSubscript_expression()
+        {abstract} + visitSubscript_head()
+        {abstract} + visitSubscript_result()
+        {abstract} + visitSuperclass_expression()
+        {abstract} + visitSuperclass_initializer_expression()
+        {abstract} + visitSuperclass_method_expression()
+        {abstract} + visitSuperclass_subscript_expression()
+        {abstract} + visitSwift_version()
+        {abstract} + visitSwitch_case()
+        {abstract} + visitSwitch_cases()
+        {abstract} + visitSwitch_statement()
+        {abstract} + visitThe_any_type()
+        {abstract} + visitThe_array_type()
+        {abstract} + visitThe_dictionary_type()
+        {abstract} + visitThe_function_type()
+        {abstract} + visitThe_implicitly_unwrapped_optional_type()
+        {abstract} + visitThe_metatype_protocol_type()
+        {abstract} + visitThe_metatype_type_type()
+        {abstract} + visitThe_optional_type()
+        {abstract} + visitThe_protocol_composition_type()
+        {abstract} + visitThe_self_type()
+        {abstract} + visitThe_tuple_type()
+        {abstract} + visitThe_type_identifier()
+        {abstract} + visitThrow_statement()
+        {abstract} + visitTop_level()
+        {abstract} + visitTop_level_declaration()
+        {abstract} + visitTrailing_closure()
+        {abstract} + visitTry_operator()
+        {abstract} + visitTuple_element()
+        {abstract} + visitTuple_expression()
+        {abstract} + visitTuple_pattern()
+        {abstract} + visitTuple_pattern_element()
+        {abstract} + visitTuple_pattern_element_list()
+        {abstract} + visitTuple_type()
+        {abstract} + visitTuple_type_element()
+        {abstract} + visitTuple_type_element_list()
+        {abstract} + visitType_annotation()
+        {abstract} + visitType_casting_operator()
+        {abstract} + visitType_identifier()
+        {abstract} + visitType_inheritance_clause()
+        {abstract} + visitType_inheritance_list()
+        {abstract} + visitType_name()
+        {abstract} + visitTypealias_assignment()
+        {abstract} + visitTypealias_declaration()
+        {abstract} + visitTypealias_name()
+        {abstract} + visitUnion_style_enum()
+        {abstract} + visitUnion_style_enum_case()
+        {abstract} + visitUnion_style_enum_case_clause()
+        {abstract} + visitUnion_style_enum_case_list()
+        {abstract} + visitUnion_style_enum_member()
+        {abstract} + visitUnion_style_enum_members()
+        {abstract} + visitValue_binding_pattern()
+        {abstract} + visitVariable_declaration()
+        {abstract} + visitVariable_declaration_head()
+        {abstract} + visitVariable_name()
+        {abstract} + visitWhere_clause()
+        {abstract} + visitWhere_expression()
+        {abstract} + visitWhile_statement()
+        {abstract} + visitWildcard_expression()
+        {abstract} + visitWildcard_pattern()
+        {abstract} + visitWillSet_clause()
+        {abstract} + visitWillSet_didSet_block()
+    }
+  }
+  
+
+  Swift3BaseVisitor .up.|> Swift3Visitor
+  Swift3Parser +-down- Swift3Parser.Access_level_modifierContext
+  Swift3Parser +-down- Swift3Parser.Any_punctuation_for_balanced_tokenContext
+  Swift3Parser +-down- Swift3Parser.ArchitectureContext
+  Swift3Parser +-down- Swift3Parser.Argument_labelContext
+  Swift3Parser +-down- Swift3Parser.Argument_nameContext
+  Swift3Parser +-down- Swift3Parser.Argument_namesContext
+  Swift3Parser +-down- Swift3Parser.Array_literalContext
+  Swift3Parser +-down- Swift3Parser.Array_literal_itemContext
+  Swift3Parser +-down- Swift3Parser.Array_literal_itemsContext
+  Swift3Parser +-down- Swift3Parser.Array_typeContext
+  Swift3Parser +-down- Swift3Parser.Arrow_operatorContext
+  Swift3Parser +-down- Swift3Parser.Assignment_operatorContext
+  Swift3Parser +-down- Swift3Parser.AssociativityContext
+  Swift3Parser +-down- Swift3Parser.AttributeContext
+  Swift3Parser +-down- Swift3Parser.Attribute_argument_clauseContext
+  Swift3Parser +-down- Swift3Parser.Attribute_nameContext
+  Swift3Parser +-down- Swift3Parser.AttributesContext
+  Swift3Parser +-down- Swift3Parser.Availability_argumentContext
+  Swift3Parser +-down- Swift3Parser.Availability_argumentsContext
+  Swift3Parser +-down- Swift3Parser.Availability_conditionContext
+  Swift3Parser +-down- Swift3Parser.Balanced_tokenContext
+  Swift3Parser +-down- Swift3Parser.Balanced_tokensContext
+  Swift3Parser +-down- Swift3Parser.Binary_expressionContext
+  Swift3Parser +-down- Swift3Parser.Binary_expressionsContext
+  Swift3Parser +-down- Swift3Parser.Binary_operatorContext
+  Swift3Parser +-down- Swift3Parser.Boolean_literalContext
+  Swift3Parser +-down- Swift3Parser.Branch_statementContext
+  Swift3Parser +-down- Swift3Parser.Break_statementContext
+  Swift3Parser +-down- Swift3Parser.Capture_listContext
+  Swift3Parser +-down- Swift3Parser.Capture_list_itemContext
+  Swift3Parser +-down- Swift3Parser.Capture_list_itemsContext
+  Swift3Parser +-down- Swift3Parser.Capture_specifierContext
+  Swift3Parser +-down- Swift3Parser.Case_conditionContext
+  Swift3Parser +-down- Swift3Parser.Case_item_listContext
+  Swift3Parser +-down- Swift3Parser.Case_labelContext
+  Swift3Parser +-down- Swift3Parser.Catch_clauseContext
+  Swift3Parser +-down- Swift3Parser.Catch_clausesContext
+  Swift3Parser +-down- Swift3Parser.Class_bodyContext
+  Swift3Parser +-down- Swift3Parser.Class_declarationContext
+  Swift3Parser +-down- Swift3Parser.Class_memberContext
+  Swift3Parser +-down- Swift3Parser.Class_nameContext
+  Swift3Parser +-down- Swift3Parser.Class_requirementContext
+  Swift3Parser +-down- Swift3Parser.Closure_expressionContext
+  Swift3Parser +-down- Swift3Parser.Closure_parameterContext
+  Swift3Parser +-down- Swift3Parser.Closure_parameter_clauseContext
+  Swift3Parser +-down- Swift3Parser.Closure_parameter_clause_identifier_listContext
+  Swift3Parser +-down- Swift3Parser.Closure_parameter_listContext
+  Swift3Parser +-down- Swift3Parser.Closure_parameter_nameContext
+  Swift3Parser +-down- Swift3Parser.Closure_signatureContext
+  Swift3Parser +-down- Swift3Parser.Code_blockContext
+  Swift3Parser +-down- Swift3Parser.Compilation_conditionContext
+  Swift3Parser +-down- Swift3Parser.Compilation_condition_ANDContext
+  Swift3Parser +-down- Swift3Parser.Compilation_condition_GEContext
+  Swift3Parser +-down- Swift3Parser.Compilation_condition_ORContext
+  Swift3Parser +-down- Swift3Parser.Compiler_control_statementContext
+  Swift3Parser +-down- Swift3Parser.ConditionContext
+  Swift3Parser +-down- Swift3Parser.Condition_listContext
+  Swift3Parser +-down- Swift3Parser.Conditional_compilation_blockContext
+  Swift3Parser +-down- Swift3Parser.Conditional_operatorContext
+  Swift3Parser +-down- Swift3Parser.Conformance_requirementContext
+  Swift3Parser +-down- Swift3Parser.Constant_declarationContext
+  Swift3Parser +-down- Swift3Parser.Continue_statementContext
+  Swift3Parser +-down- Swift3Parser.Control_transfer_statementContext
+  Swift3Parser +-down- Swift3Parser.DeclarationContext
+  Swift3Parser +-down- Swift3Parser.Declaration_identifierContext
+  Swift3Parser +-down- Swift3Parser.Declaration_modifierContext
+  Swift3Parser +-down- Swift3Parser.Declaration_modifiersContext
+  Swift3Parser +-down- Swift3Parser.DeclarationsContext
+  Swift3Parser +-down- Swift3Parser.Default_argument_clauseContext
+  Swift3Parser +-down- Swift3Parser.Default_labelContext
+  Swift3Parser +-down- Swift3Parser.Defer_statementContext
+  Swift3Parser +-down- Swift3Parser.Deinitializer_declarationContext
+  Swift3Parser +-down- Swift3Parser.Dictionary_literalContext
+  Swift3Parser +-down- Swift3Parser.Dictionary_literal_itemContext
+  Swift3Parser +-down- Swift3Parser.Dictionary_literal_itemsContext
+  Swift3Parser +-down- Swift3Parser.Dictionary_typeContext
+  Swift3Parser +-down- Swift3Parser.DidSet_clauseContext
+  Swift3Parser +-down- Swift3Parser.Do_statementContext
+  Swift3Parser +-down- Swift3Parser.Dot_operator_characterContext
+  Swift3Parser +-down- Swift3Parser.Dot_operator_headContext
+  Swift3Parser +-down- Swift3Parser.Dynamic_typeContext
+  Swift3Parser +-down- Swift3Parser.Dynamic_type_expressionContext
+  Swift3Parser +-down- Swift3Parser.Element_nameContext
+  Swift3Parser +-down- Swift3Parser.Else_clauseContext
+  Swift3Parser +-down- Swift3Parser.Else_directiveContext
+  Swift3Parser +-down- Swift3Parser.Else_directive_clauseContext
+  Swift3Parser +-down- Swift3Parser.Elseif_directiveContext
+  Swift3Parser +-down- Swift3Parser.Elseif_directive_clauseContext
+  Swift3Parser +-down- Swift3Parser.Elseif_directive_clausesContext
+  Swift3Parser +-down- Swift3Parser.Endif_directiveContext
+  Swift3Parser +-down- Swift3Parser.Enum_case_nameContext
+  Swift3Parser +-down- Swift3Parser.Enum_case_patternContext
+  Swift3Parser +-down- Swift3Parser.Enum_declarationContext
+  Swift3Parser +-down- Swift3Parser.Enum_nameContext
+  Swift3Parser +-down- Swift3Parser.Explicit_member_expression1Context
+  Swift3Parser +-down- Swift3Parser.Explicit_member_expression2Context
+  Swift3Parser +-down- Swift3Parser.Explicit_member_expression3Context
+  Swift3Parser +-down- Swift3Parser.Explicit_member_expression4Context
+  Swift3Parser +-down- Swift3Parser.ExpressionContext
+  Swift3Parser +-down- Swift3Parser.Expression_listContext
+  Swift3Parser +-down- Swift3Parser.Expression_patternContext
+  Swift3Parser +-down- Swift3Parser.Extension_bodyContext
+  Swift3Parser +-down- Swift3Parser.Extension_declarationContext
+  Swift3Parser +-down- Swift3Parser.Extension_memberContext
+  Swift3Parser +-down- Swift3Parser.External_parameter_nameContext
+  Swift3Parser +-down- Swift3Parser.Fallthrough_statementContext
+  Swift3Parser +-down- Swift3Parser.File_nameContext
+  Swift3Parser +-down- Swift3Parser.For_in_statementContext
+  Swift3Parser +-down- Swift3Parser.For_initContext
+  Swift3Parser +-down- Swift3Parser.For_statementContext
+  Swift3Parser +-down- Swift3Parser.Function_bodyContext
+  Swift3Parser +-down- Swift3Parser.Function_call_argumentContext
+  Swift3Parser +-down- Swift3Parser.Function_call_argument_clauseContext
+  Swift3Parser +-down- Swift3Parser.Function_call_argument_listContext
+  Swift3Parser +-down- Swift3Parser.Function_call_expressionContext
+  Swift3Parser +-down- Swift3Parser.Function_call_expression_with_closureContext
+  Swift3Parser +-down- Swift3Parser.Function_declarationContext
+  Swift3Parser +-down- Swift3Parser.Function_headContext
+  Swift3Parser +-down- Swift3Parser.Function_nameContext
+  Swift3Parser +-down- Swift3Parser.Function_resultContext
+  Swift3Parser +-down- Swift3Parser.Function_signatureContext
+  Swift3Parser +-down- Swift3Parser.Function_typeContext
+  Swift3Parser +-down- Swift3Parser.Function_type_argumentContext
+  Swift3Parser +-down- Swift3Parser.Function_type_argument_clauseContext
+  Swift3Parser +-down- Swift3Parser.Function_type_argument_listContext
+  Swift3Parser +-down- Swift3Parser.Generic_argumentContext
+  Swift3Parser +-down- Swift3Parser.Generic_argument_clauseContext
+  Swift3Parser +-down- Swift3Parser.Generic_argument_listContext
+  Swift3Parser +-down- Swift3Parser.Generic_parameterContext
+  Swift3Parser +-down- Swift3Parser.Generic_parameter_clauseContext
+  Swift3Parser +-down- Swift3Parser.Generic_parameter_listContext
+  Swift3Parser +-down- Swift3Parser.Generic_where_clauseContext
+  Swift3Parser +-down- Swift3Parser.Getter_clauseContext
+  Swift3Parser +-down- Swift3Parser.Getter_keyword_clauseContext
+  Swift3Parser +-down- Swift3Parser.Getter_setter_blockContext
+  Swift3Parser +-down- Swift3Parser.Getter_setter_keyword_blockContext
+  Swift3Parser +-down- Swift3Parser.Guard_statementContext
+  Swift3Parser +-down- Swift3Parser.Identifier_patternContext
+  Swift3Parser +-down- Swift3Parser.If_directiveContext
+  Swift3Parser +-down- Swift3Parser.If_directive_clauseContext
+  Swift3Parser +-down- Swift3Parser.If_statementContext
+  Swift3Parser +-down- Swift3Parser.Implicit_member_expressionContext
+  Swift3Parser +-down- Swift3Parser.Import_declarationContext
+  Swift3Parser +-down- Swift3Parser.Import_kindContext
+  Swift3Parser +-down- Swift3Parser.Import_pathContext
+  Swift3Parser +-down- Swift3Parser.Import_path_identifierContext
+  Swift3Parser +-down- Swift3Parser.In_out_expressionContext
+  Swift3Parser +-down- Swift3Parser.Infix_operator_declarationContext
+  Swift3Parser +-down- Swift3Parser.Infix_operator_groupContext
+  Swift3Parser +-down- Swift3Parser.InitializerContext
+  Swift3Parser +-down- Swift3Parser.Initializer_bodyContext
+  Swift3Parser +-down- Swift3Parser.Initializer_declarationContext
+  Swift3Parser +-down- Swift3Parser.Initializer_expressionContext
+  Swift3Parser +-down- Swift3Parser.Initializer_expression_with_argsContext
+  Swift3Parser +-down- Swift3Parser.Initializer_headContext
+  Swift3Parser +-down- Swift3Parser.Integer_literalContext
+  Swift3Parser +-down- Swift3Parser.Key_path_expressionContext
+  Swift3Parser +-down- Swift3Parser.Keyword_as_identifier_in_declarationsContext
+  Swift3Parser +-down- Swift3Parser.Keyword_as_identifier_in_labelsContext
+  Swift3Parser +-down- Swift3Parser.Label_identifierContext
+  Swift3Parser +-down- Swift3Parser.Label_nameContext
+  Swift3Parser +-down- Swift3Parser.Labeled_statementContext
+  Swift3Parser +-down- Swift3Parser.Line_control_statementContext
+  Swift3Parser +-down- Swift3Parser.Line_numberContext
+  Swift3Parser +-down- Swift3Parser.LiteralContext
+  Swift3Parser +-down- Swift3Parser.Literal_expressionContext
+  Swift3Parser +-down- Swift3Parser.Local_parameter_nameContext
+  Swift3Parser +-down- Swift3Parser.Loop_statementContext
+  Swift3Parser +-down- Swift3Parser.Mutation_modifierContext
+  Swift3Parser +-down- Swift3Parser.Negate_prefix_operatorContext
+  Swift3Parser +-down- Swift3Parser.Nil_literalContext
+  Swift3Parser +-down- Swift3Parser.Numeric_literalContext
+  Swift3Parser +-down- Swift3Parser.Operating_systemContext
+  Swift3Parser +-down- Swift3Parser.OperatorContext
+  Swift3Parser +-down- Swift3Parser.Operator_characterContext
+  Swift3Parser +-down- Swift3Parser.Operator_declarationContext
+  Swift3Parser +-down- Swift3Parser.Operator_headContext
+  Swift3Parser +-down- Swift3Parser.Optional_binding_conditionContext
+  Swift3Parser +-down- Swift3Parser.Optional_patternContext
+  Swift3Parser +-down- Swift3Parser.ParameterContext
+  Swift3Parser +-down- Swift3Parser.Parameter_clauseContext
+  Swift3Parser +-down- Swift3Parser.Parameter_listContext
+  Swift3Parser +-down- Swift3Parser.Parenthesized_expressionContext
+  Swift3Parser +-down- Swift3Parser.PatternContext
+  Swift3Parser +-down- Swift3Parser.Pattern_initializerContext
+  Swift3Parser +-down- Swift3Parser.Pattern_initializer_listContext
+  Swift3Parser +-down- Swift3Parser.Platform_conditionContext
+  Swift3Parser +-down- Swift3Parser.Playground_literalContext
+  Swift3Parser +-down- Swift3Parser.Postfix_expressionContext
+  Swift3Parser +-down- Swift3Parser.Postfix_operationContext
+  Swift3Parser +-down- Swift3Parser.Postfix_operatorContext
+  Swift3Parser +-down- Swift3Parser.Postfix_operator_declarationContext
+  Swift3Parser +-down- Swift3Parser.Postfix_self_expressionContext
+  Swift3Parser +-down- Swift3Parser.Precedence_group_assignmentContext
+  Swift3Parser +-down- Swift3Parser.Precedence_group_associativityContext
+  Swift3Parser +-down- Swift3Parser.Precedence_group_attributeContext
+  Swift3Parser +-down- Swift3Parser.Precedence_group_declarationContext
+  Swift3Parser +-down- Swift3Parser.Precedence_group_nameContext
+  Swift3Parser +-down- Swift3Parser.Precedence_group_namesContext
+  Swift3Parser +-down- Swift3Parser.Precedence_group_relationContext
+  Swift3Parser +-down- Swift3Parser.Prefix_expressionContext
+  Swift3Parser +-down- Swift3Parser.Prefix_operatorContext
+  Swift3Parser +-down- Swift3Parser.Prefix_operator_declarationContext
+  Swift3Parser +-down- Swift3Parser.PrimaryContext
+  Swift3Parser +-down- Swift3Parser.Primary_expressionContext
+  Swift3Parser +-down- Swift3Parser.Protocol_associated_type_declarationContext
+  Swift3Parser +-down- Swift3Parser.Protocol_bodyContext
+  Swift3Parser +-down- Swift3Parser.Protocol_composition_typeContext
+  Swift3Parser +-down- Swift3Parser.Protocol_declarationContext
+  Swift3Parser +-down- Swift3Parser.Protocol_identifierContext
+  Swift3Parser +-down- Swift3Parser.Protocol_initializer_declarationContext
+  Swift3Parser +-down- Swift3Parser.Protocol_memberContext
+  Swift3Parser +-down- Swift3Parser.Protocol_member_declarationContext
+  Swift3Parser +-down- Swift3Parser.Protocol_method_declarationContext
+  Swift3Parser +-down- Swift3Parser.Protocol_nameContext
+  Swift3Parser +-down- Swift3Parser.Protocol_property_declarationContext
+  Swift3Parser +-down- Swift3Parser.Protocol_subscript_declarationContext
+  Swift3Parser +-down- Swift3Parser.Range_operatorContext
+  Swift3Parser +-down- Swift3Parser.Raw_value_assignmentContext
+  Swift3Parser +-down- Swift3Parser.Raw_value_literalContext
+  Swift3Parser +-down- Swift3Parser.Raw_value_style_enumContext
+  Swift3Parser +-down- Swift3Parser.Raw_value_style_enum_caseContext
+  Swift3Parser +-down- Swift3Parser.Raw_value_style_enum_case_clauseContext
+  Swift3Parser +-down- Swift3Parser.Raw_value_style_enum_case_listContext
+  Swift3Parser +-down- Swift3Parser.Raw_value_style_enum_memberContext
+  Swift3Parser +-down- Swift3Parser.Raw_value_style_enum_membersContext
+  Swift3Parser +-down- Swift3Parser.Repeat_while_statementContext
+  Swift3Parser +-down- Swift3Parser.RequirementContext
+  Swift3Parser +-down- Swift3Parser.Requirement_listContext
+  Swift3Parser +-down- Swift3Parser.Return_statementContext
+  Swift3Parser +-down- Swift3Parser.Same_type_equalsContext
+  Swift3Parser +-down- Swift3Parser.Same_type_requirementContext
+  Swift3Parser +-down- Swift3Parser.Selector_expressionContext
+  Swift3Parser +-down- Swift3Parser.Self_expressionContext
+  Swift3Parser +-down- Swift3Parser.Setter_clauseContext
+  Swift3Parser +-down- Swift3Parser.Setter_keyword_clauseContext
+  Swift3Parser +-down- Swift3Parser.Setter_nameContext
+  Swift3Parser +-down- Swift3Parser.StatementContext
+  Swift3Parser +-down- Swift3Parser.Statement_labelContext
+  Swift3Parser +-down- Swift3Parser.StatementsContext
+  Swift3Parser +-down- Swift3Parser.Statements_implContext
+  Swift3Parser +-down- Swift3Parser.String_literalContext
+  Swift3Parser +-down- Swift3Parser.Struct_bodyContext
+  Swift3Parser +-down- Swift3Parser.Struct_declarationContext
+  Swift3Parser +-down- Swift3Parser.Struct_memberContext
+  Swift3Parser +-down- Swift3Parser.Struct_nameContext
+  Swift3Parser +-down- Swift3Parser.Subscript_declarationContext
+  Swift3Parser +-down- Swift3Parser.Subscript_expressionContext
+  Swift3Parser +-down- Swift3Parser.Subscript_headContext
+  Swift3Parser +-down- Swift3Parser.Subscript_resultContext
+  Swift3Parser +-down- Swift3Parser.Superclass_expressionContext
+  Swift3Parser +-down- Swift3Parser.Superclass_initializer_expressionContext
+  Swift3Parser +-down- Swift3Parser.Superclass_method_expressionContext
+  Swift3Parser +-down- Swift3Parser.Superclass_subscript_expressionContext
+  Swift3Parser +-down- Swift3Parser.Swift_versionContext
+  Swift3Parser +-down- Swift3Parser.Switch_caseContext
+  Swift3Parser +-down- Swift3Parser.Switch_casesContext
+  Swift3Parser +-down- Swift3Parser.Switch_statementContext
+  Swift3Parser +-down- Swift3Parser.The_any_typeContext
+  Swift3Parser +-down- Swift3Parser.The_array_typeContext
+  Swift3Parser +-down- Swift3Parser.The_dictionary_typeContext
+  Swift3Parser +-down- Swift3Parser.The_function_typeContext
+  Swift3Parser +-down- Swift3Parser.The_implicitly_unwrapped_optional_typeContext
+  Swift3Parser +-down- Swift3Parser.The_metatype_protocol_typeContext
+  Swift3Parser +-down- Swift3Parser.The_metatype_type_typeContext
+  Swift3Parser +-down- Swift3Parser.The_optional_typeContext
+  Swift3Parser +-down- Swift3Parser.The_protocol_composition_typeContext
+  Swift3Parser +-down- Swift3Parser.The_self_typeContext
+  Swift3Parser +-down- Swift3Parser.The_tuple_typeContext
+  Swift3Parser +-down- Swift3Parser.The_type_identifierContext
+  Swift3Parser +-down- Swift3Parser.Throw_statementContext
+  Swift3Parser +-down- Swift3Parser.Top_levelContext
+  Swift3Parser +-down- Swift3Parser.Top_level_declarationContext
+  Swift3Parser +-down- Swift3Parser.Trailing_closureContext
+  Swift3Parser +-down- Swift3Parser.Try_operatorContext
+  Swift3Parser +-down- Swift3Parser.Tuple_elementContext
+  Swift3Parser +-down- Swift3Parser.Tuple_expressionContext
+  Swift3Parser +-down- Swift3Parser.Tuple_patternContext
+  Swift3Parser +-down- Swift3Parser.Tuple_pattern_elementContext
+  Swift3Parser +-down- Swift3Parser.Tuple_pattern_element_listContext
+  Swift3Parser +-down- Swift3Parser.Tuple_typeContext
+  Swift3Parser +-down- Swift3Parser.Tuple_type_elementContext
+  Swift3Parser +-down- Swift3Parser.Tuple_type_element_listContext
+  Swift3Parser +-down- Swift3Parser.TypeContext
+  Swift3Parser +-down- Swift3Parser.Type_annotationContext
+  Swift3Parser +-down- Swift3Parser.Type_casting_operatorContext
+  Swift3Parser +-down- Swift3Parser.Type_identifierContext
+  Swift3Parser +-down- Swift3Parser.Type_inheritance_clauseContext
+  Swift3Parser +-down- Swift3Parser.Type_inheritance_listContext
+  Swift3Parser +-down- Swift3Parser.Type_nameContext
+  Swift3Parser +-down- Swift3Parser.Typealias_assignmentContext
+  Swift3Parser +-down- Swift3Parser.Typealias_declarationContext
+  Swift3Parser +-down- Swift3Parser.Typealias_nameContext
+  Swift3Parser +-down- Swift3Parser.Union_style_enumContext
+  Swift3Parser +-down- Swift3Parser.Union_style_enum_caseContext
+  Swift3Parser +-down- Swift3Parser.Union_style_enum_case_clauseContext
+  Swift3Parser +-down- Swift3Parser.Union_style_enum_case_listContext
+  Swift3Parser +-down- Swift3Parser.Union_style_enum_memberContext
+  Swift3Parser +-down- Swift3Parser.Union_style_enum_membersContext
+  Swift3Parser +-down- Swift3Parser.Value_binding_patternContext
+  Swift3Parser +-down- Swift3Parser.Variable_declarationContext
+  Swift3Parser +-down- Swift3Parser.Variable_declaration_headContext
+  Swift3Parser +-down- Swift3Parser.Variable_nameContext
+  Swift3Parser +-down- Swift3Parser.Where_clauseContext
+  Swift3Parser +-down- Swift3Parser.Where_expressionContext
+  Swift3Parser +-down- Swift3Parser.While_statementContext
+  Swift3Parser +-down- Swift3Parser.Wildcard_expressionContext
+  Swift3Parser +-down- Swift3Parser.Wildcard_patternContext
+  Swift3Parser +-down- Swift3Parser.WillSet_clauseContext
+  Swift3Parser +-down- Swift3Parser.WillSet_didSet_blockContext
+  Swift3Parser.Dynamic_typeContext -up-|> Swift3Parser.Postfix_expressionContext
+  Swift3Parser.Explicit_member_expression1Context -up-|> Swift3Parser.Postfix_expressionContext
+  Swift3Parser.Explicit_member_expression2Context -up-|> Swift3Parser.Postfix_expressionContext
+  Swift3Parser.Explicit_member_expression3Context -up-|> Swift3Parser.Postfix_expressionContext
+  Swift3Parser.Explicit_member_expression4Context -up-|> Swift3Parser.Postfix_expressionContext
+  Swift3Parser.Function_call_expressionContext -up-|> Swift3Parser.Postfix_expressionContext
+  Swift3Parser.Function_call_expression_with_closureContext -up-|> Swift3Parser.Postfix_expressionContext
+  Swift3Parser.Initializer_expressionContext -up-|> Swift3Parser.Postfix_expressionContext
+  Swift3Parser.Initializer_expression_with_argsContext -up-|> Swift3Parser.Postfix_expressionContext
+  Swift3Parser.Postfix_operationContext -up-|> Swift3Parser.Postfix_expressionContext
+  Swift3Parser.Postfix_self_expressionContext -up-|> Swift3Parser.Postfix_expressionContext
+  Swift3Parser.PrimaryContext -up-|> Swift3Parser.Postfix_expressionContext
+  Swift3Parser.Subscript_expressionContext -up-|> Swift3Parser.Postfix_expressionContext
+  Swift3Parser.The_any_typeContext -up-|> Swift3Parser.TypeContext
+  Swift3Parser.The_array_typeContext -up-|> Swift3Parser.TypeContext
+  Swift3Parser.The_dictionary_typeContext -up-|> Swift3Parser.TypeContext
+  Swift3Parser.The_function_typeContext -up-|> Swift3Parser.TypeContext
+  Swift3Parser.The_implicitly_unwrapped_optional_typeContext -up-|> Swift3Parser.TypeContext
+  Swift3Parser.The_metatype_protocol_typeContext -up-|> Swift3Parser.TypeContext
+  Swift3Parser.The_metatype_type_typeContext -up-|> Swift3Parser.TypeContext
+  Swift3Parser.The_optional_typeContext -up-|> Swift3Parser.TypeContext
+  Swift3Parser.The_protocol_composition_typeContext -up-|> Swift3Parser.TypeContext
+  Swift3Parser.The_self_typeContext -up-|> Swift3Parser.TypeContext
+  Swift3Parser.The_tuple_typeContext -up-|> Swift3Parser.TypeContext
+  Swift3Parser.The_type_identifierContext -up-|> Swift3Parser.TypeContext
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

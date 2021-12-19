@@ -1,0 +1,55 @@
+{
+  // Syntax of file .... {"JavaClass":{"JavaFunctionSignature":"EquivalentSwiftFunction"}}
+  "Integer": {
+    "parseInt(String)": "Int(/0)!"
+  },
+  "String": {
+    "valueOf(int)": "String(/0)",
+    "valueOf(double)": "String(/0)",
+    "valueOf(Double)": "String(/0)",
+    "valueOf(Float)": "String(/0)",
+    "valueOf(float)": "String(/0)"
+  },
+  "Float": {
+    "parseFloat(String)": "Float(/0)!"
+  },
+  "Double": {
+    "parseDouble(String)": "Double(/0)!"
+  },
+  "Math": {
+    "pow(int,int)": "pow(Double(/0),Double(/1))",
+    "pow(double,int)": "pow(/0,Double(/1))",
+    "pow(double,double)": "pow(/0,/1)",
+    "pow(int,double)": "pow(Double(/0),/1)",
+    "pow(float,float)": "pow(/0,/1)",
+    "pow(double,Double)": "pow(/0,/1)",
+    "sqrt(double)": "sqrt(Double(/0))",
+    "sqrt(int)": "sqrt(Double(/0))",
+    "cbrt(double)": "pow(/0, 1.0/3.0)",
+    "log(double)": "log(Double(/0))",
+    "log(int)": "log(Double(/0))",
+    "log(float)": "log(Float(/0))",
+    "sin(double)": "sin(Double(/0))",
+    "cos(double)": "cos(Double(/0))",
+    "tan(double)": "tan(Double(/0))",
+    "sinh(double)": "sinh(Double(/0))",
+    "cosh(double)": "cosh(Double(/0))",
+    "tanh(double)": "tanh(Double(/0))",
+    "exp(double)": "exp(Double(/0)"
+  },
+  "Arrays": {
+    "asList(String)": "ASList(/0)"
+  },
+  "System.out": {
+    "println(int)": "print(/0)",
+    "println(String)": "print(/0)",
+    "println(boolean)": "print(/0)"
+  },
+  "FirebaseFirestore": {
+    "getInstance()": "firestore()"
+  },
+  "FirebaseAuth": {
+    "getInstance()": "auth()",
+    "getCurrentUser()": "FirebaseUser"
+  }
+}

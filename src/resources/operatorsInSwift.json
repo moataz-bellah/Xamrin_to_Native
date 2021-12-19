@@ -1,0 +1,4 @@
+{ // Syntax of file .... {"SwiftDataType":{"javaFun1":"EquivalentOperator"   }}
+  "Array":{"get(int)":"[/0]"},
+  "Dictionary": {"put(String,String)":  "[/0] = /1"}
+}

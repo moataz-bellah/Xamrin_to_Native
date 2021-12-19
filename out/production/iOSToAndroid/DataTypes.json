@@ -1,0 +1,31 @@
+{
+  "Int": "int",
+  "Bool": "boolean",
+  "Float": "float",
+  "Double": "double",
+  "Character": "Char",
+  "String": "String",
+  "Array":"ArrayList",
+  "UserDefaults.standard" : "SharedPreferences",
+  "AVAudioPlayer" : "MediaPlayer",
+  //UI type
+  "UITextField": "EditText",
+  "ListView" : "ListView",
+  "MyAdapter2" : "MyAdapter2",
+  "UILabel" : "TextView",
+  "UIButton": "Button",
+  "Link" : "URL",
+  "Image": "ImageView",
+  "Alert": "AlertDialog",
+  "TextEditor": "TextView",
+  "TextField": "EditText",
+  "Button":"Button",
+  "Toggle": "Switch",
+  "openURL": "",
+  "ProgressView": "ProgressBar",
+  //access level
+  "public" : "public",
+  "internal" : "protected",
+  "private" : "private",
+  "weak" : "private"
+}
