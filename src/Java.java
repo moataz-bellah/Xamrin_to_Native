@@ -82,8 +82,8 @@ public class Java {
     }
 
     public String assignment_expression(Map<String,String> assignmentExpression){
-        String expreesion = assignmentExpression.get("leftExpression") + " = " + assignmentExpression.get("rightExpression");
-        return expreesion + ";";
+        String expression = assignmentExpression.get("leftExpression") + " = " + assignmentExpression.get("rightExpression");
+        return expression + ";";
     }
     public String expression_operator_expression(Map<String,String> ExpOpExp){
 

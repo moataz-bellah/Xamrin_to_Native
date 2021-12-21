@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JavaAssistant {
+public class SwiftAssistant {
 
     private static HashMap<String, HashMap<String, ArrayList<String>>> functionArgumentNames;
 
@@ -25,10 +25,10 @@ public class JavaAssistant {
     private static HashMap <Integer, HashMap<String, String>> convertedHashMap;
     private String mJavaClassName;
     private String mJavaParentClassName;
-    private static  final Map<String, String> JAVA_DATA_TYPES_HASH_MAP;
-    private static  final Map<String, Map<String, String>> JAVA_FUNCTIONS_RETURN_TYPES;
-    private static  final Map<String, Map<String, String>> mXamrinStaticFunctionsInJava;
-    private static  final Map<String, Map<String, String>> mXamrinFunctionsInJava;
+    private static  final Map<String, String> SWIFT_DATA_TYPES_HASH_MAP;
+    private static  final Map<String, Map<String, String>> SWIFT_FUNCTIONS_RETURN_TYPES;
+    private static  final Map<String, Map<String, String>> mXamrinStaticFunctionsInSwift;
+    private static  final Map<String, Map<String, String>> mXamrinFunctionsInSwift;
     private ArrayList<String> targetSwiftMethods;
     public static boolean isFirestoreClosure = false;
     //private ArrayList<String> currentSwiftImagePickers;
@@ -43,12 +43,13 @@ public class JavaAssistant {
      * used to store objects data types Key is variable name and value is its data type and its value
      */
     private Map<String, String> mIdentifiersTypes;
+
     /**
      * used to store class hierarchy Key is class name and value is its parent
      */
 //    private static final HashMap<String, String> mUsedClasses;
 
-    public JavaAssistant() {
+    public SwiftAssistant() {
         objectsUIIDs = new HashMap<>();
         convertedHashMap = new HashMap<>();
         targetSwiftMethods = new ArrayList<>();
@@ -57,7 +58,7 @@ public class JavaAssistant {
 
     static {
         importedLibraries = new HashMap<>();
-  //      mUsedClasses = new HashMap<>();
+        //      mUsedClasses = new HashMap<>();
         functionArgumentNames = new HashMap<>();
         HashMap<String, String> temp;
         HashMap<String, String> temp2;
@@ -75,21 +76,25 @@ public class JavaAssistant {
 
         Gson gson = new GsonBuilder().create();
 
+        Reader reader2 = new InputStreamReader((getFileFromResources("SwiftDataTypes.json")));
+        Reader reader12 = new InputStreamReader((getFileFromResources("SwiftFunctionsReturnTypes.json")));
+        Reader reader6 = new InputStreamReader((getFileFromResources("SwiftStaticBuiltInFunctionData.json")));
+        Reader reader4 = new InputStreamReader((getFileFromResources("XamrinFunctionsInSwift.json")));
 
-        Reader reader = new InputStreamReader((getFileFromResources("JavaDataTypes.json")));
-        Reader reader11 = new InputStreamReader((getFileFromResources("JavaFunctionsReturnTypes.json")));
-        Reader reader5 = new InputStreamReader((getFileFromResources("JavaStaticBuiltInFunctionData.json")));
-        Reader reader3 = new InputStreamReader((getFileFromResources("XamrinFunctionsInJava.json")));
 
-        temp = gson.fromJson(reader, HashMap.class);
-        temp5 = gson.fromJson(reader5, HashMap.class);
-        temp3 = gson.fromJson(reader3, HashMap.class);
-        temp11 = gson.fromJson(reader11, HashMap.class);
+        temp2 = gson.fromJson(reader2, HashMap.class);
 
-        JAVA_DATA_TYPES_HASH_MAP = Collections.unmodifiableMap(temp);
-        JAVA_FUNCTIONS_RETURN_TYPES = Collections.unmodifiableMap(temp11);
-        mXamrinStaticFunctionsInJava = Collections.unmodifiableMap(temp5);
-        mXamrinFunctionsInJava = Collections.unmodifiableMap(temp3);
+        temp6 = gson.fromJson(reader6, HashMap.class);
+
+        temp4 = gson.fromJson(reader4, HashMap.class);
+
+        temp12 = gson.fromJson(reader12, HashMap.class);
+
+
+        SWIFT_DATA_TYPES_HASH_MAP = Collections.unmodifiableMap(temp2);
+        SWIFT_FUNCTIONS_RETURN_TYPES = Collections.unmodifiableMap(temp12);
+        mXamrinStaticFunctionsInSwift = Collections.unmodifiableMap(temp6);
+        mXamrinFunctionsInSwift = Collections.unmodifiableMap(temp4);
 
     }
     public static InputStream getFileFromResources(String fileName) {
@@ -100,9 +105,9 @@ public class JavaAssistant {
         return is;
     }
 
-    public  String getDataType(String xamrinDataType){
-        if(JAVA_DATA_TYPES_HASH_MAP.containsKey(xamrinDataType))
-              return  JAVA_DATA_TYPES_HASH_MAP.get(xamrinDataType);
+    public String getDataType(String xamrinDataType){
+        if(SWIFT_DATA_TYPES_HASH_MAP.containsKey(xamrinDataType))
+            return SWIFT_DATA_TYPES_HASH_MAP.get(xamrinDataType);
         return "";
     }
 

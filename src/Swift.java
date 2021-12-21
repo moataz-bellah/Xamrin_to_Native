@@ -68,7 +68,7 @@ public class Swift {
         return expression;
     }
     public String class_declaration(Map<String,String> classDeclaration){
-        String expression = classDeclaration.get("accessModifier") + " class ";
+        String expression = classDeclaration.get("accessModifier") + " class " + classDeclaration.get("className");
         if(classDeclaration.containsKey("inherit")){
             expression+=("extends " + classDeclaration.get("inherit"));
         }

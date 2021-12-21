@@ -1,7 +1,7 @@
 namespace HelloWorld
 {
     class myClass{
-        int x;
+        int x = 5+4;
     }
 }
 
