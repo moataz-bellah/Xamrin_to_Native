@@ -52,10 +52,12 @@ public class Swift {
     public String close_paranc(){return ")";}
     public String open_bracket(){return "[";}
     public String close_bracket(){return "]";}
-
+    public String newLine(){return "\n";}
+    public String openTag(){return "<";}
+    public String closeTag(){return ">";}
 
     public String function_declaration(Map<String,String> functionDeclaration, ArrayList<String> functionParameters){
-        String expression = functionDeclaration.get("accessModifier") + " "  + functionDeclaration.get("functionName");
+        String expression = functionDeclaration.get("accessModifier") + " func "  + functionDeclaration.get("functionName");
         expression+="( ";
         for(String param : functionParameters){
             expression+=param + ",";

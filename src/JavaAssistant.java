@@ -11,17 +11,21 @@ import java.util.Map;
 
 public class JavaAssistant {
 
+
     private static HashMap<String, HashMap<String, ArrayList<String>>> functionArgumentNames;
 
     /**
      * maps the ID of an object in the layout.xml to its java object name
      * to be used later in converting the android layout to scene in IOS
      */
+
     private HashMap<String, String> objectsUIIDs;
+
     /**
      * this is a pair used to keep the info  (HashmapName,<key data type, value data type>) for the currently being
      * converted map/hashmap into a dictionary in swift
      */
+
     private static HashMap <Integer, HashMap<String, String>> convertedHashMap;
     private String mJavaClassName;
     private String mJavaParentClassName;
@@ -48,6 +52,12 @@ public class JavaAssistant {
      */
 //    private static final HashMap<String, String> mUsedClasses;
 
+
+
+
+
+
+
     public JavaAssistant() {
         objectsUIIDs = new HashMap<>();
         convertedHashMap = new HashMap<>();
@@ -56,6 +66,7 @@ public class JavaAssistant {
     }
 
     static {
+
         importedLibraries = new HashMap<>();
   //      mUsedClasses = new HashMap<>();
         functionArgumentNames = new HashMap<>();
@@ -64,15 +75,12 @@ public class JavaAssistant {
         HashMap<String, Map<String, String>> temp9;
         HashMap<String, Map<String, String>> temp12;
         HashMap<String, Map<String, String>> temp11;
-
         HashMap<String, Map<String, String>> temp3;
         HashMap<String, Map<String, String>> temp4;
 
         HashMap<String, String> temp10;
-
         HashMap<String, Map<String, String>> temp5;
         HashMap<String, Map<String, String>> temp6;
-
         Gson gson = new GsonBuilder().create();
 
 
@@ -85,6 +93,7 @@ public class JavaAssistant {
         temp5 = gson.fromJson(reader5, HashMap.class);
         temp3 = gson.fromJson(reader3, HashMap.class);
         temp11 = gson.fromJson(reader11, HashMap.class);
+
 
         JAVA_DATA_TYPES_HASH_MAP = Collections.unmodifiableMap(temp);
         JAVA_FUNCTIONS_RETURN_TYPES = Collections.unmodifiableMap(temp11);
@@ -105,5 +114,6 @@ public class JavaAssistant {
               return  JAVA_DATA_TYPES_HASH_MAP.get(xamrinDataType);
         return "";
     }
+
 
 }

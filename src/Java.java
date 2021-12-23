@@ -11,7 +11,8 @@ public class Java {
          if(csVariableDeclaration.containsKey("expression")){
              varExpression+=(" = " + csVariableDeclaration.get("expression"));
          }
-         varExpression+=";";
+
+         //varExpression+=";";
          return varExpression;
     }
 
@@ -52,9 +53,11 @@ public class Java {
     public String semicolen(){return ";";}
     public String open_bracket(){return "[";}
     public String close_bracket(){return "]";}
-
+    public String newLine(){return "\n";}
+    public String openTag(){return "<";}
+    public String closeTag(){return ">";}
     public String function_declaration(Map<String,String> functionDeclaration, ArrayList<String> functionParameters){
-        String expression = functionDeclaration.get("accessModifier") + " " + functionDeclaration.get("dtype") + functionDeclaration.get("functionName");
+        String expression = functionDeclaration.get("accessModifier") + " " + functionDeclaration.get("dtype") + " "+  functionDeclaration.get("functionName");
         expression+="( ";
         for(String param : functionParameters){
             expression+=param + ",";
@@ -64,6 +67,7 @@ public class Java {
         }
         return expression + ")";
     }
+
     public String class_declaration(Map<String,String> classDeclaration){
         String expression = classDeclaration.get("accessModifier") + " class " + classDeclaration.get("className");
         if(classDeclaration.containsKey("inherit")){

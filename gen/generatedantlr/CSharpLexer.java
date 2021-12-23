@@ -1,4 +1,4 @@
-// Generated from /Users/amssh/Desktop/CC/src/generatedantlr/CSharpLexer.g4 by ANTLR 4.9.2
+// Generated from C:/Users/tikoi/IdeaProjects/CC/src/generatedantlr\CSharpLexer.g4 by ANTLR 4.9.1
 package generatedantlr;
 import java.util.Stack;
 import org.antlr.v4.runtime.Lexer;
@@ -12,7 +12,7 @@ import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class CSharpLexer extends Lexer {
-	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.9.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =

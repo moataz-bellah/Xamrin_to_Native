@@ -1,13 +1,12 @@
 {
-  // Syntax of file .... {"JavaDataType":"EquivalentSwiftDataType"}
-  "int": "Int",
-  "boolean": "Bool",
-  "float": "Float",
-  "double": "Double",
-  "long": "Int64",
-  "Double": "Double",
-  "char": "Character",
-  "String": "String",
+  // Syntax of file .... {"C#DataType":"EquivalentJavaDataType"}
+  "int": "int",
+  "bool": "boolean",
+  "float": "float",
+  "double": "double",
+  "long": "long",
+  "char": "char",
+  "string": "String",
   "ArrayList":"Array",
   "Arrays": "Array",
   "List": "Array",

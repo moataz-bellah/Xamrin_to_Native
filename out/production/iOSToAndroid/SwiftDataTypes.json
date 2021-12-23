@@ -1,13 +1,11 @@
 {
-  // Syntax of file .... {"JavaDataType":"EquivalentSwiftDataType"}
   "int": "Int",
-  "boolean": "Bool",
+  "bool": "Bool",
   "float": "Float",
   "double": "Double",
   "long": "Int64",
-  "Double": "Double",
   "char": "Character",
-  "String": "String",
+  "string": "String",
   "ArrayList":"Array",
   "Arrays": "Array",
   "List": "Array",
@@ -16,7 +14,6 @@
   "MediaPlayer":"AVAudioPlayer",
   "SharedPreferences": "UserDefaults.standard",
   "SharedPreferences.Editor": "UserDefaults.standard",
-  //todo solve this two
   "Bundle": "Bundle",
   "S": "",
   "null": "nil",

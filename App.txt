@@ -1,7 +1,22 @@
 namespace HelloWorld
 {
     class myClass{
-        int x = 5+4;
+         int z = 4+8;
+         public int fun(int x,int y){
+
+            }
+         public int fun2(int c,int n){
+
+                     }
+
     }
+
+class test{
+
+    x1 = myClass();
+
+    x1.fun();
+
+}
 }
 

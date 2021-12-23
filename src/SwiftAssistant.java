@@ -22,6 +22,7 @@ public class SwiftAssistant {
      * this is a pair used to keep the info  (HashmapName,<key data type, value data type>) for the currently being
      * converted map/hashmap into a dictionary in swift
      */
+
     private static HashMap <Integer, HashMap<String, String>> convertedHashMap;
     private String mJavaClassName;
     private String mJavaParentClassName;
@@ -32,7 +33,7 @@ public class SwiftAssistant {
     private ArrayList<String> targetSwiftMethods;
     public static boolean isFirestoreClosure = false;
     //private ArrayList<String> currentSwiftImagePickers;
-    private String mLayoutName;
+
 
     /**
      * this is a map to keep the mapping between imported classes and their parent packages
@@ -81,9 +82,7 @@ public class SwiftAssistant {
         Reader reader6 = new InputStreamReader((getFileFromResources("SwiftStaticBuiltInFunctionData.json")));
         Reader reader4 = new InputStreamReader((getFileFromResources("XamrinFunctionsInSwift.json")));
 
-
         temp2 = gson.fromJson(reader2, HashMap.class);
-
         temp6 = gson.fromJson(reader6, HashMap.class);
 
         temp4 = gson.fromJson(reader4, HashMap.class);
@@ -99,7 +98,7 @@ public class SwiftAssistant {
     }
     public static InputStream getFileFromResources(String fileName) {
 
-        InputStream is = JavaAssistant.class.getClassLoader().getResourceAsStream(fileName);
+        InputStream is = SwiftAssistant.class.getClassLoader().getResourceAsStream(fileName);
 
 
         return is;

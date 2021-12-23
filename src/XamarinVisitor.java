@@ -2,9 +2,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import generatedantlr.CSharpParser;
 import generatedantlr.CSharpParserBaseVisitor;
-
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.sql.Array;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,21 +18,21 @@ import java.io.Reader;
 import java.sql.SQLOutput;
 import java.util.*;
 
-/** There is a problem in Java Assistant  Class **/
-
 
 public  class XamarinVisitor extends CSharpParserBaseVisitor {
+
     public static String currentClass;
     public static String currentMethod;
 
     Java JavaObject;
     Swift SwiftObject;
     JavaAssistant mJavaAssistant;
-
+    SwiftAssistant mSwiftAssistant;
     public XamarinVisitor(){
         JavaObject  = new Java();
         SwiftObject = new Swift();
         mJavaAssistant = new JavaAssistant();
+        mSwiftAssistant = new SwiftAssistant();
     }
 
 
@@ -45,6 +45,7 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         System.out.println(" Swift Code " + output.get(1));
         return output;
     }
+
 
     @Override
     public ArrayList<String> visitNamespace_member_declarations(CSharpParser.Namespace_member_declarationsContext ctx) {
@@ -93,6 +94,8 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         return output;
     }
 
+
+
     @Override
     public ArrayList<String> visitClass_definition(CSharpParser.Class_definitionContext ctx) {
         String swiftCode = "";
@@ -100,20 +103,23 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
 
         ArrayList<String> output = new ArrayList<>();
         ArrayList<String> temp = new ArrayList<>();
+
         HashMap<String,String> javaClassDeclaration;
         HashMap<String,String> swiftClassDeclaration = new HashMap<>();
+
         javaClassDeclaration = new HashMap<>();
         currentClass = ctx.identifier().getText();
         javaClassDeclaration.put("className",ctx.identifier().getText().toString());
         javaClassDeclaration.put("accessModifier","");
-        swiftClassDeclaration.put("className",ctx.identifier().getText().toString());
+
+        swiftClassDeclaration.put("className",ctx.identifier().getText());
         swiftClassDeclaration.put("accessModifier","");
         //classDeclaration.put("inherit","");
+
         swiftCode+=SwiftObject.class_declaration(swiftClassDeclaration);
         javaCode+=JavaObject.class_declaration(javaClassDeclaration);
         swiftCode+=SwiftObject.open_brace();
         javaCode+=JavaObject.open_brace();
-
         temp = visitClass_body(ctx.class_body());
         javaCode+=temp.get(0);
         swiftCode+=temp.get(1);
@@ -155,8 +161,19 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     @Override
     public ArrayList<String> visitClass_member_declaration(CSharpParser.Class_member_declarationContext ctx) {
         ArrayList<String> output = new ArrayList<>();
+        ArrayList<String> temp = new ArrayList<>();
+        String javaCode = "";
+        String swiftCode = "";
+        if(ctx.all_member_modifiers()!=null){
+                javaCode+=(ctx.all_member_modifiers().getText() + " ");
+                swiftCode+=(ctx.all_member_modifiers().getText() + " ");
+        }
 
-        output = visitCommon_member_declaration(ctx.common_member_declaration());
+        temp = visitCommon_member_declaration(ctx.common_member_declaration());
+        javaCode+=temp.get(0);
+        swiftCode+=temp.get(1);
+        output.add(javaCode);
+        output.add(swiftCode);
         return  output;
     }
 
@@ -166,18 +183,176 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         return output;
     }
 
+
+    /** Method Section **/
+
+
+
+
+    @Override
+    public ArrayList<String> visitMethod_declaration(CSharpParser.Method_declarationContext ctx) {
+
+        ArrayList<String> output = new ArrayList<>();
+        HashMap<String,String> javaMap = new HashMap<>();
+        HashMap<String,String> swiftMap = new HashMap<>();
+        ArrayList<String> javaParameters = new ArrayList<>();
+        ArrayList<String> swiftParameters = new ArrayList<>();
+        String functionParametersInCSharp = "";
+        ArrayList<String> methodBlock = new ArrayList<>();
+        String javaCode = "";
+        String swiftCode = "";
+        XamrinToNativeAssistant.currentMethodVariables.clear();
+
+        currentMethod = ctx.method_member_name().getText();
+        javaMap.put("functionName",ctx.method_member_name().getText());
+        swiftMap.put("functionName",ctx.method_member_name().getText());
+        javaMap.put("accessModifier","");
+        swiftMap.put("accessModifier","");
+        javaMap.put("dtype",mJavaAssistant.getDataType(XamrinToNativeAssistant.currentDataType));
+        swiftMap.put("dtype",mSwiftAssistant.getDataType(XamrinToNativeAssistant.currentDataType));
+
+        if(ctx.formal_parameter_list() != null){
+            javaParameters = visitFormal_parameter_list(ctx.formal_parameter_list()).get("javaCode");
+            swiftParameters = visitFormal_parameter_list(ctx.formal_parameter_list()).get("swiftCode");
+            functionParametersInCSharp =  getFunctionParametersInCSharp(ctx.formal_parameter_list().fixed_parameters());
+        }
+
+        javaCode+=JavaObject.function_declaration(javaMap,javaParameters);
+        swiftCode+=SwiftObject.function_declaration(swiftMap,swiftParameters);
+        methodBlock = visitMethod_body(ctx.method_body());
+        javaCode+=methodBlock.get(0);
+        swiftCode+=methodBlock.get(1);
+        output.add(javaCode);
+        output.add(swiftCode);
+        // add function definition
+        XamrinToNativeAssistant.addNewFunctionDefinition(currentClass,currentMethod,functionParametersInCSharp,XamrinToNativeAssistant.currentDataType);
+        // clearing current data type
+        XamrinToNativeAssistant.currentDataType = "";
+        currentMethod = ""; // clearing current method name
+        return output;
+    }
+
+
+
+    /** Method`s Parameters Section  **/
+
+    @Override
+    public HashMap<String,ArrayList<String>> visitFormal_parameter_list(CSharpParser.Formal_parameter_listContext ctx) {
+        HashMap<String,ArrayList<String>> output = new HashMap<>();
+        String functionParametersInCSharp =  getFunctionParametersInCSharp(ctx.fixed_parameters());
+        XamrinToNativeAssistant.addNewFunctionDefinition(currentClass,currentMethod,functionParametersInCSharp,XamrinToNativeAssistant.currentDataType);
+        output = visitFixed_parameters(ctx.fixed_parameters());
+
+        return output;
+    }
+
+
+    @Override
+    public HashMap<String,ArrayList<String>> visitFixed_parameters(CSharpParser.Fixed_parametersContext ctx) {
+        HashMap<String,ArrayList<String>> output = new HashMap<>();
+        ArrayList<String> temp = new ArrayList<>();
+        ArrayList<String> javaParameters = new ArrayList<>();
+        ArrayList<String> swiftParameters = new ArrayList<>();
+
+        for(CSharpParser.Fixed_parameterContext i : ctx.fixed_parameter()){
+                temp = visitFixed_parameter(i);
+                javaParameters.add(temp.get(0));
+                swiftParameters.add(temp.get(1));
+        }
+        output.put("javaCode",javaParameters);
+        output.put("swiftCode",swiftParameters);
+        return output;
+    }
+
+    /** Get Method Parameters in C#  **/
+
+    public String getFunctionParametersInCSharp(CSharpParser.Fixed_parametersContext ctx){
+       String parametersInCSharp = "";
+        for(CSharpParser.Fixed_parameterContext i : ctx.fixed_parameter()){
+           parametersInCSharp+= (i.arg_declaration().type_().getText() + " " +i.arg_declaration().identifier().getText());
+            parametersInCSharp+=",";
+        }
+        if(parametersInCSharp.endsWith(",")){
+            parametersInCSharp = parametersInCSharp.substring(0,parametersInCSharp.lastIndexOf(','));
+        }
+        return parametersInCSharp;
+    }
+    @Override
+    public ArrayList<String> visitFixed_parameter(CSharpParser.Fixed_parameterContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        output = visitArg_declaration(ctx.arg_declaration());
+        return output;
+    }
+
+
+    @Override
+    public ArrayList<String> visitArg_declaration(CSharpParser.Arg_declarationContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        HashMap<String,String> javaMap = new HashMap<>();
+        HashMap<String,String> swiftMap = new HashMap<>();
+
+        String parameterID = ctx.identifier().getText();
+        String parameterDataType = ctx.type_().getText(); // It will be edited
+        javaMap.put("data_type",parameterDataType);
+        javaMap.put("varName",parameterID);
+        swiftMap.put("data_type",parameterDataType);
+        swiftMap.put("varName",parameterID);
+        swiftMap.put("state","var"); // for now
+        String javaCode = JavaObject.variable_declaration(javaMap);
+        String swiftCode = SwiftObject.variable_declaration(swiftMap);
+        XamrinToNativeAssistant.addNewVariable(parameterID,parameterDataType);
+        output.add(javaCode);
+        output.add(swiftCode);
+        return output;
+    }
+
+    /** End of Method`s Parameters Section  **/
+
+
+
+    /** Method Body Section **/
+    @Override
+    public ArrayList<String> visitMethod_body(CSharpParser.Method_bodyContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        String javaCode = "";
+        String swiftCode = "";
+        javaCode+=JavaObject.open_brace();
+        swiftCode+=SwiftObject.open_brace();
+        output = visitBlock(ctx.block());
+        javaCode+=JavaObject.close_brace();
+        swiftCode+=SwiftObject.close_brace();
+        output.add(javaCode);
+        output.add(swiftCode);
+        return output;
+    }
+
+    @Override
+    public ArrayList<String> visitBlock(CSharpParser.BlockContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        return output;
+    }
+
+    /** End of Method Body Section **/
+    /** End of Method Section **/
     @Override
     public ArrayList<String> visitTyped_member_declaration(CSharpParser.Typed_member_declarationContext ctx) {
         ArrayList<String> output = new ArrayList<>();
         ArrayList<String> temp = new ArrayList<>();
+
 //        String javaCode  = "";
 //        String swiftCode = "";
 //        HashMap<String,String> javaVariableDeclaration = new HashMap<>();
 //        HashMap<String,String> swiftVariableDeclaration = new HashMap<>();
 //        javaVariableDeclaration.put("data_type",mJavaAssistant.getDataType(ctx.type_().getText()));
 //        swiftVariableDeclaration.put("data_type","Int"); // Later we will use Java Assistant when it is fixed
-        saveVariableTypes(ctx.field_declaration().variable_declarators(),ctx.type_().getText());
-        output = visitField_declaration(ctx.field_declaration());
+        if(ctx.method_declaration()!= null){
+            XamrinToNativeAssistant.currentDataType = ctx.type_().getText();
+            output = visitMethod_declaration(ctx.method_declaration());
+        }else {
+
+            saveVariableTypes(ctx.field_declaration().variable_declarators(), ctx.type_().getText());
+            output = visitField_declaration(ctx.field_declaration());
+        }
 //        javaVariableDeclaration.put("varName",temp.get(0));
 //        swiftVariableDeclaration.put("varName",temp.get(1));
 //        swiftVariableDeclaration.put("state","var");
@@ -191,6 +366,7 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     private void saveVariableTypes(CSharpParser.Variable_declaratorsContext variableDeclaratorsContext, String type) {
         for (ParseTree p : variableDeclaratorsContext.variable_declarator()) {
             CSharpParser.Variable_declaratorContext temp = (CSharpParser.Variable_declaratorContext) p;
+
             XamrinToNativeAssistant.addNewAttribute(currentClass,temp.identifier().getText(), type);
         }
     }
@@ -208,11 +384,14 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         ArrayList<String> temp = new ArrayList<>();
         String javaCode  = "";
         String swiftCode = "";
+
         for(CSharpParser.Variable_declaratorContext i : ctx.variable_declarator()){
             temp = visitVariable_declarator(i);
             javaCode+=temp.get(0);
             swiftCode+=temp.get(1);
         }
+        javaCode+=JavaObject.newLine();
+        swiftCode+=SwiftObject.newLine();
         output.add(javaCode);
         output.add(swiftCode);
         return output;
@@ -224,6 +403,7 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         ArrayList<String> temp = new ArrayList<>();
         String javaCode  = "";
         String swiftCode = "";
+
         String dataType = XamrinToNativeAssistant.getClassAttributeDataType(currentClass,ctx.identifier().getText());
 
         HashMap<String,String> javaMap = new HashMap<>();
@@ -232,7 +412,7 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         javaMap.put("varName",ctx.identifier().getText());
         swiftMap.put("varName",ctx.identifier().getText());
         javaMap.put("data_type",mJavaAssistant.getDataType(dataType));
-        swiftMap.put("data_type",mJavaAssistant.getDataType(dataType));
+        swiftMap.put("data_type",mSwiftAssistant.getDataType(dataType));
         swiftMap.put("state","var");
         if(ctx.variable_initializer() != null) {
            temp = visitVariable_initializer(ctx.variable_initializer());

@@ -1,9 +1,14 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 public class XamrinToNativeAssistant {
-    public static HashMap<String,String> currentMethodVariables;
+    public static String currentDataType = "";
+    public static HashMap<String,String> currentMethodVariables = new HashMap<>();
+
     public static HashMap<String,HashMap<String,String>> classesAttributes = new HashMap<>();
+    /** it returns map {"className":{"method(String)":"String"}}**/
+    public static HashMap<String, HashMap<String, String>> classFunctionsArgumentsDataType =new HashMap<>();
+
     XamrinToNativeAssistant(){
        // classesAttributes = new HashMap<>();
     }
@@ -40,7 +45,9 @@ public class XamrinToNativeAssistant {
         return currentMethodVariables.get(variable);
     }
 
+
     public static void addNewVariable(String variable,String dataType){
+        System.out.println("");
         currentMethodVariables.put(variable,dataType);
     }
     public static void addNewAttribute(String className,String attribute,String dataType){
@@ -52,6 +59,38 @@ public class XamrinToNativeAssistant {
             temp.put(attribute,dataType);
             classesAttributes.put(className,temp);
         }
+    }
+
+    public static void addNewFunctionDefinition(String className,String functionName,String csharpParameters,String functionReturnType
+    ){
+
+        String arguments = "";
+        String functionDefinition = functionName + "(";
+        String[] parameters = csharpParameters.split(",");
+        for(String i : parameters){
+            String[] temp = i.split(" ");
+            functionDefinition+=temp[0];
+            functionDefinition+=",";
+        }
+        if(functionDefinition.endsWith(",")){
+            functionDefinition = functionDefinition.substring(0,functionDefinition.lastIndexOf(','));
+        }
+        functionDefinition+=")";
+        addNewVariableFunction(className,functionDefinition,functionReturnType);
+
+    }
+
+    public static void addNewVariableFunction(String className,String functionDefinition,String functionReturnType) {
+        if (classFunctionsArgumentsDataType.containsKey(className)) {
+
+            classFunctionsArgumentsDataType.get(className).put(functionDefinition, functionReturnType);
+        } else {
+            HashMap<String, String> temp = new HashMap<>();
+            temp.put(functionDefinition, functionReturnType);
+            classFunctionsArgumentsDataType.put(className, temp);
+
+        }
+
     }
 
 }
