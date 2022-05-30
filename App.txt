@@ -1,22 +1,11 @@
 namespace HelloWorld
 {
     class myClass{
-         int z = 4+8;
-         public int fun(int x,int y){
 
-            }
-         public int fun2(int c,int n){
-
-                     }
-
+        public void test(){
+        FirestoreDb fd = FirestoreDb.Create();
+        fd.Collection("users").Document("alovelace");
     }
-
-class test{
-
-    x1 = myClass();
-
-    x1.fun();
-
-}
+    }
 }
 

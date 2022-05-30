@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/iOSToAndroid.iml" filepath="$PROJECT_DIR$/iOSToAndroid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/XNC.iml" filepath="$PROJECT_DIR$/XNC.iml" />
     </modules>
   </component>
 </project>

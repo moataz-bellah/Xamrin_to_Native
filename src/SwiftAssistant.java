@@ -32,6 +32,7 @@ public class SwiftAssistant {
     private static  final Map<String, Map<String, String>> mXamrinFunctionsInSwift;
     private ArrayList<String> targetSwiftMethods;
     public static boolean isFirestoreClosure = false;
+    public  String lastFunctionReturnType = "";
     //private ArrayList<String> currentSwiftImagePickers;
 
 
@@ -110,4 +111,22 @@ public class SwiftAssistant {
         return "";
     }
 
+    public String getStaticFunction(String xamarinClass,String xamarinMethod){
+        if(mXamrinStaticFunctionsInSwift.containsKey(xamarinClass))
+            if(mXamrinStaticFunctionsInSwift.get(xamarinClass).containsKey(xamarinMethod))
+                return mXamrinStaticFunctionsInSwift.get(xamarinClass).get(xamarinMethod);
+        return "";
+
+    }
+    public String getFunctionReturnType(String className,String functionDefinition){
+        if(SWIFT_FUNCTIONS_RETURN_TYPES.get(className).containsKey(functionDefinition))
+            return SWIFT_FUNCTIONS_RETURN_TYPES.get(className).get(functionDefinition);
+        return "";
+    }
+    public String getFunctionInSwift(String lastFunctionReturnType,String functionName){
+        System.out.println(" Hello " + lastFunctionReturnType + " " + functionName);
+        if(mXamrinFunctionsInSwift.get(lastFunctionReturnType).containsKey(functionName))
+            return  mXamrinFunctionsInSwift.get(lastFunctionReturnType).get(functionName);
+        return "";
+    }
 }

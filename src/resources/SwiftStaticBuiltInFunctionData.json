@@ -45,8 +45,8 @@
     "println(String)": "print(/0)",
     "println(boolean)": "print(/0)"
   },
-  "FirebaseFirestore": {
-    "getInstance()": "firestore()"
+  "FirestoreDb": {
+    "Create()": "firestore()"
   },
   "FirebaseAuth": {
     "getInstance()": "auth()",

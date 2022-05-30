@@ -35,6 +35,7 @@ public class JavaAssistant {
     private static  final Map<String, Map<String, String>> mXamrinFunctionsInJava;
     private ArrayList<String> targetSwiftMethods;
     public static boolean isFirestoreClosure = false;
+    public  String lastFunctionReturnType = "";
     //private ArrayList<String> currentSwiftImagePickers;
     private String mLayoutName;
 
@@ -110,8 +111,30 @@ public class JavaAssistant {
     }
 
     public  String getDataType(String xamrinDataType){
+
         if(JAVA_DATA_TYPES_HASH_MAP.containsKey(xamrinDataType))
               return  JAVA_DATA_TYPES_HASH_MAP.get(xamrinDataType);
+
+        return "";
+    }
+
+    public String getStaticFunction(String xamarinClass,String xamarinMethod){
+
+        if(mXamrinStaticFunctionsInJava.containsKey(xamarinClass))
+            if(mXamrinStaticFunctionsInJava.get(xamarinClass).containsKey(xamarinMethod))
+                return mXamrinStaticFunctionsInJava.get(xamarinClass).get(xamarinMethod);
+        return "";
+
+    }
+    public String getFunctionReturnType(String className,String functionDefinition){
+        if(JAVA_FUNCTIONS_RETURN_TYPES.get(className).containsKey(functionDefinition))
+            return JAVA_FUNCTIONS_RETURN_TYPES.get(className).get(functionDefinition);
+        return "";
+    }
+    public String getFunctionInJava(String lastFunctionReturnType,String functionName){
+
+        if(mXamrinFunctionsInJava.get(lastFunctionReturnType).containsKey(functionName))
+          return  mXamrinFunctionsInJava.get(lastFunctionReturnType).get(functionName);
         return "";
     }
 

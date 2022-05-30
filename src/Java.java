@@ -32,6 +32,13 @@ public class Java {
     }
     public String if_statement(Map<String,String> if_expression){
         String expression = "if(" + if_expression.get("expression") + ")";
+        if(if_expression.get("if_body")!= null){
+            expression+=open_brace();
+            expression+=newLine();
+            expression+= if_expression.get("if_body");
+            expression+=newLine();
+            expression+=close_brace();
+        }
         return expression;
     }
 

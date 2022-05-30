@@ -8,13 +8,17 @@ public class XamrinToNativeAssistant {
     public static HashMap<String,HashMap<String,String>> classesAttributes = new HashMap<>();
     /** it returns map {"className":{"method(String)":"String"}}**/
     public static HashMap<String, HashMap<String, String>> classFunctionsArgumentsDataType =new HashMap<>();
+    public static String localVariableTmpDatatype = new String();
 
     XamrinToNativeAssistant(){
        // classesAttributes = new HashMap<>();
     }
     public static boolean isVariableFoundInCurrentMethod(String variable){
-        if(currentMethodVariables.containsKey(variable))
+
+        if(currentMethodVariables.containsKey(variable)){
+
             return true;
+        }
         else
             return false;
     }
@@ -90,7 +94,26 @@ public class XamrinToNativeAssistant {
             classFunctionsArgumentsDataType.put(className, temp);
 
         }
+    }
+    public static void addTmpLocalVariableDatatype(String Datatype) {
+        localVariableTmpDatatype = Datatype;
+    }
 
+    public static String checkDataTypeOfVariable(String variable){
+
+        if(getCurrentMethodVariableDataType(variable) != null){
+            return getCurrentMethodVariableDataType(variable);
+        }
+        else if(variable.contains("\"")) {
+
+            return "String";
+
+        }
+        else if(variable.contains("."))
+            return "Float";
+        else if(variable == "")
+            return "";
+        return "int";
     }
 
 }

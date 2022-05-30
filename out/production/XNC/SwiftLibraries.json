@@ -1,0 +1,5 @@
+{
+  //syntax {"JavaLibraryName":"SwiftLibraryName"}
+  "android.media.MediaPlayer":"AVFoundation",
+  "com.google.firebase.firestore.FirebaseFirestore": "Firebase"
+}

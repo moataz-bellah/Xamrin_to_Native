@@ -1,0 +1,24 @@
+{
+  // Syntax of file .... {"SwiftDataType":{"javaFun1":"EquivalentSwiftFunction1"  ,"javaFun2":"EquivalentSwiftFunction2"   }}
+  "String": { "count": "String.length","contains": "String.contains","isEmpty": "String.isEmpty","firstIndex":"String.indexOf","uppercased": "String.toUpperCase",
+    "lowercased": "String.toLowerCase",
+    "toString": "String.toString",
+    "between": "String.between",
+    "capitalize":"String.toUpperCase",
+    "endsWith":"String.endsWith",
+    "indexOf":"String.indexOf",
+    "initials":"String.startsWith",
+    "join":"String.join",
+    "lines":"String.lines",
+    "lastIndex":"lastIndexOf",
+    "split":"String.split",
+    "startsWith":"String.startsWith",
+    "times":"String.repeat",
+    "trimmed":"String.trim",
+    "substring":"String.substring",
+    "separator":"lineSeparator"},
+
+  "Array": { "count": "size" , "removeAll": "clear",  "insert": "add", "append": "add","contains": "contains","isEmpty": "isEmpty", "remove":"remove", "index": "indexOf", "setValue":"set", "sorted":"sort", "min":"Collections.min", "max":"Collections.max","reversed":"Collections.reverse"},
+
+  "UILabel" : {"text" : "setText", "text!": "getText"}
+}

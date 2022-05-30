@@ -1,0 +1,31 @@
+{
+  //math library
+  "sqrt": "Math.sqrt",
+  "pow": "Math.pow",
+  "random": "Math.random",
+  "min": "Math.min",
+  "max": "Math.max",
+  //textview
+  "text": "setText",
+
+  "uppercased": "String.toUpperCase",
+  "lowercased": "String.toLowerCase",
+  "toString": "String.toString",
+  "contains": "String.contains",
+  "isEmpty": "String.isEmpty",
+  "between": "String.between",
+  "capitalize":"String.toUpperCase",
+  "collapseWhitespace":"",
+  "endsWith":"String.endsWith",
+  "firstIndex":"indexOf",
+  "indexOf":"String.indexOf",
+  "initials":"String.startsWith",
+  "join":"String.join",
+  "lines":"String.lines",
+  "split":"String.split",
+  "startsWith":"String.startsWith",
+  "times":"String.repeat",
+  "trimmed":"String.trim",
+  "substring":"String.substring"
+  //string library
+}
