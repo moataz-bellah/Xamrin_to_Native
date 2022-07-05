@@ -5,6 +5,9 @@ namespace HelloWorld
         public void test(){
         FirestoreDb fd = FirestoreDb.Create();
         fd.Collection("users").Document("alovelace");
+        fd.Collection("users").GetSnapshotAsync();
+         CollectionReference usersRef = fd.Collection("users");
+         usersRef.WhereGreaterThanOrEqualTo("State", "CA");
     }
     }
 }

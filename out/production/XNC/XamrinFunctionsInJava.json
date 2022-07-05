@@ -25,99 +25,16 @@
     "add(Map<String,float>)": "addDocument(/0)",
     "set(Map<String,Object>)": "setData(/0)",
     "Document()": "document()",
-    "Document(String)": "document(/0)",
-    "get()": "getDocuments()",
-    "whereEqualTo(String,String)": "whereField(/0,isEqualTo:/1)",
-    "whereEqualTo(String,int)": "whereField(/0,isEqualTo:/1)",
-    "whereEqualTo(String,boolean)": "whereField(/0,isEqualTo:/1)",
-    "whereEqualTo(String,double)": "whereField(/0,isEqualTo:/1)",
-    "whereEqualTo(String,float)": "whereField(/0,isEqualTo:/1)",
-    "whereEqualTo(String,ArrayList<String>)": "whereField(/0,isEqualTo:/1)",
-    "whereEqualTo(String,ArrayList<int>)": "whereField(/0,isEqualTo:/1)",
-    "whereEqualTo(String,ArrayList<float>)": "whereField(/0,isEqualTo:/1)",
-    "whereEqualTo(String,ArrayList<Object>)": "whereField(/0,isEqualTo:/1)",
-    "whereLessThan(String,String)": "whereField(/0, isLessThan: /1)",
-    "whereLessThan(String,int)": "whereField(/0, isLessThan: /1)",
-    "whereLessThan(String,boolean)": "whereField(/0, isLessThan: /1)",
-    "whereLessThan(String,double)": "whereField(/0, isLessThan: /1)",
-    "whereLessThan(String,float)": "whereField(/0, isLessThan: /1)",
-    "whereLessThan(String,ArrayList<String>)": "whereField(/0, isLessThan: /1)",
-    "whereLessThan(String,ArrayList<int>)": "whereField(/0, isLessThan: /1)",
-    "whereLessThan(String,ArrayList<float>)": "whereField(/0, isLessThan: /1)",
-    "whereLessThan(String,ArrayList<Object>)": "whereField(/0, isLessThan: /1)",
-    "whereGreaterThanOrEqualTo(String,String)":"whereField(/0,isGreaterThanOrEqualTo: /1)",
-    "whereGreaterThanOrEqualTo(String,int)":"whereField(/0,isGreaterThanOrEqualTo: /1)",
-    "whereGreaterThanOrEqualTo(String,boolean)":"whereField(/0,isGreaterThanOrEqualTo: /1)",
-    "whereGreaterThanOrEqualTo(String,double)":"whereField(/0,isGreaterThanOrEqualTo: /1)",
-    "whereGreaterThanOrEqualTo(String,float)":"whereField(/0,isGreaterThanOrEqualTo: /1)",
-    "whereGreaterThanOrEqualTo(String,ArrayList<String>)":"whereField(/0,isGreaterThanOrEqualTo: /1)",
-    "whereGreaterThanOrEqualTo(String,ArrayList<int>)":"whereField(/0,isGreaterThanOrEqualTo: /1)",
-    "whereGreaterThanOrEqualTo(String,ArrayList<float>)":"whereField(/0,isGreaterThanOrEqualTo: /1)",
-    "whereGreaterThanOrEqualTo(String,ArrayList<Object>)":"whereField(/0,isGreaterThanOrEqualTo: /1)",
-    "whereNotEqualTo(String,String)": "whereField(/0,isNotEqualTo: /1)",
-    "whereNotEqualTo(String,int)": "whereField(/0,isNotEqualTo: /1)",
-    "whereNotEqualTo(String,boolean)": "whereField(/0,isNotEqualTo: /1)",
-    "whereNotEqualTo(String,double)": "whereField(/0,isNotEqualTo: /1)",
-    "whereNotEqualTo(String,float)": "whereField(/0,isNotEqualTo: /1)",
-    "whereNotEqualTo(String,ArrayList<String>)": "whereField(/0,isNotEqualTo: /1)",
-    "whereNotEqualTo(String,ArrayList<int>)": "whereField(/0,isNotEqualTo: /1)",
-    "whereNotEqualTo(String,ArrayList<float>)": "whereField(/0,isNotEqualTo: /1)",
-    "whereNotEqualTo(String,ArrayList<Object>)": "whereField(/0,isNotEqualTo: /1)",
-    "whereArrayContains(String,String)": "whereField(/0,arrayContains: /1)",
-    "whereArrayContainsAny(String,Arrays)": "whereField(/0,arrayContainsAny: /1)",
-    "orderBy(String)": "order(by: /0)","limit(int)": "limit(to: /0)"
-  },
-  "DocumentReference": {
-    "get()": "getDocument()",
-    "set(Map<String,Object>)": "setData(/0)",
-    "set(Map<String,String>)": "setData(/0)",
-    "set(Map<String,int>)": "setData(/0)",
-    "set(Map<String,float>)": "setData(/0)",
-    "getId()" : "documentID",
-    "addSnapshotListener": "addSnapshotListener"
-  },
-  "Query": {
-    "limit(int)": "limit(to: /0)",
-    "get()": "getDocuments()"
+    "Document(String)": "document(/0)","GetSnapshotAsync()": "get()","WhereEqualTo(String,String)": "whereEqualTo(/0,/1)",
+    "WhereGreaterThan(String,int)": "whereGreaterThan(/0,/1)","WhereGreaterThan(String,String)": "whereGreaterThan(/0,/1)",
+    "WhereGreaterThanOrEqualTo(String,String)": "whereGreaterThanOrEqualTo(/0,/1)","WhereGreaterThanOrEqualTo(String,int)": "whereGreaterThanOrEqualTo(/0,/1)",
+    "WhereArrayContains(String,String)": "whereArrayContains(/0,/1)","WhereLessThanOrEqualTo(String,String)": "whereLessThanOrEqualTo(/0,/1)",
+    "WhereLessThanOrEqualTo(String,int)": "whereLessThanOrEqualTo(/0,/1)"
 
   },
-  "DocumentSnapshot": {
-    "getResult()": "!",
-    "set(Map<String,Object>)": "setData(/0)",
-    "set(Map<String,String>)": "setData(/0)",
-    "set(Map<String,int>)": "setData(/0)",
-    "set(Map<String,float>)": "setData(/0)",
-    "isSuccessful()": " != nil",
-    "delete()": "delete()",
-    "exists()": "exists()",
-    "getData()": "data()"
-  },
-  "QuerySnapshot": {
-    "getResult()": "documents",
-    "set(Map<String,Object>)": "setData(/0)",
-    "set(Map<String,String>)": "setData(/0)",
-    "set(Map<String,int>)": "setData(/0)",
-    "set(Map<String,float>)": "setData(/0)",
-    "isSuccessful()": " != nil",
-    "delete()": "delete()"
-  },
-  "Void": {
-    "isSuccessful()": " != nil"
-  },
-  "FIRAuthDataResult": {
-    "isSuccessful()": " != nil"
-  },
+  "QuerySnapshot":{
+    "Documents()": "getResult()"
+  }
 
-  "Array":{"add(Object)":"append(/0)",
-    "add(int,Object)":"insert(/1, at: /0)","size()":"count",
-    "isEmpty()": "isEmpty"},
-  "AVAudioPlayer":{"start()":"play()"},
-  "UIViewController":{"onCreate(Bundle)":"viewDidLoad()"},
-  "UITextField": {"toString()": "text!", "length()": "text!.count","getText()":""},
-  "UIButton": {"setText(String)": "setTitle(/0, for: .normal)"},
-  "UILabel": {"setText(String)": "text = /0", "setText(int)": "text = /0" ,"setText(null)": "text = nil", "getText()": "text!"},
-  "String":{"length()":"count", "toString()": ""},
-  "UIImageView": {"setImageBitmap(Bitmap)": "image = /0"},
-  "UserDefaults.standard": {"putString(String,String)": "setValue(/1, forKey: /0)",
-    "getString(String,String)": "string(forKey: /0) else { return /1 }", "apply()": ""}
+
 }

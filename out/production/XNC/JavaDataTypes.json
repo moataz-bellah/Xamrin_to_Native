@@ -11,35 +11,19 @@
   "Arrays": "Array",
   "List": "Array",
   "Integer":"Int",
-  "AppCompatActivity": "UIViewController",
-  "MediaPlayer":"AVAudioPlayer",
-  "SharedPreferences": "UserDefaults.standard",
-  "SharedPreferences.Editor": "UserDefaults.standard",
-  //todo solve this two
-  "Bundle": "Bundle",
-  "S": "",
   "null": "nil",
   "FirestoreDb": "FirebaseFirestore",
-
-  "FirebaseAuth": "Auth",
-  "Map": "Dictionary",
-  "HashMap": "Dictionary",
-  "Object": "Any",
+  "Dictionary": "Map",
   "CollectionReference": "CollectionReference",
   "DocumentReference": "DocumentReference",
   "OnCompleteListener": "",
   "OnSuccessListener": "",
   "OnFailureListener": "",
-  "EventListener": "",
   "QuerySnapshot": "QuerySnapshot",
   "DocumentSnapshot": "DocumentSnapshot",
   "Query": "Query",
-  "FirebaseUser": "FIRUser",
-  "AuthCredential": "AuthCredential",
-  "AuthResult": "FIRAuthDataResult",
   "Task": "",
   "QueryDocumentSnapshot": "DocumentSnapshot",
-  "Void": "Void",
-  "FirebaseFirestoreException": "FirebaseFirestoreException"
+  "Void": "Void"
 }
 

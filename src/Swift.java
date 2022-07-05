@@ -135,9 +135,9 @@ public class Swift {
     }
 
     public String map_declaration(Map<String,String> mapDeclaration){
-        String expression = ("Map<" + mapDeclaration.get("key") + "," + mapDeclaration.get("value") + mapDeclaration.get(">"));
-        expression+=mapDeclaration.get("mapName");
-        return expression;
+        // var emptyDictionary =  [Int: String]()
+        String expression =  "var " + mapDeclaration.get("mapName") + " = [" + mapDeclaration.get("key") + ": "  + mapDeclaration.get("value") + "]()";
+        return expression + "\n";
     }
 
     public String hash_map_declaration(Map<String,String> mapDeclaration){

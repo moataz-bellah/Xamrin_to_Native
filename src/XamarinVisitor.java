@@ -424,13 +424,70 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     @Override
     public ArrayList<String> visitLocal_variable_declaration(CSharpParser.Local_variable_declarationContext ctx) {
         ArrayList<String> output = new ArrayList<>();
-        XamrinToNativeAssistant.localVariableTmpDatatype = ctx.local_variable_type().getText();
+        HashMap<String,String> data = new HashMap<>();
+        if(ctx.local_variable_type() != null){
+                data = visitLocal_variable_type(ctx.local_variable_type());
+                XamrinToNativeAssistant.localVariableTmpDatatype = data.get("Xamarin_type");
+        }
+        else
+            XamrinToNativeAssistant.localVariableTmpDatatype = ctx.local_variable_type().getText();
         for (CSharpParser.Local_variable_declaratorContext i :ctx.local_variable_declarator()){
+
             output = visitLocal_variable_declarator(i);
+
         }
 
         return output;
     }
+
+    @Override
+    public HashMap<String,String> visitLocal_variable_type(CSharpParser.Local_variable_typeContext ctx) {
+        return visitType_(ctx.type_());
+    }
+
+    @Override
+    public HashMap<String,String> visitType_(CSharpParser.Type_Context ctx) {
+        return visitBase_type(ctx.base_type());
+    }
+
+    @Override
+    public HashMap<String,String> visitBase_type(CSharpParser.Base_typeContext ctx) {
+        return visitClass_type(ctx.class_type());
+    }
+
+    @Override
+    public HashMap<String,String> visitClass_type(CSharpParser.Class_typeContext ctx) {
+        return visitNamespace_or_type_name(ctx.namespace_or_type_name());
+    }
+
+    @Override
+    public HashMap<String,String> visitNamespace_or_type_name(CSharpParser.Namespace_or_type_nameContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        HashMap<String,String> data = new HashMap<>();
+
+        if(ctx.identifier().get(0).getText().equals("Dictionary")){
+            XamrinToNativeAssistant.isMap = true;
+            HashMap<String,String> mapDataType = visitType_argument_list(ctx.type_argument_list(0));
+            data.put("Xamarin_type","Dictionary");
+            data.put("key",mapDataType.get("key"));
+            data.put("value",mapDataType.get("value"));
+        }
+        else
+            data.put("Xamarin_type",ctx.getText());
+        return data;
+    }
+
+    @Override
+    public HashMap<String,String> visitType_argument_list(CSharpParser.Type_argument_listContext ctx) {
+        HashMap<String,String> data = new HashMap<>();
+        if(XamrinToNativeAssistant.isMap) {
+            data.put("key",ctx.type_().get(0).base_type().getText());
+            data.put("value",ctx.type_().get(1).base_type().getText());
+
+        }
+        return data;
+    }
+
     @Override
     public ArrayList<String> visitLocal_variable_declarator(CSharpParser.Local_variable_declaratorContext ctx) {
         ArrayList<String> output = new ArrayList<>();
@@ -439,25 +496,35 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         String swiftCode = "";
         HashMap<String,String> javaMap = new HashMap<>();
         HashMap<String,String> swiftMap = new HashMap<>();
+        HashMap<String,String>data = new HashMap<>();
+        if(XamrinToNativeAssistant.isMap){
+            XamrinToNativeAssistant.mapName = ctx.identifier().getText();
+            output = visitLocal_variable_initializer(ctx.local_variable_initializer());
+            XamrinToNativeAssistant.mapName = "";
 
-        javaMap.put("varName",ctx.identifier().getText());
-        swiftMap.put("varName",ctx.identifier().getText());
-        javaMap.put("data_type",mJavaAssistant.getDataType(XamrinToNativeAssistant.localVariableTmpDatatype));
-        swiftMap.put("data_type",mSwiftAssistant.getDataType(XamrinToNativeAssistant.localVariableTmpDatatype));
-        swiftMap.put("state","var");
+        }
+        else{
+            javaMap.put("varName",ctx.identifier().getText());
+            swiftMap.put("varName",ctx.identifier().getText());
+            javaMap.put("data_type",mJavaAssistant.getDataType(XamrinToNativeAssistant.localVariableTmpDatatype));
+            swiftMap.put("data_type",mSwiftAssistant.getDataType(XamrinToNativeAssistant.localVariableTmpDatatype));
+            swiftMap.put("state","var");
 
-        if(ctx.local_variable_initializer() != null) {
-            temp = visitLocal_variable_initializer((CSharpParser.Local_variable_initializerContext) ctx.local_variable_initializer());
-            javaMap.put("expression",temp.get(0));
-            swiftMap.put("expression",temp.get(1));
+            if(ctx.local_variable_initializer() != null) {
+                temp = visitLocal_variable_initializer((CSharpParser.Local_variable_initializerContext) ctx.local_variable_initializer());
+                javaMap.put("expression",temp.get(0));
+                swiftMap.put("expression",temp.get(1));
+            }
+
+            javaCode+=JavaObject.variable_declaration(javaMap);
+            swiftCode+=SwiftObject.variable_declaration(swiftMap);
+
+            XamrinToNativeAssistant.addNewVariable(javaMap.get("varName"),XamrinToNativeAssistant.localVariableTmpDatatype);
+            output.add(javaCode);
+            output.add(swiftCode);
+
         }
 
-        javaCode+=JavaObject.variable_declaration(javaMap);
-        swiftCode+=SwiftObject.variable_declaration(swiftMap);
-
-        XamrinToNativeAssistant.addNewVariable(javaMap.get("varName"),XamrinToNativeAssistant.localVariableTmpDatatype);
-        output.add(javaCode);
-        output.add(swiftCode);
         XamrinToNativeAssistant.localVariableTmpDatatype = "";
         return output;
     }
@@ -834,11 +901,13 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
 
                 String functionName = visitMember_access(ctx.member_access(0));
                 String argumentDataType = "";
+
                 if(ctx.method_invocation(0)!=null)
                     temp = visitMethod_invocation(ctx.method_invocation(0));
                 if(!temp.isEmpty()) {
                     argumentDataType = XamrinToNativeAssistant.checkDataTypeOfVariable((temp.get(0)));
                 }
+                System.out.println(" JJJJJJJJJJJJJJJJJ  " + argumentDataType);
                 String functionDefinition = functionName + "(" + argumentDataType + ")";
                 javaOutput+=mJavaAssistant.getStaticFunction(startName,functionDefinition);
                 swiftOuput+=mSwiftAssistant.getStaticFunction(startName,functionDefinition);
@@ -866,17 +935,20 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
                             String functionName = visitMember_access(ctx.member_access(counter));
 
                             if(ctx.method_invocation(counter)!= null) {
+
                                 temp = visitMethod_invocation(ctx.method_invocation(counter));
-
+                                String[] sourceParameters;
                                 if(!temp.isEmpty()) {
-
-                                    argumentDataType = XamrinToNativeAssistant.checkDataTypeOfVariable((temp.get(0)));
-
+                                    sourceParameters = temp.get(0).split(", *");
+                                    for(int i2 = 0;i2<sourceParameters.length;i2++){
+                                        argumentDataType += XamrinToNativeAssistant.checkDataTypeOfVariable(sourceParameters[i2]);
+                                        argumentDataType+=",";
+                                    }
+                                    argumentDataType = argumentDataType.substring(0,argumentDataType.lastIndexOf(","));
                                 }
-                                String functionDefinition = functionName + "(" + argumentDataType + ")";
 
+                                String functionDefinition = functionName + "(" + argumentDataType + ")";
                                 String functionInJava = mJavaAssistant.getFunctionInJava(mJavaAssistant.lastFunctionReturnType,functionDefinition);
-                                System.out.println("Function In Java " +functionInJava);
                                 String functionInSwift = mSwiftAssistant.getFunctionInSwift(mSwiftAssistant.lastFunctionReturnType,functionDefinition);
                                 String parametersInXamarin = ctx.method_invocation(counter).getText();
                                 parametersInXamarin = parametersInXamarin.substring(parametersInXamarin.indexOf("(")+1,parametersInXamarin.lastIndexOf(")"));
@@ -907,7 +979,7 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
                         swiftOuput = swiftOuput.substring(0,swiftOuput.lastIndexOf("."));
                         javaOutput+=";\n";
                         swiftOuput+=";\n";
-                        System.out.println("Java Output Is" + javaOutput + " Swift " + swiftOuput);
+
                         mJavaAssistant.lastFunctionReturnType = "";
                         mSwiftAssistant.lastFunctionReturnType = "";
                     }
@@ -933,76 +1005,217 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     public ArrayList<String> visitPrimary_expression(CSharpParser.Primary_expressionContext ctx) {
         ArrayList<String> output = new ArrayList<>();
         ArrayList<String> temp = new ArrayList<>();
+        HashMap<String,String> javaMultipleFunction= new HashMap<>();  // useless
+        HashMap<String,String> swiftMultipleFunction= new HashMap<>(); // useless
         String javaOutput = "";
         String swiftOuput = "";
-        Recode(ctx);
-        // multiple function inthializer like  FirestoreDb db = FirestoreDB.Create()
-        if(ctx.primary_expression_start()!=null){
-            String varDataType = ctx.primary_expression_start().getText();
-            XamrinToNativeAssistant.checkDataTypeOfVariable(varDataType);
-            // in this case it is a multiple function statement like db.collection("users"); and i want to return "users"
-            if(!XamrinToNativeAssistant.isVariableFound(varDataType)){
-                ArrayList<String> argument = new ArrayList<>();
-                argument.add(varDataType);
-                argument.add(varDataType);
-                return argument;
+        String startName = "";
+        // Dictionary Conversion
+        if(XamrinToNativeAssistant.isMap){
+            if(ctx.primary_expression_start() != null){
+
+                HashMap<String,String> data = new HashMap<>();
+                data = visitPrimary_Expression_Start(ctx.primary_expression_start());
+                HashMap<String,String> javaMapData = new HashMap<>();
+                HashMap<String,String> swiftMapData = new HashMap<>();
+
+                javaMapData.put("mapName",XamrinToNativeAssistant.mapName);
+                javaMapData.put("key",mJavaAssistant.getDataType(data.get("key")));
+                javaMapData.put("value",mJavaAssistant.getDataType(data.get("value")));
+                javaMapData.put("type",mJavaAssistant.getDataType(data.get("Xamarin_type")));
+                swiftMapData.put("mapName",XamrinToNativeAssistant.mapName);
+                swiftMapData.put("key",mSwiftAssistant.getDataType(data.get("key")));
+                swiftMapData.put("value",mSwiftAssistant.getDataType(data.get("value")));
+                javaOutput+=JavaObject.map_declaration(javaMapData);
+                swiftOuput+=SwiftObject.map_declaration(swiftMapData);
+                output.add(javaOutput);
+                output.add(swiftOuput);
+                XamrinToNativeAssistant.isMap = false;
+                String dataTypeInXamarin = data.get("Xamarin_type") + "<" + data.get("key") + "," + data.get("value") + ">";
+                XamrinToNativeAssistant.addNewVariable(XamrinToNativeAssistant.mapName,dataTypeInXamarin);
+                return output;
             }
-            javaOutput+=mJavaAssistant.getDataType(varDataType);
-            swiftOuput+=mSwiftAssistant.getDataType(varDataType);
-            javaOutput+=".";
-            swiftOuput+=".";
-            int counter = 0;
-            String argumentDataType = "";
-            if(ctx.member_access(0)!=null){
-                for(CSharpParser.Member_accessContext i : ctx.member_access()){
-                    String functionName = visitMember_access(ctx.member_access(counter));
-
-
-                    //javaOutput+="(";
-                    //swiftOuput+="(";
-                    if(ctx.method_invocation(counter)!= null) {
-
-                        temp = visitMethod_invocation(ctx.method_invocation(counter));
-
-                        if(!temp.isEmpty()) {
-
-                            argumentDataType = XamrinToNativeAssistant.checkDataTypeOfVariable((temp.get(0)));
-
-                        }
-                        String functionDefinition = functionName + "(" + argumentDataType + ")";
-                        String functionReturnType = mJavaAssistant.getFunctionReturnType(varDataType, functionDefinition);
-
-
-                        javaOutput+=mJavaAssistant.getStaticFunction(varDataType,functionDefinition);
-                        swiftOuput+=mSwiftAssistant.getStaticFunction(varDataType,functionDefinition);
-                       // javaOutput += temp.get(0);
-                        // swiftOuput += temp.get(1);
-                        javaOutput += ".";
-                        swiftOuput += ".";
-                        counter++;
-                    }
-                }
-
-
-            }
-
-//            String functionName = visitMember_access(ctx.member_access(0));
-//            functionName+="()";
-//            javaOutput+=mJavaAssistant.getStaticFunction(varDataType,functionName);
-//            swiftOuput+=mSwiftAssistant.getStaticFunction(varDataType,functionName);
-            javaOutput+=";\n";
-            swiftOuput+=";\n";
-            output.add(javaOutput);
-            output.add(swiftOuput);
-
-
-            return output;
         }
 
-        output.add(ctx.getText());
-        output.add(ctx.getText());
-        //output.add(ctx.identifier());
+        // Bracket Expression Conversion like book["name"]
+        if(ctx.bracket_expression()!=null){
+            visitBracket_expression(ctx.bracket_expression(0));
+            for(CSharpParser.Bracket_expressionContext i : ctx.bracket_expression()){
+
+                visitBracket_expression(i);
+            }
+        }
+        if(ctx.primary_expression_start()!=null){
+            startName = ctx.primary_expression_start().getText();
+            javaMultipleFunction.put("Caller",startName); // useless
+            swiftMultipleFunction.put("Caller",startName); // useless
+            if(ctx.member_access(0)==null){
+                // Argument like collection("users") and we want "users"
+                ArrayList<String> argument = new ArrayList<>();
+                argument.add(startName);
+                argument.add(startName);
+                return argument;
+            }
+
+            if(!XamrinToNativeAssistant.isVariableFoundInCurrentMethod(startName)){
+                // Static Function like FirebaseDB.Create();
+                javaOutput+=mJavaAssistant.getDataType(startName);
+                swiftOuput+=mSwiftAssistant.getDataType(startName);
+                javaOutput+=".";
+                swiftOuput+=".";
+
+
+                String functionName = visitMember_access(ctx.member_access(0));
+                String argumentDataType = "";
+                if(ctx.method_invocation(0)!=null)
+                    temp = visitMethod_invocation(ctx.method_invocation(0));
+                if(!temp.isEmpty()) {
+                    argumentDataType = XamrinToNativeAssistant.checkDataTypeOfVariable((temp.get(0)));
+                }
+                String functionDefinition = functionName + "(" + argumentDataType + ")";
+                javaOutput+=mJavaAssistant.getStaticFunction(startName,functionDefinition);
+                swiftOuput+=mSwiftAssistant.getStaticFunction(startName,functionDefinition);
+
+                javaOutput+=";\n";
+                swiftOuput+=";\n";
+
+            }
+            else{
+                if(ctx.member_access(0)!=null){
+                    // Multiple Function like db.Collection("users").Document("ali");
+                    int counter = 0;
+                    String argumentDataType = "";
+                    String rootObjectDatatype = XamrinToNativeAssistant.getCurrentMethodVariableDataType(startName);
+                    javaOutput+=startName;
+                    swiftOuput+=startName;
+                    javaOutput+=".";
+                    swiftOuput+=".";
+                    //String rootJavaType = mJavaAssistant.getDataType(rootObjectDatatype);
+                    //String rootSwiftType = mSwiftAssistant.getDataType(rootJavaType);
+
+                    mJavaAssistant.lastFunctionReturnType = mJavaAssistant.getDataType(rootObjectDatatype);
+                    mSwiftAssistant.lastFunctionReturnType = mSwiftAssistant.getDataType(rootObjectDatatype);
+
+                    for(CSharpParser.Member_accessContext i : ctx.member_access()){
+                        String functionName = visitMember_access(ctx.member_access(counter));
+                        String[] javaParameters;
+                        String[] swiftParameters;
+                        if(ctx.method_invocation(counter)!= null) {
+                            temp = visitMethod_invocation(ctx.method_invocation(counter));
+
+                            String[] sourceParameters;
+                            if(!temp.isEmpty()) {
+
+                                sourceParameters = temp.get(0).split(", *");
+                                for(int i2 = 0;i2<sourceParameters.length;i2++){
+                                    argumentDataType += XamrinToNativeAssistant.checkDataTypeOfVariable(sourceParameters[i2]);
+                                    argumentDataType+=",";
+                                }
+                                argumentDataType = argumentDataType.substring(0,argumentDataType.lastIndexOf(","));
+                            }
+
+                            String functionDefinition = functionName + "(" + argumentDataType + ")";
+
+                            String functionInJava = mJavaAssistant.getFunctionInJava(mJavaAssistant.lastFunctionReturnType,functionDefinition);
+
+                            String functionInSwift = mSwiftAssistant.getFunctionInSwift(mSwiftAssistant.lastFunctionReturnType,functionDefinition);
+                            String parametersInXamarin = ctx.method_invocation(counter).getText();
+
+                            boolean emptyParameters = false;
+                            if(parametersInXamarin.length() == 2){
+                                emptyParameters = true;
+                            }
+                            parametersInXamarin = parametersInXamarin.substring(parametersInXamarin.indexOf("(")+1,parametersInXamarin.lastIndexOf(")"));
+
+                            String[] parametersArray = parametersInXamarin.split(", *");
+
+                            for(int j = 0;j<parametersArray.length;j++) {
+                                if (!functionInJava.contains("/"))
+                                    break;
+                                if (emptyParameters) {
+                                    functionInJava = functionInJava.replace('/' + String.valueOf(j), "");
+                                    functionInSwift = functionInSwift.replace('/' + String.valueOf(j), "");
+                                } else {
+                                    javaParameters = temp.get(0).split(", *");
+                                    swiftParameters = temp.get(1).split(", *");
+                                    String argumentInJava = javaParameters[j];
+                                    String argumentInSwift = swiftParameters[j];
+                                    functionInJava = functionInJava.replace('/' + String.valueOf(j), argumentInJava);
+                                    functionInSwift = functionInSwift.replace('/' + String.valueOf(j), argumentInSwift);
+                                }
+                            }
+                            javaOutput+=functionInJava;
+                            swiftOuput+=functionInSwift;
+
+                            mJavaAssistant.lastFunctionReturnType = mJavaAssistant.getFunctionReturnType(mJavaAssistant.lastFunctionReturnType, functionDefinition);
+
+                            mSwiftAssistant.lastFunctionReturnType = mSwiftAssistant.getFunctionReturnType(mSwiftAssistant.lastFunctionReturnType, functionDefinition);
+
+                            javaOutput+=".";
+                            swiftOuput+=".";
+                        }
+                        argumentDataType = "";
+                        counter++;
+                    }
+                    javaOutput = javaOutput.substring(0,javaOutput.lastIndexOf("."));
+                    swiftOuput = swiftOuput.substring(0,swiftOuput.lastIndexOf("."));
+                    javaOutput+=";\n";
+                    swiftOuput+=";\n";
+
+                    mJavaAssistant.lastFunctionReturnType = "";
+                    mSwiftAssistant.lastFunctionReturnType = "";
+                }
+                else{
+
+                    ArrayList<String> argument = new ArrayList<>();
+                    argument.add(startName);
+                    argument.add(startName);
+                    return argument;
+                }
+
+            }
+        }
+        javaMultipleFunction.put("Block",javaOutput); // useless
+        swiftMultipleFunction.put("Block",swiftOuput); // useless
+
+        output.add(javaOutput);
+        output.add(swiftOuput);
         return output;
+    }
+
+    @Override
+    public ArrayList<String> visitBracket_expression(CSharpParser.Bracket_expressionContext ctx) {
+
+        String javaOutput = "";
+        String swiftOutput = "";
+        ArrayList<String> temp = new ArrayList<>();
+        //System.out.println("SUIIIIIII 1 "+ ctx.getText());
+        //temp.add(ctx.getText());
+        //temp.add(ctx.getText());
+        //visitIndexer_argument(ctx.indexer_argument(0));
+
+
+        return temp;
+    }
+
+    @Override
+    public ArrayList<String> visitIndexer_argument(CSharpParser.Indexer_argumentContext ctx) {
+        ArrayList<String>output = new ArrayList<>();
+        System.out.println("SUIIIIIIIII ");
+        output = visitExpression(ctx.expression());
+        System.out.println(" OUTPUT ILS     " + output.get(0));
+
+        return output;
+    }
+
+    public HashMap<String,String> visitPrimary_Expression_Start(CSharpParser.Primary_expression_startContext ctx){
+        HashMap<String,String> data = new HashMap<>();
+
+
+        if(ctx.getChild(1) != null)
+            return visitType_((CSharpParser.Type_Context) ctx.getChild(1));
+
+        return data;
     }
 
     @Override
@@ -1022,9 +1235,25 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     @Override
     public ArrayList<String> visitArgument_list(CSharpParser.Argument_listContext ctx) {
         ArrayList<String> output = new ArrayList<>();
-
-        if(ctx.argument(0)!=null)
-                output = visitArgument(ctx.argument(0));
+        ArrayList<String> temp = new ArrayList<>();
+        String javaOutput = "";
+        String swiftOutput = "";
+        if(ctx.argument(0)!=null) {
+            for(CSharpParser.ArgumentContext i : ctx.argument()){
+                    temp = visitArgument(i);
+                    javaOutput+=temp.get(0);
+                    swiftOutput+=temp.get(1);
+                    javaOutput+=",";
+                    swiftOutput+=",";
+            }
+            javaOutput = javaOutput.substring(0,javaOutput.lastIndexOf(","));
+            swiftOutput = swiftOutput.substring(0,swiftOutput.lastIndexOf(","));
+            output.add(javaOutput);
+            output.add(swiftOutput);
+            return output;
+        }
+        output.add("");
+        output.add("");
         return output;
     }
 

@@ -3,12 +3,15 @@ import java.util.HashMap;
 import java.util.Map;
 public class XamrinToNativeAssistant {
     public static String currentDataType = "";
+    public static boolean isMap = false;
+    public static String mapName = "";
     public static HashMap<String,String> currentMethodVariables = new HashMap<>();
 
     public static HashMap<String,HashMap<String,String>> classesAttributes = new HashMap<>();
     /** it returns map {"className":{"method(String)":"String"}}**/
     public static HashMap<String, HashMap<String, String>> classFunctionsArgumentsDataType =new HashMap<>();
     public static String localVariableTmpDatatype = new String();
+
 
     XamrinToNativeAssistant(){
        // classesAttributes = new HashMap<>();

@@ -141,9 +141,9 @@ public class Java {
     }
 
     public String map_declaration(Map<String,String> mapDeclaration){
-        String expression = ("Map<" + mapDeclaration.get("key") + "," + mapDeclaration.get("value") + mapDeclaration.get(">"));
-        expression+=mapDeclaration.get("mapName");
-        return expression;
+        String expression = ("Map<" + mapDeclaration.get("key") + "," + mapDeclaration.get("value") + ">");
+        expression+=(mapDeclaration.get("mapName") + " = new Map<>();");
+        return expression + "\n";
     }
 
     public String hash_map_declaration(Map<String,String> mapDeclaration){
