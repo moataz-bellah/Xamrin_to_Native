@@ -13,7 +13,7 @@ public class Java {
          }
 
          //varExpression+=";";
-         return varExpression;
+         return varExpression + ";\n";
     }
 
     public String variable_declaration_without_datatype(Map<String,String> csVariableDeclaration){
@@ -23,7 +23,8 @@ public class Java {
             varExpression+=(" = " + csVariableDeclaration.get("expression"));
         }
         varExpression+=";";
-        return varExpression;
+        return varExpression + "\n";
+
 
     }
     public String expression(Map<String,String> csExpression){
@@ -78,11 +79,22 @@ public class Java {
     public String class_declaration(Map<String,String> classDeclaration){
         String expression = classDeclaration.get("accessModifier") + " class " + classDeclaration.get("className");
         if(classDeclaration.containsKey("inherit")){
-            expression+=("extends " + classDeclaration.get("inherit"));
+            expression+=(" extends " + classDeclaration.get("inherit"));
         }
         return expression;
     }
 
+    public String constructor_declaration(Map<String,String> constructorStatement,ArrayList<String> functionParameters){
+        String statement =  constructorStatement.get("name");
+        statement+="( ";
+        for(String param : functionParameters){
+            statement+=param + ",";
+        }
+        if(statement.endsWith(",")){
+            statement = statement.substring(0,statement.lastIndexOf(','));
+        }
+        return statement + ")";
+    }
     public String return_statement(Map<String,String> returnStatement){
         return "return " + returnStatement.get("returnStatement");
     }
@@ -124,11 +136,11 @@ public class Java {
         return expression;
     }
     public String array_declaration(Map<String,String> arrayDeclaration,String elements){
-        String expression = arrayDeclaration.get("dtype") + "[]" + arrayDeclaration.get("arrayName");
+        String expression = arrayDeclaration.get("data_type") + "[]" + arrayDeclaration.get("varName");
         if(elements!=""){
-            expression+=(" = " + elements);
+            expression+=(" = {" + elements + "}");
         }
-        return expression;
+        return expression+";\n";
     }
 
     public String array_list_declaration(Map<String,String> arrayList){
@@ -137,8 +149,10 @@ public class Java {
             expression+=arrayList.get("genericDataType");
         }
         expression+=(">" + arrayList.get("arrayName"));
-        return expression;
+        return expression + "\n";
     }
+
+
 
     public String map_declaration(Map<String,String> mapDeclaration){
         String expression = ("Map<" + mapDeclaration.get("key") + "," + mapDeclaration.get("value") + ">");

@@ -4,6 +4,9 @@ import java.util.Map;
 public class XamrinToNativeAssistant {
     public static String currentDataType = "";
     public static boolean isMap = false;
+    public static boolean isArray = false;
+    public static boolean isArrayList = false;
+    public static String arrayListName = "";
     public static String mapName = "";
     public static HashMap<String,String> currentMethodVariables = new HashMap<>();
 
@@ -11,6 +14,7 @@ public class XamrinToNativeAssistant {
     /** it returns map {"className":{"method(String)":"String"}}**/
     public static HashMap<String, HashMap<String, String>> classFunctionsArgumentsDataType =new HashMap<>();
     public static String localVariableTmpDatatype = new String();
+
 
 
     XamrinToNativeAssistant(){

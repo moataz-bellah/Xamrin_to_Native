@@ -2,12 +2,7 @@
 
   "FirebaseFirestore": {"getInstance()": "firestore()",
 
-
-    "Collection(String)": "collection(/0)"},
-
-
-
-
+      "Collection(String)": "collection(/0)"},
 
   "Auth": {"getInstance()": "auth()","getCurrentUser()": "currentUser",
     "createUserWithEmailAndPassword(String,String)": "createUser(withEmail: /0, password: /1)",

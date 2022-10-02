@@ -16,32 +16,11 @@ public class Main {
 
         //choose a file
         String swiftpath = "App.txt";
-//        String swiftpath = "";
-//        swiftpath = read.chooseFile();
+
 
         //read a file
         String swiftCode = read.IosFileRead(swiftpath);
-//        String swiftCode = "struct ContentView: View {\n" +
-//                "    @State private var name: String = \"\"\n" +
-//                "@State private var age:String = \"\"\n" +
-//                "    @State private var fullText: String = \"This is some editable text...\"\n" +
-//                "\t@state private var new: String = \"BLABLABLA\"\n" +
-//                "\n" +
-//                "    var body: some let View {        \t\n" +
-//                "\t   TextField(\"Enter your name\", text: name)\n" +
-//                "\t   TextField(\"What is your age\", text: age)\n" +
-//                "\t   TextEditor(text: fullText)\n" +
-//                "\t   TextEditor(text: new)\n" +
-//                "           Link(\"LearnSwiftUI\", destination: URL(string: \"https://www.hackingwithswift.com/quick-start/swiftui\")!)\n" +
-//                "\tLink(\"google\",destination: URL(string: \"https://www.google.com\")!)\n" +
-//                "\t   Image(\"foo\")\n" +
-//                "\tImage(\"sky\")\n" +
-//                "           Alert(title: Text(\"Title of the alert\"), message: Text(\"Alert Example\"), dismissButton: .default(Text(\"OK\")))\n" +
-//                "Alert(title: Text(\"Title of the alert\"), message: Text(\"Alert 2\"), dismissButton: .default(Text(\"OK\")))\t\n" +
-//                "\t\t     \t\t\t\t        \n" +
-//                "    }\n" +
-//                "}";
-//
+
 
         String javaCode = convertToJava(swiftCode);
 //        System.out.println(javaCode);

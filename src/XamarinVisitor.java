@@ -13,13 +13,16 @@ import java.util.Stack;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.sql.SQLOutput;
 import java.util.*;
+import java.util.LinkedList;
+import java.util.Queue;
 
-
+import java.io.FileWriter;
+import java.io.IOException;
 public  class XamarinVisitor extends CSharpParserBaseVisitor {
 
     public static String currentClass;
@@ -42,6 +45,7 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     @Override
     public ArrayList<String> visitCompilation_unit(CSharpParser.Compilation_unitContext ctx) {
         ArrayList<String> output = visitNamespace_member_declarations(ctx.namespace_member_declarations());
+
         System.out.println("Java Code\n" + output.get(0));
         System.out.println("Swift Code\n" + output.get(1));
         return output;
@@ -117,6 +121,14 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         swiftClassDeclaration.put("accessModifier","");
         //classDeclaration.put("inherit","");
 
+
+
+        if(ctx.class_base() != null){
+
+            temp = visitClass_base(ctx.class_base());
+            javaClassDeclaration.put("inherit",temp.get(0));
+            swiftClassDeclaration.put("inherit",temp.get(1));
+        }
         swiftCode+=SwiftObject.class_declaration(swiftClassDeclaration);
         javaCode+=JavaObject.class_declaration(javaClassDeclaration);
         swiftCode+=SwiftObject.open_brace();
@@ -126,6 +138,18 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         swiftCode+=temp.get(1);
         swiftCode+=SwiftObject.close_brace();
         javaCode+=JavaObject.close_brace();
+        try {
+            FileWriter javaFile = new FileWriter(currentClass + ".java");
+            FileWriter swiftFile = new FileWriter(currentClass + ".swift");
+            javaFile.write(javaCode);
+            swiftFile.write(swiftCode);
+            javaFile.close();
+            swiftFile.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
         output.add(javaCode);
         output.add(swiftCode);
         return output;
@@ -134,6 +158,30 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     @Override
     public ArrayList<String> visitClass_body(CSharpParser.Class_bodyContext ctx) {
         ArrayList<String> output = visitClass_member_declarations(ctx.class_member_declarations());
+        return output;
+    }
+
+    @Override
+    public ArrayList<String> visitClass_base(CSharpParser.Class_baseContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        String parentClasses = "";
+
+        if(ctx.class_type() != null){
+
+            if(ctx.class_type().namespace_or_type_name() != null)
+                    parentClasses+=(ctx.class_type().namespace_or_type_name().getText()+",");
+
+        }
+
+        for(CSharpParser.Namespace_or_type_nameContext c : ctx.namespace_or_type_name()){
+
+                parentClasses+=(c.getText()+",");
+        }
+        if(parentClasses.endsWith(","))
+            parentClasses = parentClasses.substring(0,parentClasses.lastIndexOf(","));
+
+        output.add(parentClasses);
+        output.add(parentClasses);
         return output;
     }
 
@@ -189,9 +237,70 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         else if(ctx.typed_member_declaration()!=null){
             output = visitTyped_member_declaration(ctx.typed_member_declaration());
         }
+        else if(ctx.constructor_declaration() != null){
+            output = visitConstructor_declaration(ctx.constructor_declaration());
+        }
         return output;
     }
 
+    /** Constructor **/
+    @Override
+    public ArrayList<String> visitConstructor_declaration(CSharpParser.Constructor_declarationContext ctx) {
+        String constructorName = ctx.identifier().getText();
+        ArrayList<String> output = new ArrayList<>();
+        HashMap<String,String> javaMap = new HashMap<>();
+        HashMap<String,String> swiftMap = new HashMap<>();
+        ArrayList<String> javaParameters = new ArrayList<>();
+        ArrayList<String> swiftParameters = new ArrayList<>();
+        String functionParametersInCSharp = "";
+        ArrayList<String> methodBlock = new ArrayList<>();
+        String javaCode = "";
+        String swiftCode = "";
+        XamrinToNativeAssistant.currentMethodVariables.clear();
+        currentMethod = constructorName;
+        javaMap.put("name",constructorName);
+        swiftMap.put("name",constructorName);
+        if(ctx.formal_parameter_list() != null){
+            javaParameters = visitFormal_parameter_list(ctx.formal_parameter_list()).get("javaCode");
+            swiftParameters = visitFormal_parameter_list(ctx.formal_parameter_list()).get("swiftCode");
+            functionParametersInCSharp =  getFunctionParametersInCSharp(ctx.formal_parameter_list().fixed_parameters());
+        }
+
+        javaCode+=JavaObject.constructor_declaration(javaMap,javaParameters);
+        swiftCode+=SwiftObject.constructor_declaration(swiftMap,swiftParameters);
+        javaCode+=JavaObject.open_brace();
+        swiftCode+=SwiftObject.open_brace();
+        methodBlock = visitBody(ctx.body());
+        javaCode+=methodBlock.get(0);
+        swiftCode+=methodBlock.get(1);
+        javaCode+=JavaObject.close_brace();
+        swiftCode+=SwiftObject.close_brace();
+        output.add(javaCode);
+        output.add(swiftCode);
+        // add function definition
+        XamrinToNativeAssistant.addNewFunctionDefinition(currentClass,currentMethod,functionParametersInCSharp,XamrinToNativeAssistant.currentDataType);
+        // clearing current data type
+        XamrinToNativeAssistant.currentDataType = "";
+        currentMethod = ""; // clearing current method name
+
+        return output;
+    }
+
+    @Override
+    public ArrayList<String> visitBody(CSharpParser.BodyContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        ArrayList<String> temp = new ArrayList<>();
+        String javaCode = "";
+        String swiftCode = "";
+        if(ctx.block() != null){
+            temp = visitBlock(ctx.block());
+            javaCode+=temp.get(0);
+            swiftCode+=temp.get(1);
+        }
+        output.add(javaCode);
+        output.add(swiftCode);
+        return output;
+    }
 
     /** Method Section **/
 
@@ -345,7 +454,14 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         ArrayList<String> output = new ArrayList<>();
         if(ctx.statement_list() != null){
             output = visitStatement_list(ctx.statement_list());
+            return output;
         }
+        /* if the body has no code like {
+                                           }
+
+         */
+        output.add("");
+        output.add("");
         return output;
     }
 
@@ -382,33 +498,160 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     @Override
     public ArrayList<String> visitEmbedded_statement(CSharpParser.Embedded_statementContext ctx) {
         ArrayList<String> output = new ArrayList<>();
+
+        // IfStatementContext
         if(ctx.simple_embedded_statement().getText().contains("if")){
+
             output = (ArrayList<String>) visitIfStatement((CSharpParser.IfStatementContext) ctx.simple_embedded_statement());
         }
-        if(ctx.simple_embedded_statement().getClass().toString().contains("ExpressionStatement")){
+        else if(ctx.simple_embedded_statement().getClass().toString().contains("TryStatementContext")){
+
+            output = visitTryStatement((CSharpParser.TryStatementContext) ctx.simple_embedded_statement());
+        }
+        else if(ctx.simple_embedded_statement().getClass().toString().contains("WhileStatementContext")){
+
+            output = visitWhileStatement((CSharpParser.WhileStatementContext) ctx.simple_embedded_statement());
+        }
+        else if(ctx.simple_embedded_statement().getClass().toString().contains("ForStatementContext")){
+
+                output = visitForStatement((CSharpParser.ForStatementContext) ctx.simple_embedded_statement());
+        }
+        else if(ctx.simple_embedded_statement().getClass().toString().contains("ExpressionStatement")){
             output = visitExpression((CSharpParser.ExpressionContext)ctx.simple_embedded_statement().getChild(0));
         }
         return output;
     }
 
     @Override
-    public ArrayList<String> visitIfStatement(CSharpParser.IfStatementContext ctx) {
+    public ArrayList<String> visitTryStatement(CSharpParser.TryStatementContext ctx) {
         ArrayList<String> output = new ArrayList<>();
-        String javaCode = "";
-        String swiftCode = "";
-
-        HashMap<String,String> javaMap = new HashMap<>();
-        HashMap<String,String> swiftMap = new HashMap<>();
-
-        javaMap.put("expression",visitExpression(ctx.expression()).get(0));
-        swiftMap.put("expression",visitExpression(ctx.expression()).get(1));
-
-        javaCode+= JavaObject.if_statement(javaMap);
-        swiftCode+= SwiftObject.if_statement(swiftMap);
-        if (ctx.if_body()!= null){
-            output = visitIf_body(ctx.if_body(0));
+        ArrayList<String> temp = new ArrayList<>();
+        String javaCode = "try ";
+        String swiftCode = "do ";
+        javaCode+=JavaObject.open_brace();
+        swiftCode+=SwiftObject.open_brace();
+        if(ctx.block() != null){
+            temp = visitBlock(ctx.block());
+            javaCode+=temp.get(0);
+            swiftCode+=temp.get(1);
+        }
+        javaCode+=JavaObject.close_brace();
+        swiftCode+=SwiftObject.close_brace();
+        if(ctx.catch_clauses() != null){
+            temp = visitCatch_clauses(ctx.catch_clauses());
+            javaCode+=temp.get(0);
+            swiftCode+=temp.get(1);
         }
 
+        if(ctx.finally_clause() != null){
+            temp = visitFinally_clause(ctx.finally_clause());
+            javaCode+=temp.get(0);
+            swiftCode+=temp.get(1);
+        }
+        output.add(javaCode);
+        output.add(swiftCode);
+        return output;
+    }
+
+    @Override
+    public ArrayList<String> visitCatch_clauses(CSharpParser.Catch_clausesContext ctx) {
+        ArrayList output = new ArrayList();
+        ArrayList temp = new ArrayList();
+
+        if(ctx.specific_catch_clause() != null){
+           output =  visitSpecific_catch_clause(ctx.specific_catch_clause(0));
+        }
+        return output;
+    }
+
+    @Override
+    public ArrayList<String> visitSpecific_catch_clause(CSharpParser.Specific_catch_clauseContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        ArrayList<String> temp = new ArrayList<>();
+        XamrinToNativeAssistant.addNewVariable(ctx.identifier().getText(),ctx.class_type().getText());
+        String javaCode  = "catch ("+ ctx.class_type().getText()+ " " + ctx.identifier().getText() + ")";
+        String swiftCode = "catch ";
+        javaCode+=JavaObject.open_brace();
+        swiftCode+=SwiftObject.open_brace();
+        if(ctx.block() != null){
+            temp = visitBlock(ctx.block());
+            javaCode+=temp.get(0);
+            swiftCode+=temp.get(1);
+        }
+        javaCode+=JavaObject.close_brace();
+        swiftCode+=SwiftObject.close_brace();
+        output.add(javaCode);
+        output.add(swiftCode);
+
+        return output;
+    }
+
+    @Override
+    public ArrayList<String> visitFinally_clause(CSharpParser.Finally_clauseContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        ArrayList<String> temp  = new ArrayList<>();
+        String javaCode = "finally ";
+        String swiftCode = "catch ";
+        javaCode+=JavaObject.open_brace();
+        swiftCode+=SwiftObject.open_brace();
+        if(ctx.block() != null){
+            temp = visitBlock(ctx.block());
+            javaCode+=temp.get(0);
+            swiftCode+=temp.get(1);
+        }
+        javaCode+=JavaObject.close_brace();
+        swiftCode+=SwiftObject.close_brace();
+        output.add(javaCode);
+        output.add(swiftCode);
+        return output;
+    }
+
+    @Override
+    public ArrayList<String> visitIfStatement(CSharpParser.IfStatementContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        ArrayList<String> temp = new ArrayList<>();
+        String javaCode = "";
+        String swiftCode = "";
+        HashMap<String,String> javaMap = new HashMap<>();
+        HashMap<String,String> swiftMap = new HashMap<>();
+        temp = visitExpression(ctx.expression());
+
+        javaMap.put("expression",temp.get(0));
+        swiftMap.put("expression",temp.get(1));
+
+
+        if(ctx.getText().substring(0,6).contains("elseif")){
+            javaCode+=JavaObject.elseif_statement(javaMap);
+            swiftCode+=SwiftObject.elseif_statement(swiftMap);
+        }
+        else {
+            javaCode += JavaObject.if_statement(javaMap);
+            //javaCode+=JavaObject.open_brace();
+            swiftCode += SwiftObject.if_statement(swiftMap);
+        }
+        //        swiftCode+=SwiftObject.open_brace();
+//        if (ctx.if_body()!= null){
+//
+//            temp = visitIf_body(ctx.if_body(0));
+//        }
+
+
+        for(CSharpParser.If_bodyContext c : ctx.if_body()){
+            javaCode+=JavaObject.open_brace();
+
+
+            swiftCode+=SwiftObject.open_brace();
+
+            temp = visitIf_body(c);
+            javaCode+=temp.get(0);
+            swiftCode+=temp.get(1);
+            javaCode+=JavaObject.close_brace();
+            swiftCode+=SwiftObject.close_brace();
+        }
+//        javaCode+=temp.get(0);
+//        javaCode+=JavaObject.close_brace();
+//        swiftCode+=temp.get(1);
+//        swiftCode+=SwiftObject.close_brace();
         output.add(javaCode);
         output.add(swiftCode);
         return output;
@@ -417,7 +660,111 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     @Override
     public ArrayList<String> visitIf_body(CSharpParser.If_bodyContext ctx) {
         ArrayList<String> output = new ArrayList<>();
-        output = visitBlock(ctx.block());
+        if(ctx.block()!= null) {
+            output = visitBlock(ctx.block());
+            return output;
+        }
+        else if(ctx.simple_embedded_statement() != null){
+            if(ctx.simple_embedded_statement().getClass().toString().contains("IfStatementContext")) {
+                output = (ArrayList<String>) visitIfStatement((CSharpParser.IfStatementContext) ctx.simple_embedded_statement());
+                return output;
+
+            }
+
+        }
+        // empty body
+        output.add("");
+        output.add("");
+        return output;
+    }
+
+    @Override
+    public ArrayList<String> visitForStatement(CSharpParser.ForStatementContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        ArrayList<String> temp = new ArrayList<>();
+        String javaCode = "";
+        String swiftCode = "";
+        HashMap<String,String> javaMap= new HashMap<>();
+        HashMap<String,String> swiftMap= new HashMap<>();
+        if(ctx.for_initializer() != null){
+            temp = visitFor_initializer(ctx.for_initializer());
+            javaMap.put("start",temp.get(0));
+            swiftMap.put("start",temp.get(1));
+        }
+        if(ctx.expression() != null){
+            temp = visitExpression(ctx.expression());
+            javaMap.put("end",temp.get(0));
+            swiftMap.put("end",temp.get(1));
+        }
+        if(ctx.for_iterator() != null){
+            temp = visitFor_iterator(ctx.for_iterator());
+            javaMap.put("increment",temp.get(0));
+            swiftMap.put("increment",temp.get(1));
+
+        }
+        javaCode+=JavaObject.for_loop_statement(javaMap);
+        swiftCode+=SwiftObject.for_loop_statement(swiftMap);
+
+        if(ctx.embedded_statement() != null){
+            javaCode+=JavaObject.open_brace();
+            swiftCode+=SwiftObject.open_brace();
+//            temp = visitEmbedded_statement(ctx.embedded_statement());
+             temp =  visitBlock(ctx.embedded_statement().block());
+            javaCode+=temp.get(0);
+            swiftCode+=temp.get(1);
+            javaCode+=JavaObject.close_brace();
+            swiftCode+=SwiftObject.close_brace();
+        }
+        output.add(javaCode);
+        output.add(swiftCode);
+        return output;
+    }
+
+    @Override
+    public ArrayList<String> visitFor_initializer(CSharpParser.For_initializerContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+
+        if(ctx.local_variable_declaration() != null)
+            output = visitLocal_variable_declaration(ctx.local_variable_declaration());
+        return output;
+    }
+
+    @Override
+    public ArrayList<String> visitFor_iterator(CSharpParser.For_iteratorContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        if(ctx.expression(0) != null){
+            output = visitExpression(ctx.expression(0));
+        }
+        return output;
+    }
+
+    @Override
+    public ArrayList<String> visitWhileStatement(CSharpParser.WhileStatementContext ctx) {
+        ArrayList<String>output = new ArrayList<>();
+        ArrayList<String> temp = new ArrayList<>();
+        String javaCode = "";
+        String swiftCode = "";
+        HashMap<String,String> javaMap= new HashMap<>();
+        HashMap<String,String> swiftMap= new HashMap<>();
+        if(ctx.expression() != null){
+            temp = visitExpression(ctx.expression());
+            javaMap.put("condition",temp.get(0));
+            swiftMap.put("condition",temp.get(1));
+        }
+        javaCode+=JavaObject.while_loop_statement(javaMap);
+        swiftCode+=SwiftObject.while_loop_statement(swiftMap);
+
+        if(ctx.embedded_statement() != null){
+            javaCode+=JavaObject.open_brace();
+            swiftCode+=SwiftObject.open_brace();
+            temp = visitBlock(ctx.embedded_statement().block());
+            javaCode+=temp.get(0);
+            swiftCode+=temp.get(1);
+            javaCode+=JavaObject.close_brace();
+            swiftCode+=SwiftObject.close_brace();
+        }
+        output.add(javaCode);
+        output.add(swiftCode);
         return output;
     }
 
@@ -447,17 +794,77 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
 
     @Override
     public HashMap<String,String> visitType_(CSharpParser.Type_Context ctx) {
+       if(ctx.rank_specifier() != null)
+           for(CSharpParser.Rank_specifierContext c:ctx.rank_specifier()){
+               visitRank_specifier(c);
+           }
+
+
         return visitBase_type(ctx.base_type());
     }
 
     @Override
+    public HashMap<String,String> visitRank_specifier(CSharpParser.Rank_specifierContext ctx) {
+        HashMap<String,String> data = new HashMap<>();
+
+        if(ctx.OPEN_BRACKET() != null && ctx.CLOSE_BRACKET() != null)
+            XamrinToNativeAssistant.isArray = true;
+        return data;
+    }
+
+    @Override
     public HashMap<String,String> visitBase_type(CSharpParser.Base_typeContext ctx) {
+        if(ctx.simple_type()!=null)
+            return visitSimple_type(ctx.simple_type());
         return visitClass_type(ctx.class_type());
     }
 
     @Override
+    public HashMap<String,String> visitSimple_type(CSharpParser.Simple_typeContext ctx) {
+        HashMap<String,String> data = new HashMap<>();
+
+        if(ctx.numeric_type() != null)
+            data = visitNumeric_type(ctx.numeric_type());
+    return data;
+    }
+
+    @Override
+    public HashMap<String,String> visitNumeric_type(CSharpParser.Numeric_typeContext ctx) {
+        HashMap<String,String> data = new HashMap<>();
+        if(ctx.integral_type() != null)
+            data = visitIntegral_type(ctx.integral_type());
+        else if(ctx.floating_point_type() != null)
+            data = visitFloating_point_type(ctx.floating_point_type());
+
+        return data;
+    }
+
+    @Override
+    public HashMap<String,String> visitIntegral_type(CSharpParser.Integral_typeContext ctx) {
+        HashMap<String,String> data = new HashMap<>();
+
+        if(ctx.INT().getText() != "")
+            data.put("Xamarin_type",ctx.INT().getText());
+        return data;
+    }
+
+    @Override
+    public HashMap<String,String> visitFloating_point_type(CSharpParser.Floating_point_typeContext ctx) {
+        HashMap<String,String> data = new HashMap<>();
+        if(ctx.FLOAT() != null)
+            data.put("Xamarin_type",ctx.FLOAT().getText());
+        return data;
+    }
+
+    @Override
     public HashMap<String,String> visitClass_type(CSharpParser.Class_typeContext ctx) {
-        return visitNamespace_or_type_name(ctx.namespace_or_type_name());
+        HashMap<String,String> data = new HashMap<>();
+        if(ctx.namespace_or_type_name() != null)
+            data =  visitNamespace_or_type_name(ctx.namespace_or_type_name());
+
+        if(ctx.STRING()!= null)
+            data.put("Xamarin_type",ctx.STRING().getText());
+        return data;
     }
 
     @Override
@@ -472,6 +879,13 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
             data.put("key",mapDataType.get("key"));
             data.put("value",mapDataType.get("value"));
         }
+        else if(ctx.identifier().get(0).getText().equals("ArrayList")){
+
+            XamrinToNativeAssistant.isArrayList = true;
+            data.put("Xamarin_type","ArrayList");
+
+
+        }
         else
             data.put("Xamarin_type",ctx.getText());
         return data;
@@ -485,6 +899,7 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
             data.put("value",ctx.type_().get(1).base_type().getText());
 
         }
+
         return data;
     }
 
@@ -497,12 +912,18 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         HashMap<String,String> javaMap = new HashMap<>();
         HashMap<String,String> swiftMap = new HashMap<>();
         HashMap<String,String>data = new HashMap<>();
+         if(XamrinToNativeAssistant.isArrayList){
+             XamrinToNativeAssistant.arrayListName = ctx.identifier().getText();
+            XamrinToNativeAssistant.addNewVariable(ctx.identifier().getText(),XamrinToNativeAssistant.localVariableTmpDatatype);
+
+        }
         if(XamrinToNativeAssistant.isMap){
             XamrinToNativeAssistant.mapName = ctx.identifier().getText();
             output = visitLocal_variable_initializer(ctx.local_variable_initializer());
             XamrinToNativeAssistant.mapName = "";
 
         }
+
         else{
             javaMap.put("varName",ctx.identifier().getText());
             swiftMap.put("varName",ctx.identifier().getText());
@@ -516,10 +937,18 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
                 swiftMap.put("expression",temp.get(1));
             }
 
-            javaCode+=JavaObject.variable_declaration(javaMap);
-            swiftCode+=SwiftObject.variable_declaration(swiftMap);
-
-            XamrinToNativeAssistant.addNewVariable(javaMap.get("varName"),XamrinToNativeAssistant.localVariableTmpDatatype);
+            if (XamrinToNativeAssistant.isArray){
+                javaCode+=JavaObject.array_declaration(javaMap,temp.get(0));
+                swiftCode+=SwiftObject.array_declaration(swiftMap,temp.get(1));
+                String arrayDataTypeSign = "Array("+ XamrinToNativeAssistant.localVariableTmpDatatype+")";
+                XamrinToNativeAssistant.addNewVariable(javaMap.get("varName"),arrayDataTypeSign);
+                XamrinToNativeAssistant.isArray = false;
+            }
+            else {
+                javaCode += JavaObject.variable_declaration(javaMap);
+                swiftCode += SwiftObject.variable_declaration(swiftMap);
+                XamrinToNativeAssistant.addNewVariable(javaMap.get("varName"), XamrinToNativeAssistant.localVariableTmpDatatype);
+            }
             output.add(javaCode);
             output.add(swiftCode);
 
@@ -532,10 +961,22 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     @Override
     public ArrayList<String> visitLocal_variable_initializer(CSharpParser.Local_variable_initializerContext ctx) {
         ArrayList<String> output = new ArrayList<>();
+        if(ctx.array_initializer() != null)
+            return visitArray_initializer(ctx.array_initializer());
         output = visitExpression(ctx.expression());
         return output;
     }
 
+    @Override
+    public ArrayList<String> visitArray_initializer(CSharpParser.Array_initializerContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        String txt = ctx.getText();
+        txt = txt.substring(txt.indexOf("{")+1,txt.lastIndexOf("}"));
+        output.add(txt);
+        output.add(txt);
+
+        return output;
+    }
 
     /** End of Method Body Section **/
     /** End of Method Section **/
@@ -752,7 +1193,32 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     public ArrayList<String> visitEquality_expression(CSharpParser.Equality_expressionContext ctx) {
         ArrayList<String> output = new ArrayList<>();
         ArrayList<String> temp = new ArrayList<>();
-        output = visitRelational_expression(ctx.relational_expression(0));
+        Queue<String> signs = new LinkedList<>();
+        String javaCode = "";
+        String swiftCode = "";
+
+        for(ParseTree cc : ctx.children){
+            if(cc.getClass().toString().contains("TerminalNodeImpl")){
+                signs.add(cc.getText());
+            }
+
+        }
+        for(CSharpParser.Relational_expressionContext c : ctx.relational_expression()) {
+            //output = visitShift_expression(ctx.shift_expression(0));
+            temp = visitRelational_expression(c);
+
+            javaCode+=temp.get(0);
+            swiftCode+=temp.get(1);
+            if(signs.size()>0) {
+                String sign = signs.remove();
+                javaCode += sign;
+                swiftCode += sign;
+            }
+            javaCode+=" "; // useless step
+            swiftCode+=" "; // useless step
+        }
+        output.add(javaCode);
+        output.add(swiftCode);
         return output;
     }
 
@@ -760,7 +1226,32 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     public ArrayList<String> visitRelational_expression(CSharpParser.Relational_expressionContext ctx) {
         ArrayList<String> output = new ArrayList<>();
         ArrayList<String> temp = new ArrayList<>();
-        output = visitShift_expression(ctx.shift_expression(0));
+       String javaCode = "";
+       String swiftCode = "";
+       Queue<String> signs = new LinkedList<>();
+        for(ParseTree cc : ctx.children){
+                if(cc.getClass().toString().contains("TerminalNodeImpl")){
+                    signs.add(cc.getText());
+                }
+
+        }
+
+        for(CSharpParser.Shift_expressionContext c : ctx.shift_expression()) {
+            //output = visitShift_expression(ctx.shift_expression(0));
+            temp = visitShift_expression(c);
+
+            javaCode+=temp.get(0);
+            swiftCode+=temp.get(1);
+            if(signs.size()>0) {
+                String sign = signs.remove();
+                javaCode += sign;
+                swiftCode += sign;
+            }
+            javaCode+=" "; // useless step
+            swiftCode+=" "; // useless step
+        }
+        output.add(javaCode);
+        output.add(swiftCode);
         return output;
     }
 
@@ -907,7 +1398,7 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
                 if(!temp.isEmpty()) {
                     argumentDataType = XamrinToNativeAssistant.checkDataTypeOfVariable((temp.get(0)));
                 }
-                System.out.println(" JJJJJJJJJJJJJJJJJ  " + argumentDataType);
+
                 String functionDefinition = functionName + "(" + argumentDataType + ")";
                 javaOutput+=mJavaAssistant.getStaticFunction(startName,functionDefinition);
                 swiftOuput+=mSwiftAssistant.getStaticFunction(startName,functionDefinition);
@@ -1036,7 +1527,22 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
                 return output;
             }
         }
+        if(XamrinToNativeAssistant.isArrayList){
+            if(ctx.primary_expression_start() != null){
+                javaOutput+="new ArrayList()";
+                swiftOuput+="[AnyObject]()\n";
+                HashMap<String,String> data = new HashMap<>();
 
+                data = visitPrimary_Expression_Start(ctx.primary_expression_start());
+                javaOutput+=data.get("Java");
+                swiftOuput+=data.get("Swift");
+                XamrinToNativeAssistant.isArrayList = false;
+                output.add(javaOutput);
+                output.add(swiftOuput);
+                return output;
+            }
+
+        }
         // Bracket Expression Conversion like book["name"]
         if(ctx.bracket_expression()!=null){
             visitBracket_expression(ctx.bracket_expression(0));
@@ -1047,6 +1553,16 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         }
         if(ctx.primary_expression_start()!=null){
             startName = ctx.primary_expression_start().getText();
+
+            // statement like x++
+            if(ctx.OP_INC().size()!= 0){
+                javaOutput+=(startName+ctx.OP_INC(0));
+                swiftOuput+=(startName+ctx.OP_INC(0));
+                output.add(javaOutput);
+                output.add(swiftOuput);
+
+                return output;
+            }
             javaMultipleFunction.put("Caller",startName); // useless
             swiftMultipleFunction.put("Caller",startName); // useless
             if(ctx.member_access(0)==null){
@@ -1189,7 +1705,7 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
         String javaOutput = "";
         String swiftOutput = "";
         ArrayList<String> temp = new ArrayList<>();
-        //System.out.println("SUIIIIIII 1 "+ ctx.getText());
+
         //temp.add(ctx.getText());
         //temp.add(ctx.getText());
         //visitIndexer_argument(ctx.indexer_argument(0));
@@ -1201,21 +1717,87 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     @Override
     public ArrayList<String> visitIndexer_argument(CSharpParser.Indexer_argumentContext ctx) {
         ArrayList<String>output = new ArrayList<>();
-        System.out.println("SUIIIIIIIII ");
+
         output = visitExpression(ctx.expression());
-        System.out.println(" OUTPUT ILS     " + output.get(0));
+
 
         return output;
     }
 
     public HashMap<String,String> visitPrimary_Expression_Start(CSharpParser.Primary_expression_startContext ctx){
         HashMap<String,String> data = new HashMap<>();
+        // to handle statement like ArrayList(){1,2,3}
+        if(XamrinToNativeAssistant.isArrayList) {
+            if (ctx.getChildCount() > 2){
 
-
+                if(ctx.getChild(2).getClass().toString().contains("Object_creation_expressionContext")){
+                        data = visitObject_creation_expression((CSharpParser.Object_creation_expressionContext) ctx.getChild(2));
+                        return data;
+                }
+            }
+        }
         if(ctx.getChild(1) != null)
             return visitType_((CSharpParser.Type_Context) ctx.getChild(1));
 
         return data;
+    }
+
+    @Override
+    public HashMap<String,String> visitObject_creation_expression(CSharpParser.Object_creation_expressionContext ctx) {
+        HashMap<String,String> output = new HashMap<>();
+        if(ctx.object_or_collection_initializer() != null){
+            output = visitObject_or_collection_initializer(ctx.object_or_collection_initializer());
+        }
+        return output;
+    }
+
+    @Override
+    public HashMap<String,String> visitObject_or_collection_initializer(CSharpParser.Object_or_collection_initializerContext ctx) {
+        HashMap<String,String> output = new HashMap<>();
+        if(ctx.collection_initializer() != null){
+                output = visitCollection_initializer(ctx.collection_initializer());
+        }
+        return output;
+    }
+
+    @Override
+    public HashMap<String,String> visitCollection_initializer(CSharpParser.Collection_initializerContext ctx) {
+        HashMap<String,String> output = new HashMap<>();
+        ArrayList<String> temp = new ArrayList<>();
+        String javaCode = "";
+        String swiftCode = "";
+        HashMap<String,String> swiftMap = new HashMap<>();
+        if(XamrinToNativeAssistant.isArrayList){
+            XamrinToNativeAssistant.isArrayList = false;
+            javaCode+="{";
+            swiftMap.put("name",XamrinToNativeAssistant.arrayListName);
+            for(CSharpParser.Element_initializerContext c : ctx.element_initializer()){
+                if(c.non_assignment_expression() != null){
+                    temp = visitNon_assignment_expression(c.non_assignment_expression());
+                    swiftMap.put("element",temp.get(1));
+                    javaCode+=temp.get(0);
+                    javaCode+=",";
+                    swiftCode+=SwiftObject.append(swiftMap);
+                }
+            }
+            if(javaCode.endsWith(","))
+                javaCode = javaCode.substring(0,javaCode.lastIndexOf(","));
+            javaCode+="}";
+
+        }
+
+        output.put("Java",javaCode);
+        output.put("Swift",swiftCode);
+        return output;
+    }
+
+    @Override
+    public ArrayList<String> visitElement_initializer(CSharpParser.Element_initializerContext ctx) {
+        ArrayList<String> output = new ArrayList<>();
+        if(ctx.non_assignment_expression() != null){
+            output = visitNon_assignment_expression(ctx.non_assignment_expression());
+        }
+        return output;
     }
 
     @Override

@@ -1,14 +1,30 @@
 namespace HelloWorld
 {
-    class myClass{
-
+    class myClass : cls1,cls2,cls3{
+        public myClass(int x){
+            x = 5;
+        }
         public void test(){
-        FirestoreDb fd = FirestoreDb.Create();
-        fd.Collection("users").Document("alovelace");
-        fd.Collection("users").GetSnapshotAsync();
-         CollectionReference usersRef = fd.Collection("users");
-         usersRef.WhereGreaterThanOrEqualTo("State", "CA");
+                FirestoreDb db = FirestoreDb.Create();
+                 string name = "moataz-bellah";
+                 float x = 5.2;
+                    if(x>0){}
+                           else if(x==2){}
+                     string[] cars = {"BMW","MAZDA","FERRARI"};
+                            int x= 4;
+                                        if(x>0){
+                                        x = 5;
+                                        }else if(x==0){
+                                        x = 4;
+                                        }else{x= 4;}
+                                         ArrayList resultList = new ArrayList(){1,2,3};
+                            }
+                    }
+
+
     }
-    }
-}
+
+
+
+
 

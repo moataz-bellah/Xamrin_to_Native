@@ -1,22 +1,6 @@
 {
   "Object":{"toString()":"String"},
   "Integer":{"parseInt(String)":"int"},
-  "Math":{"sqrt(double)":"double",
-    "sqrt(int)":"double",
-    "pow(double,double)":"double","pow(double,int)":"double","pow(int,int)":"double"},
-  "Double":{"parseDouble(String)":"double"},
-  "EditText":{"getText()":"Editable"},
-  "TextView": {"getText()": "String"},
-  "String": {
-    "valueOf(int)": "String",
-    "valueOf(double)": "String",
-    "valueOf(Double)": "String",
-    "valueOf(Float)": "String",
-    "valueOf(float)": "String",
-    "length()": "int"
-  },
-  "Editable": {"toString()": "String"},
-
   "Firestore": {"Collection(String)":  "CollectionReference"},
   "CollectionReference": {"add(Map<String,Object>)": "DocumentReference","Document()": "DocumentReference","Document(String)": "DocumentReference",
     "GetSnapshotAsync()": "QuerySnapshot","WhereEqualTo(String,String)": "Query","WhereGreaterThan(String,int)": "Query","WhereGreaterThan(String,String)": "Query",

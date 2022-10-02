@@ -12,7 +12,7 @@ public class Swift {
             varExpression+=(" = " + csVariableDeclaration.get("expression"));
         }
 
-        return varExpression;
+        return varExpression + "\n";
     }
 
     public String variable_declaration_without_datatype(Map<String,String> csVariableDeclaration){
@@ -22,7 +22,7 @@ public class Swift {
             varExpression+=(" = " + csVariableDeclaration.get("expression"));
         }
         varExpression+=";";
-        return varExpression;
+        return varExpression + "\n";
 
     }
     public String expression(Map<String,String> csExpression){
@@ -72,11 +72,22 @@ public class Swift {
     public String class_declaration(Map<String,String> classDeclaration){
         String expression = classDeclaration.get("accessModifier") + " class " + classDeclaration.get("className");
         if(classDeclaration.containsKey("inherit")){
-            expression+=("extends " + classDeclaration.get("inherit"));
+            expression+=(" : " + classDeclaration.get("inherit"));
         }
         return expression;
     }
-
+    public String constructor_declaration(Map<String,String> constructorStatement, ArrayList<String> functionParameters){
+        String expression = " init ";
+        expression+="( ";
+        for(String param : functionParameters){
+            expression+=param + ",";
+        }
+        if(expression.endsWith(",")){
+            expression = expression.substring(0,expression.lastIndexOf(','));
+        }
+        expression += ")";
+        return expression;
+    }
     public String return_statement(Map<String,String> returnStatement){
         return "return " + returnStatement.get("returnStatement");
     }
@@ -118,13 +129,21 @@ public class Swift {
         return expression;
     }
     public String array_declaration(Map<String,String> arrayDeclaration,String elements){
-        String expression = arrayDeclaration.get("dtype") + "[]" + arrayDeclaration.get("arrayName");
-        if(elements!=""){
-            expression+=(" = " + elements);
-        }
-        return expression;
-    }
 
+        // var emptyDoubles: [Double] = []
+        String expression = "var " + arrayDeclaration.get("varName") + ": [" + arrayDeclaration.get("data_type") + "]";
+
+        if(elements!=""){
+            expression+=(" = [" + elements + "]");
+        }
+        else{
+            expression+=(" = []");
+        }
+        return expression+ ";\n";
+    }
+    public String append(Map<String,String> data){
+        return data.get("name") + ".append(" + data.get("element") + ");\n";
+    }
     public String array_list_declaration(Map<String,String> arrayList){
         String expression = "ArrayList<";
         if(arrayList.containsKey("genericDataType")){
