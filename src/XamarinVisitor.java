@@ -32,6 +32,7 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     Swift SwiftObject;
     JavaAssistant mJavaAssistant;
     SwiftAssistant mSwiftAssistant;
+    
     public XamarinVisitor(){
         JavaObject  = new Java();
         SwiftObject = new Swift();

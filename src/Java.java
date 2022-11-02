@@ -6,6 +6,7 @@ public class Java {
 
     public String variable_declaration(Map<String,String> csVariableDeclaration){
 
+
          String varExpression = "";
          varExpression = csVariableDeclaration.get("data_type") + " " + csVariableDeclaration.get("varName");
          if(csVariableDeclaration.containsKey("expression")){
