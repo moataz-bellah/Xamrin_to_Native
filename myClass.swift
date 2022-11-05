@@ -1,8 +1,16 @@
- class myClass : cls1,cls2,cls3{ 
+ class myClass : Object{ 
 public  init ( var x :int
 ){ 
 x = 5  ;} 
-public  func test( )->{ 
+public public start(var ss :string
+)->Void{
+ self.start =  ss 
+}
+public start()->string{
+ return self.start
+}
+public  func test( )->String{ 
+let realm = try! Realm()
 var db :Firestore = Firestore.firestore();
   
 var name :String = "moataz-bellah"  

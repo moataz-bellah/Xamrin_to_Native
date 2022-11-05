@@ -11,6 +11,8 @@
   "Arrays": "Array",
   "null": "null",
   "FirestoreDb": "FirebaseFirestore",
+  "Realm": "Realm",
+  "RealmObject": "RealmObject",
   "Dictionary": "Map",
   "CollectionReference": "CollectionReference",
   "DocumentReference": "DocumentReference",

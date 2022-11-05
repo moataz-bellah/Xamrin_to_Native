@@ -1,8 +1,17 @@
- class myClass extends cls1,cls2,cls3{ 
+ class myClass extends RealmObject{ 
 public myClass( int x;
 ){ 
 x = 5  ;} 
-public   test( ){ 
+public public void start(string ss;
+) {
+ this.start =  ss;
+; 
+}
+public string start(){
+ return this.start;
+}
+public  String test( ){ 
+Realm realm = Realm.getInstance(new RealmConfiguration.Builder().name(realmName).build());
 FirebaseFirestore db = FirebaseFirestore.getInstance();
   ;
 String name = "moataz-bellah"  ;

@@ -13,6 +13,8 @@
   "Dictionary": "Map",
   "null": "nil",
   "FirestoreDb": "Firestore",
+  "Realm": "Realm",
+  "RealmObject": "Object",
   "CollectionReference": "CollectionReference",
   "DocumentReference": "DocumentReference",
   "OnCompleteListener": "",

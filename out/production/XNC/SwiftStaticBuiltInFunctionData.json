@@ -10,5 +10,8 @@
   "FirebaseAuth": {
     "getInstance()": "auth()",
     "getCurrentUser()": "FirebaseUser"
+  },
+  "Realm": {
+    "GetInstance()": "try! Realm()"
   }
 }

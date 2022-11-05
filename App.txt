@@ -1,10 +1,15 @@
 namespace HelloWorld
 {
-    class myClass : cls1,cls2,cls3{
+    class myClass : RealmObject{
         public myClass(int x){
             x = 5;
         }
+         public string start(string ss){
+                        get;set;}
         public void test(){
+                   var realm = Realm.GetInstance();
+
+
                 FirestoreDb db = FirestoreDb.Create();
                  string name = "moataz-bellah";
                  float x = 5.2;

@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
-
+import patterns.PatternsMatcher;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.*;
@@ -23,7 +23,7 @@ import java.util.Queue;
 
 import java.io.FileWriter;
 import java.io.IOException;
-public  class XamarinVisitor extends CSharpParserBaseVisitor {
+public class XamarinVisitor extends CSharpParserBaseVisitor {
 
     public static String currentClass;
     public static String currentMethod;
@@ -32,12 +32,13 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     Swift SwiftObject;
     JavaAssistant mJavaAssistant;
     SwiftAssistant mSwiftAssistant;
-    
+    PatternsMatcher patternsMatcher;
     public XamarinVisitor(){
         JavaObject  = new Java();
         SwiftObject = new Swift();
         mJavaAssistant = new JavaAssistant();
         mSwiftAssistant = new SwiftAssistant();
+        patternsMatcher = new PatternsMatcher();
     }
 
 
@@ -166,23 +167,32 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     public ArrayList<String> visitClass_base(CSharpParser.Class_baseContext ctx) {
         ArrayList<String> output = new ArrayList<>();
         String parentClasses = "";
-
+        String javaParentClass = "";
+        String swiftParentClass = "";
         if(ctx.class_type() != null){
 
-            if(ctx.class_type().namespace_or_type_name() != null)
-                    parentClasses+=(ctx.class_type().namespace_or_type_name().getText()+",");
+            if(ctx.class_type().namespace_or_type_name() != null){
+                 javaParentClass = mJavaAssistant.getDataType(ctx.class_type().namespace_or_type_name().getText());
+                 swiftParentClass = mSwiftAssistant.getDataType(ctx.class_type().namespace_or_type_name().getText());
+
+                //parentClasses+=(ctx.class_type().namespace_or_type_name().getText()+",");
+
+            }
+
 
         }
 
         for(CSharpParser.Namespace_or_type_nameContext c : ctx.namespace_or_type_name()){
-
-                parentClasses+=(c.getText()+",");
+            javaParentClass = mJavaAssistant.getDataType(c.getText()) + ",";
+            swiftParentClass = mSwiftAssistant.getDataType(c.getText()) + ",";
+           //     parentClasses+=(c.getText()+",");
         }
-        if(parentClasses.endsWith(","))
-            parentClasses = parentClasses.substring(0,parentClasses.lastIndexOf(","));
-
-        output.add(parentClasses);
-        output.add(parentClasses);
+        if(javaParentClass.endsWith(",")) {
+            javaParentClass = javaParentClass.substring(0, javaParentClass.lastIndexOf(","));
+            swiftParentClass = swiftParentClass.substring(0, swiftParentClass.lastIndexOf(","));
+        }
+        output.add(javaParentClass);
+        output.add(swiftParentClass);
         return output;
     }
 
@@ -310,12 +320,19 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
 
     @Override
     public ArrayList<String> visitMethod_declaration(CSharpParser.Method_declarationContext ctx) {
-
         ArrayList<String> output = new ArrayList<>();
         HashMap<String,String> javaMap = new HashMap<>();
         HashMap<String,String> swiftMap = new HashMap<>();
         ArrayList<String> javaParameters = new ArrayList<>();
         ArrayList<String> swiftParameters = new ArrayList<>();
+        if(patternsMatcher.CheckGettersAndSettersStatementPattern(ctx.getText())){
+             javaParameters = visitFormal_parameter_list(ctx.formal_parameter_list()).get("javaCode");
+             swiftParameters = visitFormal_parameter_list(ctx.formal_parameter_list()).get("swiftCode");
+             output = patternsMatcher.GettersAndSettersStatementPattern(ctx.getText(),ctx.method_member_name().getText(),
+                     javaParameters,swiftParameters,XamrinToNativeAssistant.currentDataType);
+
+            return output;
+        }
         String functionParametersInCSharp = "";
         ArrayList<String> methodBlock = new ArrayList<>();
         String javaCode = "";
@@ -773,6 +790,13 @@ public  class XamarinVisitor extends CSharpParserBaseVisitor {
     public ArrayList<String> visitLocal_variable_declaration(CSharpParser.Local_variable_declarationContext ctx) {
         ArrayList<String> output = new ArrayList<>();
         HashMap<String,String> data = new HashMap<>();
+       // System.out.println("SUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII " + ctx.getText());
+        // "var[a-zA-Z]+=[0-9]+"
+        if(patternsMatcher.CheckRealmInitStatementPattern(ctx.getText())){
+            output = patternsMatcher.RealmInitStatementPattern(ctx.getText());
+            return output;
+        }
+
         if(ctx.local_variable_type() != null){
                 data = visitLocal_variable_type(ctx.local_variable_type());
                 XamrinToNativeAssistant.localVariableTmpDatatype = data.get("Xamarin_type");

@@ -15,5 +15,8 @@
   "FirebaseAuth": {
     "getInstance()": "auth()",
     "getCurrentUser()": "FirebaseUser"
+  },
+  "Realm": {
+    "GetInstance()": "getInstance(new RealmConfiguration.Builder().name(realmName).build())"
   }
 }
