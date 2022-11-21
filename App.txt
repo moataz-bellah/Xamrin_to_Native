@@ -1,30 +1,49 @@
 namespace HelloWorld
 {
     class myClass : RealmObject{
-        public myClass(int x){
-            x = 5;
-        }
-         public string start(string ss){
-                        get;set;}
-        public void test(){
-                   var realm = Realm.GetInstance();
 
+        [PrimaryKey]
+            public ObjectId Id { get; set; }
 
-                FirestoreDb db = FirestoreDb.Create();
-                 string name = "moataz-bellah";
-                 float x = 5.2;
-                    if(x>0){}
-                           else if(x==2){}
-                     string[] cars = {"BMW","MAZDA","FERRARI"};
-                            int x= 4;
-                                        if(x>0){
-                                        x = 5;
-                                        }else if(x==0){
-                                        x = 4;
-                                        }else{x= 4;}
-                                         ArrayList resultList = new ArrayList(){1,2,3};
-                            }
+                [Required]
+                 public string Make { get; set; }
+                 [Required]
+                 public string Model { get; set; }
+                 public double Price { get; set; }
+                 public string Owner { get; set; }
                     }
+       class program{
+
+                public void run(){
+                        var realm = Realm.GetInstance();
+                        realm.Write(() =>
+                        {
+                            realm.Add(new Guitar()
+                            {
+                                Make = "Gibson",
+                                Model = "Les Paul Custom",
+                                Price = 649.99,
+                                Owner = "N Young"
+                            });
+                        });
+                        var allGuitars = realm.All<Guitar>();
+                        var lessExpensiveGuitars = realm.All<Guitar>().Where(g => g.Price < 400);
+                        var guitarsSortedByMake = realm.All<Guitar>().OrderBy(g => g.Make);
+                        realm.Write(() =>
+                        {
+                            davidsStrat.Price = 1700345.56;
+                        });
+                        realm.Write(() =>
+                        {
+                            realm.Remove(mostExpensiveGuitar);
+                        });
+                        var app = App.Create(myRealmAppId);
+                        var user = await app.LogInAsync(Credentials.Anonymous());
+                        await user.LogOutAsync();
+
+
+                }
+       }
 
 
     }

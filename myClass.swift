@@ -1,41 +1,27 @@
  class myClass : Object{ 
-public  init ( var x :int
-){ 
-x = 5  ;} 
-public public start(var ss :string
-)->Void{
- self.start =  ss 
-}
-public start()->string{
- return self.start
-}
-public  func test( )->String{ 
-let realm = try! Realm()
-var db :Firestore = Firestore.firestore();
-  
-var name :String = "moataz-bellah"  
-var x :Float = 5.2  
-if(x> 0  ){ 
-} 
-{ 
-if(x == 2  ){ 
-} 
-} 
-var cars: [String] = ["BMW","MAZDA","FERRARI"];
-var x :Int = 4  
-if(x> 0  ){ 
-x = 5  ;} 
-{ 
-if(x == 0  ){ 
-x = 4  ;} 
-{ 
-x = 4  ;} 
-} 
-var resultList :Array = [AnyObject]()
-resultList.append(1  );
-resultList.append(2  );
-resultList.append(3  );
-  
-
-} 
+@Persisted(primaryKey: true) var Id: ObjectId
+func Id(x:ObjectId) -> Void{
+ self.Id=x}
+func Id()->ObjectId{
+ return self.Id}
+@Persisted var Make: string
+func Make(x:string) -> Void{
+ self.Make=x}
+func Make()->string{
+ return self.Make}
+@Persisted var Model: string
+func Model(x:string) -> Void{
+ self.Model=x}
+func Model()->string{
+ return self.Model}
+@Persisted var Price: double
+func Price(x:double) -> Void{
+ self.Price=x}
+func Price()->double{
+ return self.Price}
+@Persisted var Owner: string
+func Owner(x:string) -> Void{
+ self.Owner=x}
+func Owner()->string{
+ return self.Owner}
 } 

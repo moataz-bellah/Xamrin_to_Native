@@ -202,6 +202,7 @@ public class XamarinVisitor extends CSharpParserBaseVisitor {
        ArrayList<String> temp  = new ArrayList<>();
        String javaCode  = "";
        String swiftCode = "";
+
        if(ctx.class_member_declaration()!=null) {
             for (CSharpParser.Class_member_declarationContext i : ctx.class_member_declaration()) {
                 temp = visitClass_member_declaration(i);
@@ -224,6 +225,12 @@ public class XamarinVisitor extends CSharpParserBaseVisitor {
         ArrayList<String> temp = new ArrayList<>();
         String javaCode = "";
         String swiftCode = "";
+
+        if(patternsMatcher.CheckGettersAndSettersStatementPattern2(ctx.getText())) {
+
+            output = patternsMatcher.GettersAndSettersStatementPattern2(ctx.getText());
+            return output;
+        }
         if(ctx.all_member_modifiers()!=null){
                 javaCode+=(ctx.all_member_modifiers().getText() + " ");
                 swiftCode+=(ctx.all_member_modifiers().getText() + " ");
@@ -790,13 +797,40 @@ public class XamarinVisitor extends CSharpParserBaseVisitor {
     public ArrayList<String> visitLocal_variable_declaration(CSharpParser.Local_variable_declarationContext ctx) {
         ArrayList<String> output = new ArrayList<>();
         HashMap<String,String> data = new HashMap<>();
-       // System.out.println("SUIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII " + ctx.getText());
+
+
+
         // "var[a-zA-Z]+=[0-9]+"
         if(patternsMatcher.CheckRealmInitStatementPattern(ctx.getText())){
             output = patternsMatcher.RealmInitStatementPattern(ctx.getText());
             return output;
         }
 
+        if(patternsMatcher.CheckRealmInitializeAppStatementPattern(ctx.getText())) {
+
+            output = patternsMatcher.RealmInitializeAppStatementPattern(ctx.getText());
+            return output;
+        }
+        if(patternsMatcher.CheckRealmLoginAnonymousStatementPattern(ctx.getText())){
+
+            output = patternsMatcher.RealmLoginAnonymousStatementPattern(ctx.getText());
+
+            return output;
+        }
+        if(patternsMatcher.CheckRealmRetrieveAllStatementPattern(ctx.getText())) {
+
+            output = patternsMatcher.RealmRetrieveAllStatementPattern(ctx.getText());
+            return output;
+        }
+        if(patternsMatcher.CheckRealmWhereLessThanStatementPattern(ctx.getText())){
+           output = patternsMatcher.RealmWhereLessThanStatementPattern(ctx.getText());
+           return output;
+        }
+        if(patternsMatcher.CheckRealmOrderByStatementPattern(ctx.getText())){
+
+            output = patternsMatcher.RealmOrderByStatementPattern(ctx.getText());
+            return output;
+        }
         if(ctx.local_variable_type() != null){
                 data = visitLocal_variable_type(ctx.local_variable_type());
                 XamrinToNativeAssistant.localVariableTmpDatatype = data.get("Xamarin_type");
@@ -1382,6 +1416,13 @@ public class XamarinVisitor extends CSharpParserBaseVisitor {
     public ArrayList<String> visitUnary_expression(CSharpParser.Unary_expressionContext ctx) {
         ArrayList<String> output = new ArrayList<>();
         ArrayList<String> temp = new ArrayList<>();
+
+        if(patternsMatcher.CheckRealmLogoutStatementPattern(ctx.getText()))
+        {
+
+            output = patternsMatcher.RealmLogoutStatementPattern(ctx.getText());
+            return output;
+        }
         output = visitPrimary_expression(ctx.primary_expression());
         return output;
     }
@@ -1526,6 +1567,25 @@ public class XamarinVisitor extends CSharpParserBaseVisitor {
         String javaOutput = "";
         String swiftOuput = "";
         String startName = "";
+
+
+
+
+        if(patternsMatcher.CheckRealmWriteForDeleteStatementPattern(ctx.getText())){
+
+          output = patternsMatcher.RealmWriteForDeleteStatementPattern(ctx.getText());
+          return  output;
+        }
+        if(patternsMatcher.CheckRealmWriteForUpdateStatementPattern(ctx.getText())) {
+            output = patternsMatcher.RealmWriteForUpdateStatementPattern(ctx.getText());
+            return output;
+        }
+        if(patternsMatcher.RealmWriteStatementPatternCheck(ctx.getText())) {
+
+            output = patternsMatcher.RealmWriteStatementPattern(ctx.getText());
+            return output;
+        }
+
         // Dictionary Conversion
         if(XamrinToNativeAssistant.isMap){
             if(ctx.primary_expression_start() != null){
